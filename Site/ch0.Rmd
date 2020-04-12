@@ -49,13 +49,12 @@ $$
 　本書の構成は一般的なデータサイエンスのプロセスにのっとっており，次のとおりである。まず，第1章ではデータの取得について解説する。自社内の情報を利用する場合もあれば，公開財務データを利用する場合もあるだろう。企業内部のデータならばERP(EnterpriseResourcePlanning)などを利用して獲得できるが，外部データを効率的に獲得する方法は学習する必要があるだろう。第1章は，「バフェットコード」と呼ばれるサービスの紹介と実際のデータ獲得の方法に焦点を当てる。第2章から第3章まではデータを分析可能にするための前処理について学習する。第4章では分析に必要なデータの視覚化について学習し，第5章から第7章までは実際に会計データを分析するプロセスを学習する。
 
 ## 参考文献 {-}
-Anderson, S. W. and K. L. Sedatole (2012) “Evidence on the cost hierarchy: The associa- tion between resource consumption and production activities,” Journal of Management Accounting Research, Vol. 25, No. 1, pp. 119–141.
+Anderson, S. W. and K. L. Sedatole (2012) “Evidence on the cost hierarchy: The association between resource consumption and production activities,” _Journal of Management Accounting Research_, Vol. 25, No. 1, pp. 119–141.
 
-Banker, R. D., G. Potter, and R. G. Schroeder (1995) “An empirical analysis of manufacturing overhead cost drivers,” Journal of Accounting and Economics, Vol. 19, No. 1, pp. 115–137. Jones, J. J. (1991) “Earnings management during import relief investigations,” Journal of
+Banker, R. D., G. Potter, and R. G. Schroeder (1995) “An empirical analysis of manufacturing overhead cost drivers,” _Journal of Accounting and Economics_, Vol. 19, No. 1, pp. 115–137. Jones, J. J. (1991) “Earnings management during import relief investigations,” Journal of
 Accounting Research, Vol. 29, No. 2, pp. 193–228.
 
-Roychowdhury, S. (2006) “Earnings management through real activities manipulation,” Jour-
-nal of Accounting and Economics, Vol. 42, No. 3, pp. 335–370.
+Roychowdhury, S. (2006) “Earnings management through real activities manipulation,” _Journal of Accounting and Economics_, Vol. 42, No. 3, pp. 335–370.
 
 (新井康平)
 

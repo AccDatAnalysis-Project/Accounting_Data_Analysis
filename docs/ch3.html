@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 R Markdown | 会計情報のデータ分析</title>
-  <meta name="description" content="1 R Markdown | 会計情報のデータ分析" />
+  <title>第3章 会計情報を前処理する(応用) | 会計情報のデータ分析</title>
+  <meta name="description" content="第3章 会計情報を前処理する(応用) | 会計情報のデータ分析" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 R Markdown | 会計情報のデータ分析" />
+  <meta property="og:title" content="第3章 会計情報を前処理する(応用) | 会計情報のデータ分析" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 R Markdown | 会計情報のデータ分析" />
+  <meta name="twitter:title" content="第3章 会計情報を前処理する(応用) | 会計情報のデータ分析" />
   
   
   
@@ -133,8 +133,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.3" data-path="ch0.html"><a href="ch0.html#企業内部で会計情報の統計分析を実施できない理由"><i class="fa fa-check"></i><b>0.3</b> 企業内部で会計情報の統計分析を実施「できない」理由</a></li>
 <li class="chapter" data-level="" data-path="ch0.html"><a href="ch0.html#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="ch3.html"><a href="ch3.html"><i class="fa fa-check"></i><b>1</b> R Markdown</a><ul>
-<li class="chapter" data-level="1.1" data-path="ch3.html"><a href="ch3.html#including-plots"><i class="fa fa-check"></i><b>1.1</b> Including Plots</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html"><i class="fa fa-check"></i>第3章 会計情報を前処理する(応用)</a><ul>
+<li class="chapter" data-level="0.4" data-path="ch3.html"><a href="ch3.html#この章について"><i class="fa fa-check"></i><b>0.4</b> この章について</a></li>
+<li class="chapter" data-level="0.5" data-path="ch3.html"><a href="ch3.html#会計データとほかのデータの結合整理"><i class="fa fa-check"></i><b>0.5</b> 会計データとほかのデータの結合・整理</a></li>
 </ul></li>
 </ul>
 
@@ -153,23 +154,149 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-markdown" class="section level1">
-<h1><span class="header-section-number">1</span> R Markdown</h1>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">summary</span>(cars)</a></code></pre></div>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-<div id="including-plots" class="section level2">
-<h2><span class="header-section-number">1.1</span> Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="_main_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<div id="第3章-会計情報を前処理する応用" class="section level1 unnumbered">
+<h1>第3章 会計情報を前処理する(応用)</h1>
+<div id="学習目標" class="section level4 unnumbered">
+<h4>学習目標</h4>
+<ol style="list-style-type: decimal">
+<li>読み込んだ会計データと他のデータとの結合・整理が実行できる</li>
+<li>財務数値を作成し，記述統計量をグループ間で比較できる</li>
+<li>2期間以上の会計情報が必要な財務数値を作成できる</li>
+</ol>
+</div>
+<div id="応用例" class="section level4 unnumbered">
+<h4>応用例</h4>
+<ol style="list-style-type: decimal">
+<li>業界間での収益性指標の比較</li>
+<li>上場年数で分けたグループ間での費用構造の比較</li>
+</ol>
+</div>
+<div id="関連する会計研究" class="section level4 unnumbered">
+<h4>関連する会計研究</h4>
+<p>Srivastava, A. (2014) ‘’Why have measures of earnings quality changed over time?” <em>Journal of Accounting and Economics</em>, Vol. 57, No, 2–3, pp. 196-217.</p>
+</div>
+<div id="この章について" class="section level2">
+<h2><span class="header-section-number">0.4</span> この章について</h2>
+<p>　この章では，複数のデータセットを利用して会計データを分析する方法について学習する。2章では，会計データをcsv形式で保存し，保存したcsvファイルをread_csv()関数を利用することで，R上に会計データを読み込むことができた。しかし，実際に会計情報を分析するためには，会計データだけではなく，他のデータを利用する場面も多い。たとえば，産業データ，株価データ，マクロデータといったデータセットである。このような他のデータと会計データを組み合わせることで，会計データに産業データを結合して産業間でROEを比較する，会計データに株価データを結合して時価簿価比率を計算するといった分析ができるようになる。複数のデータセットを利用した分析をするには，(1)会計データと結合したい他のデータセットの両方を読み込んだうえで2つのデータセットを結合・整理する，(2)結合・整理したデータセットで財務数値を計算する，という2つの作業が必要になる。また，分母に期首・期末の平均資産をもちいるROAなどの財務数値を作成したければ当期の会計データに前期の会計データを結合するというパネルデータの取り扱いも必要になるだろう。この章では，(1)複数データの結合・整理，(2)財務指標の作成と要約，(3)パネルデータの取り扱い，の3つについて学習する。</p>
+<p>　この章で学習する分析は，非常にシンプルなものであるものの，そのシンプルさ故に強力な証拠ともなり得る。たとえば，この章で学習する分析をもちいた興味深い研究として，Srivastava(2014)が挙げられる。米国企業では費用収益対応(matching)が一貫して低下しており，会計情報の有効性が低下しているのではないかという一連の議論がある。Srivastava(2014)は，販売費及び一般管理費(以下、販管費)の支出割合が高い新規企業が参入することで，米国企業における費用収益対応が低下したのではないかと主張した。会計処理上，売上原価は売上高と個別対応であるのに対して，販管費は期間対応である。そのため，新しい企業ほど総費用に占める販管費の割合が高ければ，そのような企業が新規参入することでサンプル全体の費用収益対応の程度は低下することになるだろう。この論文で行われた分析の一つが，企業を上場時期ごとにグルーピングし，グループ間で総費用に占める販管費の割合を比較するというシンプルな分析だった。分析結果は，上場年数の新しいグループは販管費の割合が高く，逆に上場年度の古いグループは売上原価の割合が高いという予想通りのものだった。Srivastava(2014)の分析結果は，そのシンプルさ故に強力な証拠となっている。Srivastava(2014)と同様の分析を行うには，会計データに上場年数のデータセットを結合し，上場年数のグループ間で総費用に占める各費用の割合を計算するという操作が必要になる。いずれも，この章で学習する操作ができれば実行できるだろう。</p>
+</div>
+<div id="会計データとほかのデータの結合整理" class="section level2">
+<h2><span class="header-section-number">0.5</span> 会計データとほかのデータの結合・整理</h2>
+<p>　それでは，会計データと他のデータセットを結合する方法について学習しよう。3章および4章では，ドラッグストアと家電量販店の会計数値を比較する。分析対象企業は，業界動向サーチ (<a href="https://gyokai-search.com" class="uri">https://gyokai-search.com</a>) からドラッグストアと家電量販店の売上高ランキング上位10社(計20社)を対象とした(2019年3月6日時点)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>。まずは，会計データをバフェットコードよりダウンロードして，read_csv()関数で読み込む。バフェットコードからダウンロード(2019年3月6日時点)できたのは，20社中18社でありデータにいくつか欠損があった。そこで，欠損のあった企業の有価証券報告書をEDINETからダウンロードして，残りの数値を手入力したデータがch3_findata_ch3.csvである。データが完成したら，read_csv()関数で読み込もう。なお，パッケージであるtidyverseを呼び出すのを忘れないように。その後，selectで必要は列のみを取り出し，renameで名前を英語にしておこう。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># 財務データの読み込み</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<pre><code>## ── Attaching packages ────────</code></pre>
+<pre><code>## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ─────────────────
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">df_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;ch3_findata.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;cp932&quot;</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   銘柄コード = col_double(),
+##   会社名 = col_character(),
+##   売上高 = col_double(),
+##   売上原価 = col_double(),
+##   販管費 = col_double(),
+##   当期純利益 = col_double(),
+##   総資産 = col_double(),
+##   負債 = col_double(),
+##   有利子負債 = col_double(),
+##   純資産 = col_double(),
+##   現金及び預金 = col_double(),
+##   売上債権 = col_double(),
+##   棚卸資産 = col_double(),
+##   仕入債務 = col_double(),
+##   法人税等 = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">df_<span class="dv">1</span> &lt;-<span class="st"> </span>df_<span class="dv">0</span> <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">    銘柄コード,</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">    会社名,</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">    売上高,</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">    売上原価,</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">    販管費,</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">    総資産</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">  </span><span class="kw">rename</span>(</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="dt">id    =</span> 銘柄コード,</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">    <span class="dt">name  =</span> 会社名,</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">    <span class="dt">sales =</span> 売上高,</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">    <span class="dt">cogs  =</span> 売上原価,</a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">    <span class="dt">sga   =</span> 販管費,</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">    <span class="dt">asset =</span> 総資産</a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">  )</a></code></pre></div>
+<p>　次に，業種データを作成して読み込む。なお，東証業種分類など公式な分類であれば，手入力しなくとも日経NEEDSなどのデータベースからダウンロードすることが可能である。今回は，業界リサーチの家電量販店(<a href="https://gyokai-search.com/3-kaden-ryohan.htm)とドラッグストア(https://gyokai-search.com/3-drag.htm)のサイトをもとに" class="uri">https://gyokai-search.com/3-kaden-ryohan.htm)とドラッグストア(https://gyokai-search.com/3-drag.htm)のサイトをもとに</a>，「銘柄コード」，「会社名」，「業界」という3つの列からなるデータセットを手入力で作成し，「ch3_inddata.csv」というファイルを作成した。この業種データをRで読み込み、会計データに結合して、会計データの各企業がどの業種に分類されているのかわかるようにしたいというのが、これからやりたいことである。データセットの結合には、結合したい列に加えて結合キーが必要になる。例えば、会計データセットにおけるカワチ薬品の行には、業種データセットにおけるカワチ薬品の行を結合したい。すなわち、3つのデータセットでどの行にどの行を紐付けるのか番号などをつけて明確にしておく必要があり、これを結合キーという。今回は銘柄コードを結合キーとして使うことにしよう。そこで、業種データからは結合したい列「業界」と、結合キーである「銘柄コード」を残すことにしよう。
+　</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># 業界データの読み込み</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">df_ind_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;ch3_inddata.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;cp932&quot;</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   銘柄コード = col_double(),
+##   会社名 = col_character(),
+##   業界 = col_character()
+## )</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># 変数名の変更</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">df_ind_<span class="dv">1</span> &lt;-<span class="st"> </span>df_ind_<span class="dv">0</span> <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">    銘柄コード,</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">    業界</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="st">  </span><span class="kw">rename</span>(</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">    <span class="dt">id  =</span> 銘柄コード,</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">    <span class="dt">ind =</span> 業界</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">  )</a></code></pre></div>
+<p>　それでは，2つのデータセットを結合しよう。今回は両データセットに共通する行のみを残したいので，<code>inner_join()</code>関数をつかって結合する。結合キーには「銘柄コード(id)」を使用する。なお，inner_join()関数以外にも，左側に記入するデータセットの行をすべて残すleft_join()関数，両方のデータセットの行をすべて残すfull_join()関数がある。
+結合できたら、head()関数で結果を確認してみよう。また、このデータセットに，どういう業界が含まれているか確認するには、table()関数を使用する。table()関数は度数を計算するための関数で，データセットにおける業界ごとの行数を数えて出力してくれている。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># データの結合</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">df_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">inner_join</span>(df_<span class="dv">1</span>, df_ind_<span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="dt">by =</span> <span class="st">&quot;id&quot;</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co"># 上から6行目まで確認</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="kw">head</span>(df_<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 7
+##      id name                            sales   cogs    sga  asset ind          
+##   &lt;dbl&gt; &lt;chr&gt;                           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;        
+## 1  2664 カワチ薬品                     268205 211068  52563 183303 ドラッグストア…
+## 2  2730 エディオン                     686284 488119 182786 369547 家電         
+## 3  3048 ビックカメラ                   844029 607947 209025 365605 家電         
+## 4  3088 マツモトキヨシホールディングス 558879 389673 135639 315161 ドラッグストア…
+## 5  3098 ココカラファイン               390963 286311  90939 158179 ドラッグストア…
+## 6  3141 ウエルシアホールディングス     695268 485320 181121 292238 ドラッグストア…</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># 業界ごとの度数の確認</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">df_<span class="dv">2</span> <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(ind) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
+<pre><code>## .
+## ドラッグストア           家電 
+##             10              8</code></pre>
+<p>　<code>table()</code> 関数の結果より，結合されたデータセットの内訳が確認できる。以下では，ド ラッグストア業界に属する企業 10 社と家電量販店業界に属する企業 8 社で財務数値を比 較していく。なお，R は日本語の取り扱いがそれほど得意ではないので，業界名を英語に 修正しておく。業界の英語名を示す「ind_eng」という新しい列をデータセットに追加す る。データセットに列を追加するには mutate()
+関数を使う。今回は，「ind」の列に記入さ れている日本語名を英語名に置き換えたいので，recode() 関数も使って下記のように記入 する。</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># 業界名を英語に変更</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">df_<span class="dv">2</span> &lt;-<span class="st"> </span>df_<span class="dv">2</span> <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ind_eng =</span> <span class="kw">recode</span>(ind,</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">    <span class="st">&quot;ドラッグストア&quot;</span> =<span class="st"> &quot;DrugStore&quot;</span>,</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">    <span class="st">&quot;家電&quot;</span>           =<span class="st"> &quot;ElectronicsRetail&quot;</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">  ))</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="kw">head</span>(df_<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 8
+##      id name                  sales   cogs    sga  asset ind        ind_eng     
+##   &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       
+## 1  2664 カワチ薬品           268205 211068  52563 183303 ドラッグストア… DrugStore   
+## 2  2730 エディオン           686284 488119 182786 369547 家電       Electronics…
+## 3  3048 ビックカメラ         844029 607947 209025 365605 家電       Electronics…
+## 4  3088 マツモトキヨシホールディングス… 558879 389673 135639 315161 ドラッグストア… DrugStore   
+## 5  3098 ココカラファイン     390963 286311  90939 158179 ドラッグストア… DrugStore   
+## 6  3141 ウエルシアホールディングス… 695268 485320 181121 292238 ドラッグストア… DrugStore</code></pre>
 
 </div>
 </div>
@@ -182,6 +309,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+
+<div class="footnotes">
+<hr />
+<ol start="5">
+<li id="fn5"><p>本来は業種の分類は東証業種分類や日経業種分類といった公式の業界分類を使うことが学術的に望ましい。しかし，本書はテキストであり，会計数値に関する議論を直感的に理解しやすいことに重点を置いたため，今回はこの分類を採用している。<a href="ch3.html#fnref5" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
