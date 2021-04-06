@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 会計情報を前処理する | 会計情報のデータ分析</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 会計情報を前処理する | 会計情報のデータ分析" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 会計情報を前処理する | 会計情報のデータ分析" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="北田智久・濵村純平・井上謙仁　編" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="03-Rの準備.html"/>
+<link rel="next" href="05-会計情報の可視化.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">目次</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>まえがき</a></li>
+<li class="chapter" data-level="1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html"><i class="fa fa-check"></i><b>1</b> 会計情報を統計分析する：必要性と困難性</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#会計情報を統計分析するとは"><i class="fa fa-check"></i><b>1.1</b> 「会計情報を統計分析する」とは？</a></li>
+<li class="chapter" data-level="1.2" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#実証的な会計研究からの示唆コスト変動研究と利益調整研究"><i class="fa fa-check"></i><b>1.2</b> 実証的な会計研究からの示唆：「コスト変動研究」と「利益調整研究」</a></li>
+<li class="chapter" data-level="1.3" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#企業内部で会計情報の統計分析を実施できない理由"><i class="fa fa-check"></i><b>1.3</b> 企業内部で会計情報の統計分析を実施「できない」理由</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html"><i class="fa fa-check"></i><b>2</b> 会計データへのアクセス</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#会計データを入手し整理する"><i class="fa fa-check"></i><b>2.1</b> 会計データを入手し，整理する</a></li>
+<li class="chapter" data-level="2.2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#edinetの使い方"><i class="fa fa-check"></i><b>2.2</b> EDINETの使い方</a></li>
+<li class="chapter" data-level="2.3" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#整然データとは"><i class="fa fa-check"></i><b>2.3</b> 整然データとは</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-Rの準備.html"><a href="03-Rの準備.html"><i class="fa fa-check"></i><b>3</b> R・Rstudioの準備と基本操作</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#この章について"><i class="fa fa-check"></i><b>3.1</b> この章について</a></li>
+<li class="chapter" data-level="3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#インストール"><i class="fa fa-check"></i><b>3.2</b> インストール</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rのインストール"><i class="fa fa-check"></i><b>3.2.1</b> Rのインストール</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioのインストール"><i class="fa fa-check"></i><b>3.2.2</b> RStudioのインストール</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作とrの基礎知識"><i class="fa fa-check"></i><b>3.3</b> RStudioの基本操作とRの基礎知識</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作"><i class="fa fa-check"></i><b>3.3.1</b> RStudioの基本操作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rの基礎知識"><i class="fa fa-check"></i><b>3.3.2</b> Rの基礎知識</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html"><i class="fa fa-check"></i><b>4</b> 会計情報を前処理する</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#この章について-1"><i class="fa fa-check"></i><b>4.1</b> この章について</a></li>
+<li class="chapter" data-level="4.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込操作"><i class="fa fa-check"></i><b>4.2</b> データの読込・操作</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込"><i class="fa fa-check"></i><b>4.2.1</b> データの読込</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの操作"><i class="fa fa-check"></i><b>4.2.2</b> データの操作</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの結合"><i class="fa fa-check"></i><b>4.3</b> データの結合</a></li>
+<li class="chapter" data-level="4.4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#財務指標の作成"><i class="fa fa-check"></i><b>4.4</b> 財務指標の作成</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html"><i class="fa fa-check"></i><b>5</b> 会計情報の可視化</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#この章について-2"><i class="fa fa-check"></i><b>5.1</b> この章について</a></li>
+<li class="chapter" data-level="5.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#つのグラフを出力する"><i class="fa fa-check"></i><b>5.2</b> 1つのグラフを出力する</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ggplotの記述方法"><i class="fa fa-check"></i><b>5.2.1</b> ggplotの記述方法</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ヒストグラムと箱ひげ図"><i class="fa fa-check"></i><b>5.2.2</b> ヒストグラムと箱ひげ図</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#折れ線グラフ"><i class="fa fa-check"></i><b>5.2.3</b> 折れ線グラフ</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#複数のグラフを出力する"><i class="fa fa-check"></i><b>5.3</b> 複数のグラフを出力する</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html"><i class="fa fa-check"></i><b>6</b> 会計情報を検定する</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#この章について-3"><i class="fa fa-check"></i><b>6.1</b> この章について</a></li>
+<li class="chapter" data-level="6.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#用語説明"><i class="fa fa-check"></i><b>6.2</b> 用語説明</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#母集団と標本"><i class="fa fa-check"></i><b>6.2.1</b> 母集団と標本</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#有意水準"><i class="fa fa-check"></i><b>6.2.2</b> 有意水準</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#t検定"><i class="fa fa-check"></i><b>6.3</b> t検定</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#対応のない二群のt検定"><i class="fa fa-check"></i><b>6.3.1</b> 対応のない二群のt検定</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数"><i class="fa fa-check"></i><b>6.3.2</b> 相関係数</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数の検定"><i class="fa fa-check"></i><b>6.3.3</b> 相関係数の検定</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-単回帰.html"><a href="07-単回帰.html"><i class="fa fa-check"></i><b>7</b> 単回帰分析とCVP分析</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析とは"><i class="fa fa-check"></i><b>7.1</b> CVP分析とは</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="07-単回帰.html"><a href="07-単回帰.html#固定費と変動費"><i class="fa fa-check"></i><b>7.1.1</b> 固定費と変動費</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-単回帰.html"><a href="07-単回帰.html#固変分解の方法"><i class="fa fa-check"></i><b>7.1.2</b> 固変分解の方法</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析における仮定"><i class="fa fa-check"></i><b>7.1.3</b> CVP分析における仮定</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法を利用した固変分解"><i class="fa fa-check"></i><b>7.2</b> 最小二乗法を利用した固変分解</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-単回帰.html"><a href="07-単回帰.html#データの確認"><i class="fa fa-check"></i><b>7.2.1</b> データの確認</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法に関する予備知識"><i class="fa fa-check"></i><b>7.2.2</b> 最小二乗法に関する予備知識</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法の実践"><i class="fa fa-check"></i><b>7.2.3</b> 最小二乗法の実践</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-重回帰.html"><a href="08-重回帰.html"><i class="fa fa-check"></i><b>8</b> コストビヘイビアを推定する</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-重回帰.html"><a href="08-重回帰.html#費用構造が変化した場合の費用直線の推定"><i class="fa fa-check"></i><b>8.1</b> 費用構造が変化した場合の費用直線の推定</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="08-重回帰.html"><a href="08-重回帰.html#ダミー変数"><i class="fa fa-check"></i><b>8.1.1</b> ダミー変数</a></li>
+<li class="chapter" data-level="8.1.2" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費のみを変えたい場合"><i class="fa fa-check"></i><b>8.1.2</b> グループごとに固定費のみを変えたい場合</a></li>
+<li class="chapter" data-level="8.1.3" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費および変動費率を変えたい場合"><i class="fa fa-check"></i><b>8.1.3</b> グループごとに固定費および変動費率を変えたい場合</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="08-重回帰.html"><a href="08-重回帰.html#コストドライバー分析"><i class="fa fa-check"></i><b>8.2</b> コストドライバー分析</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-重回帰.html"><a href="08-重回帰.html#重回帰分析"><i class="fa fa-check"></i><b>8.2.1</b> 重回帰分析</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-重回帰.html"><a href="08-重回帰.html#残差回帰"><i class="fa fa-check"></i><b>8.2.2</b> 残差回帰</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">ここ何書こうかしら</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">会計情報のデータ分析</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div id="ch4" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> 会計情報を前処理する</h1>
+<div class="sourceCode" id="cb33"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb33-1"><a href="04-会計情報の前処理.html#cb33-1" aria-hidden="true" tabindex="-1"></a>&lt;学習目標&gt;</span>
+<span id="cb33-2"><a href="04-会計情報の前処理.html#cb33-2" aria-hidden="true" tabindex="-1"></a>・読み込んだ会計データと他のデータとの結合・整理が実行できる</span>
+<span id="cb33-3"><a href="04-会計情報の前処理.html#cb33-3" aria-hidden="true" tabindex="-1"></a>・財務数値を作成し，記述統計量をグループ間で比較できる</span></code></pre></div>
+<p>【応用例】</p>
+<ul>
+<li>業界間での収益性指標の比較</li>
+<li>上場年数で分けたグループ間での費用構造の比較</li>
+</ul>
+<p>【関連する会計研究】</p>
+<ul>
+<li>Srivastava, A. (2014) `‘Why have measures of earnings quality changed over time?’’ <em>Journal of Accounting and Economics</em>, Vol. 57, No, 2–3, pp. 196-217.</li>
+</ul>
+<div id="この章について-1" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> この章について</h2>
+<p>この章では，データセットを利用して会計データを分析する方法を学習する。
+第<a href="03-Rの準備.html#ch3">3</a>章では，RおよびRstudioの操作環境を整え，これらの基本操作について学習した。</p>
+<p>しかし，実際に会計情報を分析するには，会計データをR上に読み込む必要がある。
+さらに，会計データだけではなく他のデータも合わせて利用する場面も多い。
+たとえば，産業データ，株価データ，マクロデータといったデータセットである。
+このような他のデータと会計データを組み合わせることで，会計データに産業データを結合して産業間でROEを比較する，会計データに株価データを結合して時価簿価比率を計算するなどの分析ができる。</p>
+<p>こうした複数のデータセットを利用した分析をするには， 会計データと結合したい他のデータセットの両方を読み込んだうえで2つのデータセットを結合・整理する，(2) 結合・整理したデータセットで財務数値を計算する，という作業が必要になる。
+この章では，(1) データの読込・結合・整理，(2) 財務指標の作成と要約を学習する。</p>
+<p>この章で学習する分析は非常にシンプルだが，そのシンプルさゆえに強力な証拠にもなりうる。
+たとえば，この章で学習する分析を利用した興味深い研究として，
+<span class="citation"><a href="08-重回帰.html#ref-S2014JAE" role="doc-biblioref">Srivastava</a> (<a href="08-重回帰.html#ref-S2014JAE" role="doc-biblioref">2014</a>)</span>
+が挙げられる。</p>
+<p>米国企業では費用収益対応が一貫して低下しており，会計情報が役立たたなくなっているのではないかという議論がある。
+<span class="citation"><a href="08-重回帰.html#ref-S2014JAE" role="doc-biblioref">Srivastava</a> (<a href="08-重回帰.html#ref-S2014JAE" role="doc-biblioref">2014</a>)</span>
+は，販売費および一般管理費（以下，販管費）の支出割合が高い新規企業が参入することで，米国企業における費用収益対応が低下したのではないかと主張した。
+会計処理上，売上原価は売上高と個別対応であるのに対して，販管費は期間対応である。
+そのため，新しい企業ほど総費用に占める販管費の割合が高ければ，そのような企業が新規参入することでサンプル全体の費用収益対応の程度は低下するだろう。</p>
+<p>この論文で行われた分析は，企業を上場時期ごとにグループ分けし，グループ間で総費用に占める販管費の割合を比較するというシンプルな分析だった。
+分析結果は，上場年数の新しいグループは販管費の割合が高く，逆に上場年度の古いグループは売上原価の割合が高いという予想通りのものだった。</p>
+<p><span class="citation"><a href="08-重回帰.html#ref-S2014JAE" role="doc-biblioref">Srivastava</a> (<a href="08-重回帰.html#ref-S2014JAE" role="doc-biblioref">2014</a>)</span>
+の分析結果は，そのシンプルさ故に強力な証拠になっている。
+<span class="citation"><a href="08-重回帰.html#ref-S2014JAE" role="doc-biblioref">Srivastava</a> (<a href="08-重回帰.html#ref-S2014JAE" role="doc-biblioref">2014</a>)</span>
+と同様の分析を行うには，会計データに上場年数のデータセットを結合し，上場年数のグループ間で総費用に占める各費用の割合を計算するという操作が必要になる。
+いずれも，この章で学習する操作ができれば実行できる。</p>
+</div>
+<div id="データの読込操作" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> データの読込・操作</h2>
+<p></p>
+<div id="データの読込" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> データの読込</h3>
+<p></p>
+<p>まずは，会計データの読み込み・操作・書き出しまでを実際にやってみよう。
+本章では「findata.csv」というデータを使用する。</p>
+<p>データを読み込むために，読み込みたいcsvファイル (findata.csv) をプロジェクトのあるディレクトリ（Rプロジェクトで作成されたフォルダ内）に保存する。
+プロジェクト内のファイルはRStudioの右下のファイルズ (files) ペインに表示される。
+csvファイルを読み込むには，tidyverseパッケージの<code>read_csv()</code>関数<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>を使用する。</p>
+<p>Macユーザーは文字エンコードの関係から<code>read_csv()</code>関数の引数に<code>locale=locale(encoding="CP932")</code>をつけることに注意してほしい。
+なお，Rでは，「<code>,</code>（コンマ）」や「<code>+</code>」など必ず次に何らかのコードが来る文字で改行した場合は，「複数行で書いた場合も1行の命令」として実行される。</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="04-会計情報の前処理.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb34-2"><a href="04-会計情報の前処理.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
+<span id="cb34-3"><a href="04-会計情報の前処理.html#cb34-3" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;findata.csv&quot;</span>,</span>
+<span id="cb34-4"><a href="04-会計情報の前処理.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">&quot;cp932&quot;</span>)</span>
+<span id="cb34-5"><a href="04-会計情報の前処理.html#cb34-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+## ─ Column specification ────────────────────────────
+## cols(
+##   銘柄コード = col_double(),
+##   会社名 = col_character(),
+##   売上高 = col_double(),
+##   売上原価 = col_double(),
+##   販管費 = col_double(),
+##   当期純利益 = col_double(),
+##   総資産 = col_double(),
+##   負債 = col_double(),
+##   有利子負債 = col_double(),
+##   純資産 = col_double(),
+##   現金及び預金 = col_double(),
+##   売上債権 = col_double(),
+##   棚卸資産 = col_double(),
+##   仕入債務 = col_double(),
+##   法人税等 = col_double()
+## )</code></pre>
+<p>読み込みに成功したら，データセットに含まれる変数名が表示される。
+親切なことに，<code>read_csv()</code>関数は読み込んだデータの各列が，どのデータ型として読み込まれたのかも合わせて表示してくれる。
+表示によると，このデータセットの列（col）は，実数型（double）もしくは文字型（character）のいずれかで読み込まれている。</p>
+</div>
+<div id="データの操作" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> データの操作</h3>
+<p></p>
+<p>RStudioでは，右上の環境 (environment) ペインに読み込んだデータが表示される。
+表示をみてみると，15の列（財務数値などの変数）をもつ18行（企業）のデータセットであることがわかる。
+実際に読み込んだデータを確認してみよう。
+環境ペインに表示されている<code>df_0</code>の右にある表のアイコンをクリックすると，Excelのような形式で読み込んだデータが表示される。
+また，コンソールペインに<code>df_0</code>と打ち込むと<code>df_0</code>の一部分が表示される。</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="04-会計情報の前処理.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># データの表示</span></span>
+<span id="cb36-2"><a href="04-会計情報の前処理.html#cb36-2" aria-hidden="true" tabindex="-1"></a>df_0</span></code></pre></div>
+<pre><code>## # A tibble: 18 x 15
+##    銘柄コード 会社名  売上高 売上原価 販管費 当期純利益 総資産   負債 有利子負債
+##         &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+##  1       2664 カワチ薬品… 2.68e5   211068  52563       3869 1.83e5  91422      32019
+##  2       2730 エディオン… 6.86e5   488119 182786       8944 3.70e5 200541      65930
+##  3       3048 ビックカメラ… 8.44e5   607947 209025      17122 3.66e5 209839      95576
+##  4       3088 マツモトキヨ… 5.59e5   389673 135639      22755 3.15e5 110290          0
+##  5       3098 ココカラファ… 3.91e5   286311  90939       9067 1.58e5  70368        300
+##  6       3141 ウエルシアホ… 6.95e5   485320 181121      17166 2.92e5 161756      44225
+##  7       3148 クリエイトS… 2.68e5   194479  59819       9540 1.21e5  52035          0
+##  8       3349 コスモス薬品… 5.58e5   447681  87568      17633 2.51e5 141720       9816
+##  9       3391 ツルハホール… 6.73e5   480402 152599      24798 3.40e5 135697      15335
+## 10       7419 ノジマ  5.02e5   383819 101026      13634 2.60e5 191272      70857
+## 11       7513 コジマ  2.46e5   179616  62526       3418 1.01e5  59165      31667
+## 12       7649 スギホールデ… 4.57e5   325481 106804      16411 2.54e5  91943          0
+## 13       8173 上新電機… 3.92e5   300187  81858       5579 1.89e5 108127      39216
+## 14       8202 ラオックス… 6.43e4    37999  26153        104 6.35e4  19000       9221
+## 15       8282 ケーズホール… 6.79e5   487499 160868      22706 4.04e5 161298      58377
+## 16       9627 アインホール… 2.68e5   220392  28370      10567 1.83e5  86702      16803
+## 17       9831 ヤマダ電機… 1.57e6  1135758 399351      29779 1.18e6 586827     310948
+## 18       9989 サンドラッグ… 5.64e5   423256 104878      24829 2.47e5  91790          0
+## # … with 6 more variables: 純資産 &lt;dbl&gt;, 現金及び預金 &lt;dbl&gt;, 売上債権 &lt;dbl&gt;,
+## #   棚卸資産 &lt;dbl&gt;, 仕入債務 &lt;dbl&gt;, 法人税等 &lt;dbl&gt;</code></pre>
+<p>このままでは15列もあるため，少し見辛い。
+そこで，<code>df_0</code>の1列目から4列目までと，6列目だけを表示させてみよう。
+Rでは「１から４」のことを<code>1:4</code>と記入する。
+そのため，「１から４と６」を指定したいときは，<code>1:4,6</code>と記入する。</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="04-会計情報の前処理.html#cb38-1" aria-hidden="true" tabindex="-1"></a>df_0[, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">6</span>)]</span></code></pre></div>
+<pre><code>## # A tibble: 18 x 5
+##    銘柄コード 会社名                          売上高 売上原価 当期純利益
+##         &lt;dbl&gt; &lt;chr&gt;                            &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+##  1       2664 カワチ薬品                      268205   211068       3869
+##  2       2730 エディオン                      686284   488119       8944
+##  3       3048 ビックカメラ                    844029   607947      17122
+##  4       3088 マツモトキヨシホールディングス  558879   389673      22755
+##  5       3098 ココカラファイン                390963   286311       9067
+##  6       3141 ウエルシアホールディングス      695268   485320      17166
+##  7       3148 クリエイトSDホールディングス    268161   194479       9540
+##  8       3349 コスモス薬品                    557999   447681      17633
+##  9       3391 ツルハホールディングス          673238   480402      24798
+## 10       7419 ノジマ                          501890   383819      13634
+## 11       7513 コジマ                          246391   179616       3418
+## 12       7649 スギホールディングス            457047   325481      16411
+## 13       8173 上新電機                        391726   300187       5579
+## 14       8202 ラオックス                       64291    37999        104
+## 15       8282 ケーズホールディングス          679132   487499      22706
+## 16       9627 アインホールディングス          268385   220392      10567
+## 17       9831 ヤマダ電機                     1573873  1135758      29779
+## 18       9989 サンドラッグ                    564215   423256      24829</code></pre>
+<p>このように，データセットの一部のみを指定する場合は，<code>df_0[指定する行ベクトル,指定する列ベクトル]</code>と記入する。
+なお，上記と同じ操作を下記の4つのどの記入方法でも実行することができる。</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="04-会計情報の前処理.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 下記4つはすべて同じ操作</span></span>
+<span id="cb40-2"><a href="04-会計情報の前処理.html#cb40-2" aria-hidden="true" tabindex="-1"></a>df_0[, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">6</span>)]</span>
+<span id="cb40-3"><a href="04-会計情報の前処理.html#cb40-3" aria-hidden="true" tabindex="-1"></a>df_0[, <span class="fu">c</span>(<span class="st">&quot;銘柄コード&quot;</span>, <span class="st">&quot;会社名&quot;</span>, <span class="st">&quot;売上高&quot;</span>, <span class="st">&quot;売上原価&quot;</span>, <span class="st">&quot;当期純利益&quot;</span>)]</span>
+<span id="cb40-4"><a href="04-会計情報の前処理.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df_0, 銘柄コード, 会社名, 売上高, 売上原価, 当期純利益)</span>
+<span id="cb40-5"><a href="04-会計情報の前処理.html#cb40-5" aria-hidden="true" tabindex="-1"></a>df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb40-6"><a href="04-会計情報の前処理.html#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(銘柄コード, 会社名, 売上高, 売上原価, 当期純利益)</span></code></pre></div>
+<p>上記4つのどのコードでも同じ操作ができるのだが，どのコードで記述するのが良いだろうか。
+プログラミングで最も大事なことは，「読みやすいコード」を書くことである。
+プログラミングで何かするとき，ほぼすべての工程でコードを読むという作業が発生する。
+プログラムの作業時間のほとんどは「コードを書く」ことではなく，「コードを読む」ことにかけられる。
+したがって，作業効率の観点から，読みやすく理解しやすいコードを書くことが大事になる。
+コードの読みやすさ，理解しやすさの度合いは「可読性」と呼ばれる。</p>
+<p>それでは，上記4つのうち可読性の高いコードはどれだろうか。
+結論からいえば，4つ目のコードが最も可読性が高い。
+まず，1つ目のコード<code>df_0[, c(1:4, 6)]</code>は文字数が少なくコードを打ち込むのは楽そうである。
+しかし，あとになってこのコードを見直したとき「あれ？6行目って何の数値だったっけ？」となってしまうかもしれない。
+2つ目のコードの記述はシンプルではあるものの，コードからどのような操作をしているのか分かりづらい。
+一方，3，4つ目は「select」とあるので，「変数を選択しているんだな」とRを知らない人でさえ何となく理解できるコードになっている。
+しかも，<code>select()</code>関数を使う際には「""（ダブルクオーテーション）」も必要なく，記述が楽である。</p>
+<p>4つ目のコードには少し説明が必要だろう。
+4つ目のコードで使用されている「<code>%&gt;%</code>」は，パイプ演算子と呼ばれる。
+パイプ演算子を正確に説明すると「直前に記載されてある変数を直後に記載されてある関数の第1引数として渡す」という操作を行う。
+なんだか難しそうだが，使い方はシンプルだ。
+基本的に「<code>df</code>というデータに対して，Aという作業をする」というコードを書きたければ<code>df %&gt;% Aの作業コード</code>と記入すればよい。
+パイプ演算子を使うことで，<code>df_0</code>を<code>select()</code>関数の外に出すことができるため，4つ目のコードが最も読みやすい。</p>
+<p>パイプ演算子のメリットは，複数の作業をするときの可読性が高いことだ。
+例えば，「dfというデータに対して，Aという作業して，その作業をしたものに対してBという作業をして，…」ということをしたいときは，<code>df %&gt;% Aの作業コード %&gt;% Bの作業コード %&gt;% ...</code>と数珠つなぎで記入すればよい。
+パイプ演算子の利用は，最初難しく感じるかもしれないが，慣れてくるとパイプ演算子を使ったほうが断然読みやすい。</p>
+<p>パイプ演算子の練習として，「dfというデータセットに対して，いくつかの列を選択して，それから列名を変更する」という作業をしてみよう。
+列名を変更するには，<code>rename()</code>関数を使う。
+Rでは，列名が日本語だと分析上取り扱いにくいことが多い。
+そのため，<code>rename()</code>関数を使って変数名を英語表記に変更する。
+ここでは，「銘柄コード，<code>会社名</code>，<code>売上高</code>，<code>売上原価</code>，<code>販管費</code>，<code>総資産</code>」の6つの列を選択し，これらの変数名をそれぞれ<code>id</code>，<code>name</code>，<code>sales</code>，<code>cogs</code>，<code>sga</code>，<code>asset</code>」に変更してみる。</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="04-会計情報の前処理.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># データセットに対して，列を選択して，列名を変更する</span></span>
+<span id="cb41-2"><a href="04-会計情報の前処理.html#cb41-2" aria-hidden="true" tabindex="-1"></a>df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="04-会計情報の前処理.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb41-4"><a href="04-会計情報の前処理.html#cb41-4" aria-hidden="true" tabindex="-1"></a>    銘柄コード,</span>
+<span id="cb41-5"><a href="04-会計情報の前処理.html#cb41-5" aria-hidden="true" tabindex="-1"></a>    会社名,</span>
+<span id="cb41-6"><a href="04-会計情報の前処理.html#cb41-6" aria-hidden="true" tabindex="-1"></a>    売上高,</span>
+<span id="cb41-7"><a href="04-会計情報の前処理.html#cb41-7" aria-hidden="true" tabindex="-1"></a>    売上原価,</span>
+<span id="cb41-8"><a href="04-会計情報の前処理.html#cb41-8" aria-hidden="true" tabindex="-1"></a>    販管費,</span>
+<span id="cb41-9"><a href="04-会計情報の前処理.html#cb41-9" aria-hidden="true" tabindex="-1"></a>    総資産</span>
+<span id="cb41-10"><a href="04-会計情報の前処理.html#cb41-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb41-11"><a href="04-会計情報の前処理.html#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb41-12"><a href="04-会計情報の前処理.html#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> 銘柄コード,</span>
+<span id="cb41-13"><a href="04-会計情報の前処理.html#cb41-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> 会社名,</span>
+<span id="cb41-14"><a href="04-会計情報の前処理.html#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">sales =</span> 売上高,</span>
+<span id="cb41-15"><a href="04-会計情報の前処理.html#cb41-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">cogs =</span> 売上原価,</span>
+<span id="cb41-16"><a href="04-会計情報の前処理.html#cb41-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sga =</span> 販管費,</span>
+<span id="cb41-17"><a href="04-会計情報の前処理.html#cb41-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">asset =</span> 総資産</span>
+<span id="cb41-18"><a href="04-会計情報の前処理.html#cb41-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 18 x 6
+##       id name                             sales    cogs    sga   asset
+##    &lt;dbl&gt; &lt;chr&gt;                            &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1  2664 カワチ薬品                      268205  211068  52563  183303
+##  2  2730 エディオン                      686284  488119 182786  369547
+##  3  3048 ビックカメラ                    844029  607947 209025  365605
+##  4  3088 マツモトキヨシホールディングス  558879  389673 135639  315161
+##  5  3098 ココカラファイン                390963  286311  90939  158179
+##  6  3141 ウエルシアホールディングス      695268  485320 181121  292238
+##  7  3148 クリエイトSDホールディングス    268161  194479  59819  121412
+##  8  3349 コスモス薬品                    557999  447681  87568  250609
+##  9  3391 ツルハホールディングス          673238  480402 152599  339686
+## 10  7419 ノジマ                          501890  383819 101026  260291
+## 11  7513 コジマ                          246391  179616  62526  101479
+## 12  7649 スギホールディングス            457047  325481 106804  253989
+## 13  8173 上新電機                        391726  300187  81858  189019
+## 14  8202 ラオックス                       64291   37999  26153   63527
+## 15  8282 ケーズホールディングス          679132  487499 160868  403658
+## 16  9627 アインホールディングス          268385  220392  28370  183435
+## 17  9831 ヤマダ電機                     1573873 1135758 399351 1175568
+## 18  9989 サンドラッグ                    564215  423256 104878  246619</code></pre>
+<p>このようにパイプ演算子を使うことで，1連の作業をひとまとまりのコードで書くことができる。
+なお，このままではせっかく英語表記に直したデータセットがどこにも保存されていないので，新しく<code>df_1</code>というデータセットに保存し直しておく。
+保存したあとは，データセットの上から6行目までを表示してくれる<code>head()</code>関数で確認しておこう。</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="04-会計情報の前処理.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># データセットに対して，列を選択して，列名を変更する</span></span>
+<span id="cb43-2"><a href="04-会計情報の前処理.html#cb43-2" aria-hidden="true" tabindex="-1"></a>df_1 <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="04-会計情報の前処理.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb43-4"><a href="04-会計情報の前処理.html#cb43-4" aria-hidden="true" tabindex="-1"></a>    銘柄コード,</span>
+<span id="cb43-5"><a href="04-会計情報の前処理.html#cb43-5" aria-hidden="true" tabindex="-1"></a>    会社名,</span>
+<span id="cb43-6"><a href="04-会計情報の前処理.html#cb43-6" aria-hidden="true" tabindex="-1"></a>    売上高,</span>
+<span id="cb43-7"><a href="04-会計情報の前処理.html#cb43-7" aria-hidden="true" tabindex="-1"></a>    売上原価,</span>
+<span id="cb43-8"><a href="04-会計情報の前処理.html#cb43-8" aria-hidden="true" tabindex="-1"></a>    販管費,</span>
+<span id="cb43-9"><a href="04-会計情報の前処理.html#cb43-9" aria-hidden="true" tabindex="-1"></a>    総資産</span>
+<span id="cb43-10"><a href="04-会計情報の前処理.html#cb43-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb43-11"><a href="04-会計情報の前処理.html#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb43-12"><a href="04-会計情報の前処理.html#cb43-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">id    =</span> 銘柄コード,</span>
+<span id="cb43-13"><a href="04-会計情報の前処理.html#cb43-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">name  =</span> 会社名,</span>
+<span id="cb43-14"><a href="04-会計情報の前処理.html#cb43-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">sales =</span> 売上高,</span>
+<span id="cb43-15"><a href="04-会計情報の前処理.html#cb43-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">cogs  =</span> 売上原価,</span>
+<span id="cb43-16"><a href="04-会計情報の前処理.html#cb43-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sga   =</span> 販管費,</span>
+<span id="cb43-17"><a href="04-会計情報の前処理.html#cb43-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">asset =</span> 総資産</span>
+<span id="cb43-18"><a href="04-会計情報の前処理.html#cb43-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb43-19"><a href="04-会計情報の前処理.html#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-20"><a href="04-会計情報の前処理.html#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 確認</span></span>
+<span id="cb43-21"><a href="04-会計情報の前処理.html#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_1)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##      id name                            sales   cogs    sga  asset
+##   &lt;dbl&gt; &lt;chr&gt;                           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1  2664 カワチ薬品                     268205 211068  52563 183303
+## 2  2730 エディオン                     686284 488119 182786 369547
+## 3  3048 ビックカメラ                   844029 607947 209025 365605
+## 4  3088 マツモトキヨシホールディングス 558879 389673 135639 315161
+## 5  3098 ココカラファイン               390963 286311  90939 158179
+## 6  3141 ウエルシアホールディングス     695268 485320 181121 292238</code></pre>
+<p>なお，<code>select()</code>関数では，列を選択する際に，変数名を変更することもできる。
+その際には以下のようにコードを書けばよい。</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="04-会計情報の前処理.html#cb45-1" aria-hidden="true" tabindex="-1"></a>df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="04-会計情報の前処理.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb45-3"><a href="04-会計情報の前処理.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id    =</span> 銘柄コード,</span>
+<span id="cb45-4"><a href="04-会計情報の前処理.html#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">name  =</span> 会社名,</span>
+<span id="cb45-5"><a href="04-会計情報の前処理.html#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sales =</span> 売上高,</span>
+<span id="cb45-6"><a href="04-会計情報の前処理.html#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cogs  =</span> 売上原価,</span>
+<span id="cb45-7"><a href="04-会計情報の前処理.html#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sga   =</span> 販管費,</span>
+<span id="cb45-8"><a href="04-会計情報の前処理.html#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">asset =</span> 総資産</span>
+<span id="cb45-9"><a href="04-会計情報の前処理.html#cb45-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 18 x 6
+##       id name                             sales    cogs    sga   asset
+##    &lt;dbl&gt; &lt;chr&gt;                            &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1  2664 カワチ薬品                      268205  211068  52563  183303
+##  2  2730 エディオン                      686284  488119 182786  369547
+##  3  3048 ビックカメラ                    844029  607947 209025  365605
+##  4  3088 マツモトキヨシホールディングス  558879  389673 135639  315161
+##  5  3098 ココカラファイン                390963  286311  90939  158179
+##  6  3141 ウエルシアホールディングス      695268  485320 181121  292238
+##  7  3148 クリエイトSDホールディングス    268161  194479  59819  121412
+##  8  3349 コスモス薬品                    557999  447681  87568  250609
+##  9  3391 ツルハホールディングス          673238  480402 152599  339686
+## 10  7419 ノジマ                          501890  383819 101026  260291
+## 11  7513 コジマ                          246391  179616  62526  101479
+## 12  7649 スギホールディングス            457047  325481 106804  253989
+## 13  8173 上新電機                        391726  300187  81858  189019
+## 14  8202 ラオックス                       64291   37999  26153   63527
+## 15  8282 ケーズホールディングス          679132  487499 160868  403658
+## 16  9627 アインホールディングス          268385  220392  28370  183435
+## 17  9831 ヤマダ電機                     1573873 1135758 399351 1175568
+## 18  9989 サンドラッグ                    564215  423256 104878  246619</code></pre>
+</div>
+</div>
+<div id="データの結合" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> データの結合</h2>
+<p>次に，業種データを作成して読み込む。
+なお，東証業種分類など公式な分類であれば，手入力しなくても日経NEEDSなどのデータベースからダウンロードすることができる。
+今回は，業界リサーチの<a href="https://gyokai-search.com/3-kaden-ryohan.htm">家電量販店</a>と<a href="https://gyokai-search.com/3-drag.htm">ドラッグストア</a>のサイトをもとに，<code>銘柄コード</code>，<code>会社名</code>，<code>業界</code>という3つの列からなるデータセットを手入力で作成し，「inddata.csv」というファイルを作成した。
+このデータセットを読み込んだうえで，必要な列を選択して，英語表記に直して新しいデータフレーム<code>df_ind_1</code>に代入しておこう。</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="04-会計情報の前処理.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 業界データの読み込み</span></span>
+<span id="cb47-2"><a href="04-会計情報の前処理.html#cb47-2" aria-hidden="true" tabindex="-1"></a>df_ind_0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;inddata.csv&quot;</span>,</span>
+<span id="cb47-3"><a href="04-会計情報の前処理.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">&quot;cp932&quot;</span>)</span>
+<span id="cb47-4"><a href="04-会計情報の前処理.html#cb47-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+## ─ Column specification ────────────────────────────
+## cols(
+##   銘柄コード = col_double(),
+##   会社名 = col_character(),
+##   業界 = col_character()
+## )</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="04-会計情報の前処理.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 変数名の変更</span></span>
+<span id="cb49-2"><a href="04-会計情報の前処理.html#cb49-2" aria-hidden="true" tabindex="-1"></a>df_ind_1 <span class="ot">&lt;-</span> df_ind_0 <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="04-会計情報の前処理.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb49-4"><a href="04-会計情報の前処理.html#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> 銘柄コード,</span>
+<span id="cb49-5"><a href="04-会計情報の前処理.html#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ind =</span> 業界</span>
+<span id="cb49-6"><a href="04-会計情報の前処理.html#cb49-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>この業種データ（<code>df_ind_1</code>）と会計データ（<code>df_1</code>）に結合してみよう。
+データセットの結合には，結合キーが必要になる。結合キーとは，２つのデータセット間でどの行どの行を紐付けるかの目印となる変数のことだ。
+例えば，会計データでのカワチ薬品の行には，業種データでのカワチ薬品の行を結合したい。
+このように両データセットでデータ間に対応関係がある場合，どのデータ同士を紐付けるか目印となる変数が必要になる。
+今回のケースでは，どちらのデータセットにも<code>id</code>という同じ変数が含まれているので，これを結合キーとして利用する。</p>
+<p>それでは，2つのデータセットを結合しよう<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>。
+今回は両データセットに共通する行だけを残したいので，<code>inner_join()</code>関数をつかって結合する。
+結合キーには銘柄コード (<code>id</code>) を使用する。
+なお，<code>inner_join()</code>関数以外にも，左側に記入するデータセットの行をすべて残す<code>left_join()</code>関数，両方のデータセットの行をすべて残す<code>full_join()</code>関数がある。</p>
+<p>結合できたら，<code>head()</code>関数で結果を確認してみよう。
+また，このデータセットに，どういう業界が何社含まれているか確認するには，<code>table()</code>関数を使用する。
+<code>table()</code>関数は度数を計算するための関数で，データセットに各業界のデータがどれだけ含まれているかを出力してくれる。</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="04-会計情報の前処理.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># データの結合</span></span>
+<span id="cb50-2"><a href="04-会計情報の前処理.html#cb50-2" aria-hidden="true" tabindex="-1"></a>df_2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(df_1, df_ind_1,</span>
+<span id="cb50-3"><a href="04-会計情報の前処理.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;id&quot;</span></span>
+<span id="cb50-4"><a href="04-会計情報の前処理.html#cb50-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb50-5"><a href="04-会計情報の前処理.html#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="04-会計情報の前処理.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 上から6行目まで確認</span></span>
+<span id="cb50-7"><a href="04-会計情報の前処理.html#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_2)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 7
+##      id name                            sales   cogs    sga  asset ind          
+##   &lt;dbl&gt; &lt;chr&gt;                           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;        
+## 1  2664 カワチ薬品                     268205 211068  52563 183303 ドラッグストア…
+## 2  2730 エディオン                     686284 488119 182786 369547 家電         
+## 3  3048 ビックカメラ                   844029 607947 209025 365605 家電         
+## 4  3088 マツモトキヨシホールディングス 558879 389673 135639 315161 ドラッグストア…
+## 5  3098 ココカラファイン               390963 286311  90939 158179 ドラッグストア…
+## 6  3141 ウエルシアホールディングス     695268 485320 181121 292238 ドラッグストア…</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="04-会計情報の前処理.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 業界ごとの度数の確認</span></span>
+<span id="cb52-2"><a href="04-会計情報の前処理.html#cb52-2" aria-hidden="true" tabindex="-1"></a>df_2 <span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="04-会計情報の前処理.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ind) <span class="sc">%&gt;%</span></span>
+<span id="cb52-4"><a href="04-会計情報の前処理.html#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span></code></pre></div>
+<pre><code>## .
+## ドラッグストア   \u5bb6\u96fb 
+##             10              8</code></pre>
+<p><code>table()</code>関数の結果より，結合されたデータセットの内訳が確認できる。
+以下では，ドラッグストア業界に属する企業10社と家電量販店業界に属する企業8社で財務数値を比較していく。</p>
+<p>なお，Rは日本語の取り扱いがそれほど得意ではないので，業界名を英語に修正しておく。業界の英語名を示す<code>ind_eng</code>という新しい列をデータセットに追加する。
+データセットに列を追加するには<code>mutate()</code>関数を使う。
+今回は，<code>ind</code>の列に記入されている日本語名を英語名に置き換えたいので，<code>recode()</code>関数も使って以下のように記入する。</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="04-会計情報の前処理.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 業界名を英語に変更</span></span>
+<span id="cb54-2"><a href="04-会計情報の前処理.html#cb54-2" aria-hidden="true" tabindex="-1"></a>df_2 <span class="ot">&lt;-</span> df_2 <span class="sc">%&gt;%</span></span>
+<span id="cb54-3"><a href="04-会計情報の前処理.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb54-4"><a href="04-会計情報の前処理.html#cb54-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ind_eng =</span> <span class="fu">recode</span>(</span>
+<span id="cb54-5"><a href="04-会計情報の前処理.html#cb54-5" aria-hidden="true" tabindex="-1"></a>        ind,</span>
+<span id="cb54-6"><a href="04-会計情報の前処理.html#cb54-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;ドラッグストア&quot;</span> <span class="ot">=</span> <span class="st">&quot;DrugStore&quot;</span>,</span>
+<span id="cb54-7"><a href="04-会計情報の前処理.html#cb54-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;家電&quot;</span> <span class="ot">=</span> <span class="st">&quot;ElectronicsRetail&quot;</span></span>
+<span id="cb54-8"><a href="04-会計情報の前処理.html#cb54-8" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb54-9"><a href="04-会計情報の前処理.html#cb54-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-10"><a href="04-会計情報の前処理.html#cb54-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_2)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 8
+##      id name                  sales   cogs    sga  asset ind        ind_eng     
+##   &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       
+## 1  2664 カワチ薬品           268205 211068  52563 183303 ドラッグストア… DrugStore   
+## 2  2730 エディオン           686284 488119 182786 369547 家電       Electronics…
+## 3  3048 ビックカメラ         844029 607947 209025 365605 家電       Electronics…
+## 4  3088 マツモトキヨシホールディングス… 558879 389673 135639 315161 ドラッグストア… DrugStore   
+## 5  3098 ココカラファイン     390963 286311  90939 158179 ドラッグストア… DrugStore   
+## 6  3141 ウエルシアホールディングス… 695268 485320 181121 292238 ドラッグストア… DrugStore</code></pre>
+</div>
+<div id="財務指標の作成" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> 財務指標の作成</h2>
+<p>それでは，結合したデータセットをもとに，家電業界とドラッグストア業界の財務指標を比較してみよう。
+今回は2つの業界で収益性を比較する。
+企業の収益性を比較するには，どうしたらよいだろうか。
+最も単純な方法は，企業がビジネスで稼いだ利益を比較することだろう。
+企業がビジネスで稼いだ利益は営業利益とよばれる。</p>
+<p>しかし，企業の収益性を測るために，営業利益の金額を比較するのは不適切なことが多い。
+なぜなら，企業間での規模の違いを無視しているからである。
+営業利益が同じ10億円の企業でも，1,000億円の使用資本で1億円を稼いだ企業と，10億円の使用資本で1億円を稼いだ企業では，後者の方が明らかに効率の良い稼ぎ方をしている。</p>
+<p>そこで，「使用資本に対して何%の利益を稼いだか」を表す財務指標を作成し，企業の収益性を分析するのがROAやROICといった財務指標である。いずれの指標も「利益/使用資本」で計算される指標だ。
+なお，分母や分子にどの利益や使用資本をもってくるのかには様々な考え方がある。
+本章では，これらのトピックについては深入りせず，R上で指標を計算する方法と簡単な解説のみを行う。</p>
+<p>まずは，ROAを計算してみよう。ROAの値は最もコードの書きやすい「営業利益/期末資産」という式で計算し，データセットにROAの列を追加してみよう。
+データセットに新しく列を追加するには，先ほども利用した<code>mutate()</code>関数を使う。
+以下のコードでは，まず営業利益（<code>ope_inc</code>）を追加したうえで，ROAを営業利益にもとづいて計算し追加している。</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="04-会計情報の前処理.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 変数の作成</span></span>
+<span id="cb56-2"><a href="04-会計情報の前処理.html#cb56-2" aria-hidden="true" tabindex="-1"></a>df_2 <span class="ot">&lt;-</span> df_2 <span class="sc">%&gt;%</span></span>
+<span id="cb56-3"><a href="04-会計情報の前処理.html#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb56-4"><a href="04-会計情報の前処理.html#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ope_inc =</span> sales <span class="sc">-</span> (cogs <span class="sc">+</span> sga),</span>
+<span id="cb56-5"><a href="04-会計情報の前処理.html#cb56-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">roa =</span> ope_inc <span class="sc">/</span> asset</span>
+<span id="cb56-6"><a href="04-会計情報の前処理.html#cb56-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb56-7"><a href="04-会計情報の前処理.html#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-8"><a href="04-会計情報の前処理.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 変数を指定してデータの確認</span></span>
+<span id="cb56-9"><a href="04-会計情報の前処理.html#cb56-9" aria-hidden="true" tabindex="-1"></a>df_2 <span class="sc">%&gt;%</span></span>
+<span id="cb56-10"><a href="04-会計情報の前処理.html#cb56-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb56-11"><a href="04-会計情報の前処理.html#cb56-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;name&quot;</span>,</span>
+<span id="cb56-12"><a href="04-会計情報の前処理.html#cb56-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;ope_inc&quot;</span>,</span>
+<span id="cb56-13"><a href="04-会計情報の前処理.html#cb56-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;roa&quot;</span>,</span>
+<span id="cb56-14"><a href="04-会計情報の前処理.html#cb56-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;ind&quot;</span></span>
+<span id="cb56-15"><a href="04-会計情報の前処理.html#cb56-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb56-16"><a href="04-会計情報の前処理.html#cb56-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   name                           ope_inc    roa ind           
+##   &lt;chr&gt;                            &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;         
+## 1 カワチ薬品                        4574 0.0250 ドラッグストア
+## 2 エディオン                       15379 0.0416 家電          
+## 3 ビックカメラ                     27057 0.0740 家電          
+## 4 マツモトキヨシホールディングス   33567 0.107  ドラッグストア
+## 5 ココカラファイン                 13713 0.0867 ドラッグストア
+## 6 ウエルシアホールディングス       28827 0.0986 ドラッグストア</code></pre>
+<p>ここで，ROAを両業界で比較したいとする。
+どう比較すればよいだろうか。
+データを見た感じでは，なんとなくドラッグストアの方がROAは高い気もする。
+しかし，ドラッグストアの方が「どれだけ高いか」は人によって判断が異なるだろう。
+このような主観性を排除してデータの特徴を理解し，他人にも共有できる表現にするためには，「共通のモノサシ」が必要となる。
+そこで共通のモノサシとして記述統計量がもちいられる。</p>
+<p>記述統計量は平均値や分散など複数の指標を組み合わせてデータの特徴を表現する。
+これらの指標は，大きく分けて2つのカテゴリーに分類できる。
+2つのカテゴリーとは，データの中心的傾向の指標とデータのばらつきの指標である。
+データの中心的傾向は，あるデータをまとめたとき，そのデータを代表する点がどの位置に存在するを示す。
+平均値や中央値が中心的傾向の指標としてもちいられ，代表値ともよばれる。
+一方，データのばらつきは，データが中心からどれだけバラついているかを示す。
+ばらつきとして，分散や標準偏差という指標がもちいられる。</p>
+<p>まず，データの中心的傾向の指標をみてみよう。
+平均値（mean）は，観測値をすべて足し合わせた総和を，サンプルサイズで除することで計算される<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>。
+平均値はデータの「重心」とも表現される。この表現は，1つだけ飛び抜けて高い値がある場合，平均値はこの飛び抜けて高い値に引っ張られることに起因している。シーソーに例えてみよう。各データをシーソーに乗せる重り，平均値をシーソーの支点と考える。このとき平均値はシーソーのバランスがちょうどとれる支点になる。この例えでいえば，シーソーの端っこにある重りの方が，支点の中心近くにある重りよりもシーソーを傾ける力が強い。そのため，１つの重りだけ端っこ近くにある場合，シーソーのバランスを取るために支点（平均値）をその重りのある端の方向へずらす必要がある。このように平均値は良くも悪くも飛び抜けて高い値の影響を受けることが特徴である。Rでは，<code>mean()</code>関数で計算できる。</p>
+<p>中央値（median）は，観測値を大きさの順番に並べたとき，ちょうど中央に位置する観測値である。
+平均値と中央値の違いは身長の例がわかりやすい。平均値はそのまま平均身長を表すのに対し，中央値は背の順で並んだときの「真ん中の人の身長」を表す。
+平均値との違いは，１つだけ飛び抜けて高い値の影響を受けない点である。
+例えば，１人だけ身長が飛び抜けて高い人物がいた場合，平均身長は高くなるものの，中央値はその値の影響を受けない。
+なぜなら，１人だけ飛び抜けて高い人物がいたとしても背の順に並んだときの順番は変わらず，真ん中の人も同じだからだ。
+このように飛び抜けて高い（もしくは低い）値の影響を排除して，全体的な傾向を把握したいときは中央値を使うことが望ましい。
+Rでは，<code>median()</code>関数をもちいることで，中央値を計算できる。</p>
+<p>中央値は，データをちょうど2分割にする区切りとみなすこともできる。
+身長の例でいえば，データを背の低いグループと高いグループの半分半分で分けられるということだ。
+実証的な会計研究では，データを4分割する区切りがよくもちいられる。
+この区切りを四分位数（quantile）という。
+それぞれの区切りは，小さい方から第1四分位数，第2四分位数，第3四分位数とよばれる。
+例えば，クラスが100人いたとして背の順で並んでもらったとき，第1四分位数は前から25番目の人の身長，第2四分位数は前から50番目の人の身長，第3四分位数の人は前から75番目の人の身長となる。
+もちろん第2四分位数は，中央値と等しくなる。四分位数には<code>quantile()</code>関数がもちいられる。</p>
+<p>統計的分析では，四分位点だけでなくデータを順に並べた際の両端の数，すなわち最も小さな数である最小値（minimum）と，最も大きな数である最大値（maximum）を確認する場合もある。
+身長の例でいえば，背の順で並んだとき一番前の人の身長が最小値，一番後ろの人の身長が最大値である。
+最小値と最大値を確認することで，データ全体の範囲やデータに極端な値が含まれているかどうかがチェックできる。
+Rでは，最小値は<code>min()</code>関数，最大値は<code>max()</code>関数で算出できる。</p>
+<p>次にデータのばらつきを示す指標を確認しよう。
+データのばらつきを示す指標として，まず分散（variance）がある。
+分散はデータの中心（平均値）から各観測値がどれだけ離れているかを示す偏差を2乗し，それをサンプルサイズで割ると求まる。
+二乗をとる利用は，ばらつきには上にばらつく場合（平均値との差がプラス）と下にばらつく場合（平均値との差がマイナス）の2つのパターンがあるからだ。
+どちらも平均値からばらついていることには代わりがない。
+どちらのばらつきもプラスに変換するために二乗をとっていると考えてもらってよい。
+分散をみることで，データの平均的なばらつきの程度をみることができる。
+<code>var()</code>関数により計算される<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a>。</p>
+<p>しかし，分散の値でそのまま議論するのを好ましくないと判断するケースもある。
+それは単位を問題にする場合である。
+分散は偏差の「2乗」を観測値の数で割っている。
+たとえば，売上高の分散を計算すると，その単位は「円<span class="math inline">\(^2\)</span>」となる。
+一方，売上高の平均値や中央値も同様に計算すると，単位が「円」となってしまう。
+つまり，分散は平均値や中央値よりも2乗分大きく計算される。
+これでは数字の大きさをすぐに理解することができないので，分散の単位を平均値や中央値とそろえる必要がある。
+そこでもちいられるのが，分散の平方根をとった標準偏差 (standard deviation) である。
+Rでは<code>sqrt()</code>関数で計算される。</p>
+<p>それでは，ROAの記述統計量を家電業界とドラッグストア業界で比較してみよう。
+グループごとの記述統計量を出力するには，まず<code>group_by()</code>関数でどのグループに分けたいか指定し，<code>summarise()</code>関数で記述統計量を出力する
+。今回は，両業界の中央値を比較してみよう。
+なお平均値，四分位数，標準偏差といった他の指標もこれと同様の方法で出力できる。</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="04-会計情報の前処理.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ROAの比較</span></span>
+<span id="cb58-2"><a href="04-会計情報の前処理.html#cb58-2" aria-hidden="true" tabindex="-1"></a>df_2 <span class="sc">%&gt;%</span></span>
+<span id="cb58-3"><a href="04-会計情報の前処理.html#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ind) <span class="sc">%&gt;%</span></span>
+<span id="cb58-4"><a href="04-会計情報の前処理.html#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">median</span>(roa))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   ind            `median(roa)`
+##   &lt;chr&gt;                  &lt;dbl&gt;
+## 1 ドラッグストア        0.103 
+## 2 家電                  0.0465</code></pre>
+<p>出力された各業界におけるROAの中央値をみてみると，ドラッグストアは0.103で，家電量販店0.0465となっており，両業界で約2倍ほど収益性が異なる。</p>
+<p>なぜ，両業界でROAがこれほど異なるのだろうか。
+これを調べるために，ROAの分解公式を利用してみよう。
+ROAは売上高を挟むことで，「ROA <span class="math inline">\(=\)</span> 利益/売上高 <span class="math inline">\(\times\)</span> 売上高/資産」と分解できる。
+右辺の第1項を利益率，右辺の第2項を回転率とよぶ。</p>
+<p>この分解公式は，企業がどのような要因で収益性を高めているかを分析するのに役立つ。
+例えば，薄利多売のようなビジネスモデルの場合は，利益率が低い一方で回転率が高くなる。
+反対に，高級品を少量販売するようなビジネスの場合，利益率が高くなる一方で回転率が低くなる。</p>
+<p>この分解公式の各項目を計算して，業界間で比較したのが下記コードである。
+複数列に対して同じ記述統計量を出力するには，<code>summarise_at()</code>関数が便利だ。
+引数の<code>vars</code>は，どの変数について記述統計量を出力するかを示している。</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="04-会計情報の前処理.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 利益率と回転率の比較</span></span>
+<span id="cb60-2"><a href="04-会計情報の前処理.html#cb60-2" aria-hidden="true" tabindex="-1"></a>df_2 <span class="sc">%&gt;%</span></span>
+<span id="cb60-3"><a href="04-会計情報の前処理.html#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb60-4"><a href="04-会計情報の前処理.html#cb60-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">margin   =</span> ope_inc <span class="sc">/</span> sales,</span>
+<span id="cb60-5"><a href="04-会計情報の前処理.html#cb60-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">turnover =</span> sales <span class="sc">/</span> asset</span>
+<span id="cb60-6"><a href="04-会計情報の前処理.html#cb60-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb60-7"><a href="04-会計情報の前処理.html#cb60-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ind) <span class="sc">%&gt;%</span></span>
+<span id="cb60-8"><a href="04-会計情報の前処理.html#cb60-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_at</span>(</span>
+<span id="cb60-9"><a href="04-会計情報の前処理.html#cb60-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(margin, turnover),</span>
+<span id="cb60-10"><a href="04-会計情報の前処理.html#cb60-10" aria-hidden="true" tabindex="-1"></a>    median</span>
+<span id="cb60-11"><a href="04-会計情報の前処理.html#cb60-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   ind            margin turnover
+##   &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+## 1 ドラッグストア 0.0529     2.10
+## 2 家電           0.0247     1.89</code></pre>
+<p>分析結果を確認してみると，回転率はドラッグストアが2.10，家電量販店が1.89と両業界でそれほど変わらないものの，利益率はドラッグストアが0.0529，家電量販店が0.0247と2倍近い差がついている。
+すなわち，2つの業界におけるROAの中央値が2倍近く異なるのは，利益率が2倍近く異なるからだとわかる。</p>
+<p>なぜ，両業界で利益率がこんなにも異なるのだろうか。
+家電量販店業界の利益率の低さは，家電量販店がインターネット通販等に対抗するため「行きすぎた安売り」を行っている。
+そのため，家電量販店の利益率が低くなっているいうのは想像がつくだろう。</p>
+<p>一方，ドラッグストアも活用品や食料品販売などの値引き販売を行っているイメージが強いかもしれない。
+しかし，ドラッグストアの場合は売上全体の約2割を占める医薬品の利益率が4割と非常に高い。
+そのため，両業界で利益率に大きく差がでる。
+このように，どちらの業界も値引き販売のイメージが強い業界ではあるものの，実際に会計データを利用して分析してみると，イメージとは違った現実が見えてくる。</p>
+
+<div class="footnotes">
+<hr />
+<ol start="22">
+<li id="fn22"><p>Rに初期実装されている関数に<code>read.csv()</code>関数というものがある。これは<code>read_csv()</code>関数と同様にcsvファイルを読み込むための関数である。<code>read.csv()</code>関数を使っても同様の操作はできるものの，csvファイルのサイズが大きくなると<code>read_csv()</code>関数の方がファイルの読み込みが早い。<a href="04-会計情報の前処理.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p>データフレームの結合で，両データフレームに同じ名前の変数がある場合には，列名の重複を避けるためRが自動的に<code>変数名.x</code>と<code>変数名.y</code>という2つの変数を作成してしまうので注意。<a href="04-会計情報の前処理.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p>サンプルの大きさのことをさす。本章でもちいているデータは20社の観測値から構成されるため，サンプルサイズは20となる。なお，「サンプル数」という言葉でサンプルの大きさが示されることがある。しかし，サンプル数は観察されたサンプルの群数を表すため，誤用が多い。たとえば，業界Aの売上高と業界Bの売上高が手元にあるなら，サンプル数が2つあると表現できる。<a href="04-会計情報の前処理.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p><code>var()</code>で計算される分散は，正確には「不偏分散」になる。以下で議論する<code>sqrt()</code>でも「不偏標準偏差」が計算される。<a href="04-会計情報の前処理.html#fnref25" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="03-Rの準備.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="05-会計情報の可視化.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["下準備.pdf", "下準備.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

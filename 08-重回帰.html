@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 コストビヘイビアを推定する | 会計情報のデータ分析</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 コストビヘイビアを推定する | 会計情報のデータ分析" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 コストビヘイビアを推定する | 会計情報のデータ分析" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="北田智久・濵村純平・井上謙仁　編" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="07-単回帰.html"/>
+
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">目次</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>まえがき</a></li>
+<li class="chapter" data-level="1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html"><i class="fa fa-check"></i><b>1</b> 会計情報を統計分析する：必要性と困難性</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#会計情報を統計分析するとは"><i class="fa fa-check"></i><b>1.1</b> 「会計情報を統計分析する」とは？</a></li>
+<li class="chapter" data-level="1.2" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#実証的な会計研究からの示唆コスト変動研究と利益調整研究"><i class="fa fa-check"></i><b>1.2</b> 実証的な会計研究からの示唆：「コスト変動研究」と「利益調整研究」</a></li>
+<li class="chapter" data-level="1.3" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#企業内部で会計情報の統計分析を実施できない理由"><i class="fa fa-check"></i><b>1.3</b> 企業内部で会計情報の統計分析を実施「できない」理由</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html"><i class="fa fa-check"></i><b>2</b> 会計データへのアクセス</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#会計データを入手し整理する"><i class="fa fa-check"></i><b>2.1</b> 会計データを入手し，整理する</a></li>
+<li class="chapter" data-level="2.2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#edinetの使い方"><i class="fa fa-check"></i><b>2.2</b> EDINETの使い方</a></li>
+<li class="chapter" data-level="2.3" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#整然データとは"><i class="fa fa-check"></i><b>2.3</b> 整然データとは</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-Rの準備.html"><a href="03-Rの準備.html"><i class="fa fa-check"></i><b>3</b> R・Rstudioの準備と基本操作</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#この章について"><i class="fa fa-check"></i><b>3.1</b> この章について</a></li>
+<li class="chapter" data-level="3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#インストール"><i class="fa fa-check"></i><b>3.2</b> インストール</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rのインストール"><i class="fa fa-check"></i><b>3.2.1</b> Rのインストール</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioのインストール"><i class="fa fa-check"></i><b>3.2.2</b> RStudioのインストール</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作とrの基礎知識"><i class="fa fa-check"></i><b>3.3</b> RStudioの基本操作とRの基礎知識</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作"><i class="fa fa-check"></i><b>3.3.1</b> RStudioの基本操作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rの基礎知識"><i class="fa fa-check"></i><b>3.3.2</b> Rの基礎知識</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html"><i class="fa fa-check"></i><b>4</b> 会計情報を前処理する</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#この章について-1"><i class="fa fa-check"></i><b>4.1</b> この章について</a></li>
+<li class="chapter" data-level="4.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込操作"><i class="fa fa-check"></i><b>4.2</b> データの読込・操作</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込"><i class="fa fa-check"></i><b>4.2.1</b> データの読込</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの操作"><i class="fa fa-check"></i><b>4.2.2</b> データの操作</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの結合"><i class="fa fa-check"></i><b>4.3</b> データの結合</a></li>
+<li class="chapter" data-level="4.4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#財務指標の作成"><i class="fa fa-check"></i><b>4.4</b> 財務指標の作成</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html"><i class="fa fa-check"></i><b>5</b> 会計情報の可視化</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#この章について-2"><i class="fa fa-check"></i><b>5.1</b> この章について</a></li>
+<li class="chapter" data-level="5.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#つのグラフを出力する"><i class="fa fa-check"></i><b>5.2</b> 1つのグラフを出力する</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ggplotの記述方法"><i class="fa fa-check"></i><b>5.2.1</b> ggplotの記述方法</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ヒストグラムと箱ひげ図"><i class="fa fa-check"></i><b>5.2.2</b> ヒストグラムと箱ひげ図</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#折れ線グラフ"><i class="fa fa-check"></i><b>5.2.3</b> 折れ線グラフ</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#複数のグラフを出力する"><i class="fa fa-check"></i><b>5.3</b> 複数のグラフを出力する</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html"><i class="fa fa-check"></i><b>6</b> 会計情報を検定する</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#この章について-3"><i class="fa fa-check"></i><b>6.1</b> この章について</a></li>
+<li class="chapter" data-level="6.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#用語説明"><i class="fa fa-check"></i><b>6.2</b> 用語説明</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#母集団と標本"><i class="fa fa-check"></i><b>6.2.1</b> 母集団と標本</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#有意水準"><i class="fa fa-check"></i><b>6.2.2</b> 有意水準</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#t検定"><i class="fa fa-check"></i><b>6.3</b> t検定</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#対応のない二群のt検定"><i class="fa fa-check"></i><b>6.3.1</b> 対応のない二群のt検定</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数"><i class="fa fa-check"></i><b>6.3.2</b> 相関係数</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数の検定"><i class="fa fa-check"></i><b>6.3.3</b> 相関係数の検定</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-単回帰.html"><a href="07-単回帰.html"><i class="fa fa-check"></i><b>7</b> 単回帰分析とCVP分析</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析とは"><i class="fa fa-check"></i><b>7.1</b> CVP分析とは</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="07-単回帰.html"><a href="07-単回帰.html#固定費と変動費"><i class="fa fa-check"></i><b>7.1.1</b> 固定費と変動費</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-単回帰.html"><a href="07-単回帰.html#固変分解の方法"><i class="fa fa-check"></i><b>7.1.2</b> 固変分解の方法</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析における仮定"><i class="fa fa-check"></i><b>7.1.3</b> CVP分析における仮定</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法を利用した固変分解"><i class="fa fa-check"></i><b>7.2</b> 最小二乗法を利用した固変分解</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-単回帰.html"><a href="07-単回帰.html#データの確認"><i class="fa fa-check"></i><b>7.2.1</b> データの確認</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法に関する予備知識"><i class="fa fa-check"></i><b>7.2.2</b> 最小二乗法に関する予備知識</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法の実践"><i class="fa fa-check"></i><b>7.2.3</b> 最小二乗法の実践</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-重回帰.html"><a href="08-重回帰.html"><i class="fa fa-check"></i><b>8</b> コストビヘイビアを推定する</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-重回帰.html"><a href="08-重回帰.html#費用構造が変化した場合の費用直線の推定"><i class="fa fa-check"></i><b>8.1</b> 費用構造が変化した場合の費用直線の推定</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="08-重回帰.html"><a href="08-重回帰.html#ダミー変数"><i class="fa fa-check"></i><b>8.1.1</b> ダミー変数</a></li>
+<li class="chapter" data-level="8.1.2" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費のみを変えたい場合"><i class="fa fa-check"></i><b>8.1.2</b> グループごとに固定費のみを変えたい場合</a></li>
+<li class="chapter" data-level="8.1.3" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費および変動費率を変えたい場合"><i class="fa fa-check"></i><b>8.1.3</b> グループごとに固定費および変動費率を変えたい場合</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="08-重回帰.html"><a href="08-重回帰.html#コストドライバー分析"><i class="fa fa-check"></i><b>8.2</b> コストドライバー分析</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-重回帰.html"><a href="08-重回帰.html#重回帰分析"><i class="fa fa-check"></i><b>8.2.1</b> 重回帰分析</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-重回帰.html"><a href="08-重回帰.html#残差回帰"><i class="fa fa-check"></i><b>8.2.2</b> 残差回帰</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">ここ何書こうかしら</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">会計情報のデータ分析</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div id="ch8" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> コストビヘイビアを推定する</h1>
+<div class="sourceCode" id="cb141"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb141-1"><a href="08-重回帰.html#cb141-1" aria-hidden="true" tabindex="-1"></a>&lt;学習目標&gt;</span>
+<span id="cb141-2"><a href="08-重回帰.html#cb141-2" aria-hidden="true" tabindex="-1"></a>・費用構造が変化した場合の変動費率・固定費を推定できる</span>
+<span id="cb141-3"><a href="08-重回帰.html#cb141-3" aria-hidden="true" tabindex="-1"></a>・コスト・ドライバーの分析ができる</span></code></pre></div>
+<p>【応用例】</p>
+<ul>
+<li>同じデータセット内で費用構造が異なる場合の費用直線の推定</li>
+<li>コスト・ドライバー分析</li>
+</ul>
+<p>【関連する会計研究】</p>
+<p>Anderson, M. C., R. D. Banker, and S. N. Janakiraman (2003) “Are selling, general, and administrative costs”sticky“?” <em>Journal of Accounting Research</em>, Vol. 41, No. 1, pp. 47-63.</p>
+<div id="費用構造が変化した場合の費用直線の推定" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> 費用構造が変化した場合の費用直線の推定</h2>
+<p></p>
+<div id="ダミー変数" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> ダミー変数</h3>
+<p></p>
+<p>前章では，回帰分析によるCVP分析を学習した。CVP分析では，コストを変動費と固定費という2種類のコストに分類できると仮定することで，コストを売上高の変数として説明することができた。
+また，このCVP分析を行うため，Rの<code>lm()</code>関数を用いて，会計数値から企業のコスト直線を推定した。</p>
+<p>しかし，企業の費用直線を推定するうえで，この推定方法が常に適切とは限らない。
+たとえば，下記のソフトバンクグループの売上高と営業費用（売上高-営業利益）のグラフをみてみよう。
+データはソフトバンクグループのホームページから取得し，前章と同じように単回帰分析によって推定した費用直線の結果をggplotで可視化した。</p>
+<p>なお，<code>geom_abline()</code>関数はggplotに斜線を追加する関数で，引数には傾き(slope)と切片(intercept)を指定する必要がある。
+単回帰分析の斜線を書き込みたいので，単回帰分析の係数を取り出す<code>coef()</code>関数を用いて，それぞれ単回帰分析により推定した傾きと切片を指定している。</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="08-重回帰.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ライブラリの読み込み</span></span>
+<span id="cb142-2"><a href="08-重回帰.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb142-3"><a href="08-重回帰.html#cb142-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-4"><a href="08-重回帰.html#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
+<span id="cb142-5"><a href="08-重回帰.html#cb142-5" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;softbank.csv&quot;</span>,</span>
+<span id="cb142-6"><a href="08-重回帰.html#cb142-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">&quot;cp932&quot;</span>)</span>
+<span id="cb142-7"><a href="08-重回帰.html#cb142-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
+<pre><code>## 
+## ─ Column specification ────────────────────────────
+## cols(
+##   X1 = col_double(),
+##   fy = col_double(),
+##   sales = col_double(),
+##   cost = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="08-重回帰.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 単回帰分析</span></span>
+<span id="cb145-2"><a href="08-重回帰.html#cb145-2" aria-hidden="true" tabindex="-1"></a>lm_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(cost <span class="sc">~</span> sales, df_0)</span>
+<span id="cb145-3"><a href="08-重回帰.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = cost ~ sales, data = df_0)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2095.6  -853.9   123.9   487.9  1624.7 
+## 
+## Coefficients:
+##               Estimate Std. Error t value        Pr(&gt;|t|)    
+## (Intercept) 1769.09405  581.94742    3.04          0.0112 *  
+## sales          0.76058    0.02683   28.35 0.0000000000123 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1121 on 11 degrees of freedom
+## Multiple R-squared:  0.9865, Adjusted R-squared:  0.9853 
+## F-statistic: 803.6 on 1 and 11 DF,  p-value: 0.00000000001234</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="08-重回帰.html#cb147-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_0, <span class="fu">aes</span>(<span class="at">x =</span> sales, <span class="at">y =</span> cost)) <span class="sc">+</span></span>
+<span id="cb147-2"><a href="08-重回帰.html#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb147-3"><a href="08-重回帰.html#cb147-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(</span>
+<span id="cb147-4"><a href="08-重回帰.html#cb147-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">slope     =</span> <span class="fu">coef</span>(lm_1)[<span class="dv">2</span>],</span>
+<span id="cb147-5"><a href="08-重回帰.html#cb147-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">intercept =</span> <span class="fu">coef</span>(lm_1)[<span class="dv">1</span>]</span>
+<span id="cb147-6"><a href="08-重回帰.html#cb147-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb147-7"><a href="08-重回帰.html#cb147-7" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-69-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>出力されたグラフをみると，データが明らかに2つのグループに分かれている。
+なお，左下のグループが2005年以前のデータで，右上のグループが2006年以降のデータである。</p>
+<p>これは，ソフトバンクグループが2006年にボーダフォンを買収したことによる影響だと考えられる。
+ソフトバンクグループはボーダフォン買収により，新しくモバイル事業によるサービスを提供できるようになった。
+ソフトバンクのようにコスト直線の推定に使用するデータ内で，企業のコスト構造が大きく変化している場合，変化前と変化後で異なるコスト直線を推定する必要がある。</p>
+<p>データセットにOLSを適用し，直線を推定したいものの，同じデータセット内にある異なるグループごとに異なる直線を推定したい，という場面にはよく遭遇する。
+たとえば，産業や上場時期ごとに異なるコスト直線を推定したいケースもなどである。</p>
+<p>こうした状況で，データセットを分割することなく，各グループの直線を推定できる方法がダミー変数を用いた回帰分析である。
+ダミー変数とは，「ある条件を満たせば1，そうでなければ0」をとる変数をさす。</p>
+<p>ダミー変数をもちいることで，「製造業なら1，そうでなければ0」などのカテゴリーを表す表現も，数値に置き換えて回帰式に組み込むことができる。
+ダミー変数の作成には<code>if_else()</code>関数をもちいる。たとえば，「買収後のデータなら1，そうでなければ0」をとるダミー変数を作成したければ，下記のようなコードになる。</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="08-重回帰.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ダミー変数の作成</span></span>
+<span id="cb148-2"><a href="08-重回帰.html#cb148-2" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb148-3"><a href="08-重回帰.html#cb148-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb148-4"><a href="08-重回帰.html#cb148-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fy_dummy =</span> <span class="fu">if_else</span>(fy <span class="sc">&gt;=</span> <span class="dv">2006</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb148-5"><a href="08-重回帰.html#cb148-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
+<div id="グループごとに固定費のみを変えたい場合" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> グループごとに固定費のみを変えたい場合</h3>
+<p>それでは，作成したダミー変数を回帰式に組み込んでみよう。買収後に固定費が増加したと考える場合，次のような回帰式を推定すればよい。</p>
+<p>【グループごとに固定費のみを変える回帰式】
+<span class="math display">\[\begin{align}
+    Cost_t=\beta_0 + \beta_1 Sales_t + \beta_2 Dummy_t +\varepsilon_t.
+    \label{eq:8.1}
+\end{align}\]</span></p>
+<p>このように回帰式を定義しておけば，買収前のデータであれば「<span class="math inline">\(Dummy=0\)</span>」となるので，下式Beforeのようになり<span class="math inline">\(\beta_0\)</span>が買収前の固定費を表す<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a>。
+一方，買収後のデータであれば「<span class="math inline">\(Dummy=1\)</span>」となるので，下式Afterのようになり, 「<span class="math inline">\(\beta_0 +\beta_2\)</span>」が買収後の固定費を表す。
+すなわち，<span class="math inline">\(\beta_2\)</span>が買収によって増加した固定費を表す。</p>
+<p>【買収前のデータに対する回帰式(Before)】
+<span class="math display">\[\begin{align}
+    Cost_t=(\beta_0 \hspace{0.6cm}) + \beta_1 Sales_t + \varepsilon_t,
+    \label{eq:8.2}
+\end{align}\]</span>
+【買収後のデータに対する回帰式(After)】
+<span class="math display">\[\begin{align}
+    Cost_t=(\beta_0 +\beta_2) + \beta_1 Sales_t + \varepsilon_t.
+    \label{eq:8.3}
+\end{align}\]</span></p>
+<p>それでは，実際にダミー変数をもちいた回帰分析を実行してみよう。
+コードは下記のようになる。
+なお，回帰分析結果のグラフを表示するコードも示している。</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="08-重回帰.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 固定費のみダミー</span></span>
+<span id="cb149-2"><a href="08-重回帰.html#cb149-2" aria-hidden="true" tabindex="-1"></a>lm_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(cost <span class="sc">~</span> sales <span class="sc">+</span> fy_dummy, df_0)</span>
+<span id="cb149-3"><a href="08-重回帰.html#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = cost ~ sales + fy_dummy, data = df_0)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1624.1  -741.5  -108.3   931.0  1341.6 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 2732.5130   824.6320   3.314 0.007831 ** 
+## sales          0.5855     0.1149   5.094 0.000468 ***
+## fy_dummy    4173.0534  2672.0017   1.562 0.149405    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1054 on 10 degrees of freedom
+## Multiple R-squared:  0.9891, Adjusted R-squared:  0.987 
+## F-statistic: 455.6 on 2 and 10 DF,  p-value: 0.0000000001508</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="08-重回帰.html#cb151-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb151-2"><a href="08-重回帰.html#cb151-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sl         =</span> <span class="fu">c</span>(<span class="fu">coef</span>(lm_2)[<span class="dv">2</span>], <span class="fu">coef</span>(lm_2)[<span class="dv">2</span>]),</span>
+<span id="cb151-3"><a href="08-重回帰.html#cb151-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">int        =</span> <span class="fu">c</span>(<span class="fu">coef</span>(lm_2)[<span class="dv">1</span>], <span class="fu">coef</span>(lm_2)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(lm_2)[<span class="dv">3</span>]),</span>
+<span id="cb151-4"><a href="08-重回帰.html#cb151-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_dummy =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>)</span>
+<span id="cb151-5"><a href="08-重回帰.html#cb151-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb151-6"><a href="08-重回帰.html#cb151-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-7"><a href="08-重回帰.html#cb151-7" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb151-8"><a href="08-重回帰.html#cb151-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb151-9"><a href="08-重回帰.html#cb151-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb151-10"><a href="08-重回帰.html#cb151-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> sales,</span>
+<span id="cb151-11"><a href="08-重回帰.html#cb151-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">y      =</span> cost,</span>
+<span id="cb151-12"><a href="08-重回帰.html#cb151-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="fu">as.character</span>(fy_dummy)</span>
+<span id="cb151-13"><a href="08-重回帰.html#cb151-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb151-14"><a href="08-重回帰.html#cb151-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb151-15"><a href="08-重回帰.html#cb151-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb151-16"><a href="08-重回帰.html#cb151-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(</span>
+<span id="cb151-17"><a href="08-重回帰.html#cb151-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> cc,</span>
+<span id="cb151-18"><a href="08-重回帰.html#cb151-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb151-19"><a href="08-重回帰.html#cb151-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">slope     =</span> sl,</span>
+<span id="cb151-20"><a href="08-重回帰.html#cb151-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">intercept =</span> int,</span>
+<span id="cb151-21"><a href="08-重回帰.html#cb151-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour    =</span> time_dummy</span>
+<span id="cb151-22"><a href="08-重回帰.html#cb151-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb151-23"><a href="08-重回帰.html#cb151-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb151-24"><a href="08-重回帰.html#cb151-24" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-71-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>グラフをみると，同じ傾きの直線が2本表示されている。
+下の回帰直線は買収前のデータに対する分析結果，そこから上に<span class="math inline">\(\beta_2\)</span>だけずれた回帰直線は買収後のデータに対する分析結果である。
+このグラフの結果は買収によって，<span class="math inline">\(\beta_2\)</span>だけ固定費が上昇したことを表している。</p>
+<p>ここで注意したいのは，回帰分析の結果が「買収前と買収後で回帰直線の傾きが同じである」と仮定したうえでの分析結果だということだ。
+すなわち，買収前と買収後で変動費率も変化しているとも考えられるが，上記の固定費ダミーの数式では変動費率の変化を表現することができない。
+しかし，この問題はダミー変数をちょっとだけ工夫して回帰分析に組み入れることで，簡単に解決できる。</p>
+</div>
+<div id="グループごとに固定費および変動費率を変えたい場合" class="section level3" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> グループごとに固定費および変動費率を変えたい場合</h3>
+<p>買収によって変動費率も変化したと考える場合，次のような回帰式を推定すればよい。</p>
+<p>【グループごとに固定費および変動費率を変える回帰式】
+<span class="math display">\[\begin{eqnarray}
+    Cost_t=\beta_0 + \beta_1 Sales_t + \beta_2 Sales_t \times Dummy_t + \varepsilon_t.
+    \label{eq:8.4}
+\end{eqnarray}\]</span></p>
+<p>この回帰式では，買収前と買収後のデータに対する予測値がBeforeとAfterのように変化する。この式では，<span class="math inline">\(\beta_2\)</span>が買収による固定費の変化分を，<span class="math inline">\(\beta_3\)</span>が買収による変動費率の変化分を表している。</p>
+<p>【買収前のデータに対する回帰式(Before)】
+<span class="math display">\[\begin{eqnarray}
+    Cost_t=(\beta_0 \hspace{0.6cm}) +( \beta_1   \hspace{0.6cm} ) Sales_t+ \varepsilon_t,
+    \label{eq:8.5}
+\end{eqnarray}\]</span>
+【買収後のデータに対する回帰式(After)】
+<span class="math display">\[\begin{eqnarray}
+    Cost_t=(\beta_0 +\beta_2) + ( \beta_1 +\beta_3 ) Sales_t + \varepsilon_t.
+    \label{eq:8.6}
+\end{eqnarray}\]</span></p>
+<p>それでは，コードを実行してみよう。</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="08-重回帰.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 固定費と変動費率の両方をダミー</span></span>
+<span id="cb152-2"><a href="08-重回帰.html#cb152-2" aria-hidden="true" tabindex="-1"></a>lm_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(cost <span class="sc">~</span> sales <span class="sc">+</span> fy_dummy <span class="sc">+</span> sales<span class="sc">:</span>fy_dummy, df_0)</span>
+<span id="cb152-3"><a href="08-重回帰.html#cb152-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_3)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = cost ~ sales + fy_dummy + sales:fy_dummy, data = df_0)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -608.5 -340.0 -154.0  318.2  990.9 
+## 
+## Coefficients:
+##                   Estimate  Std. Error t value   Pr(&gt;|t|)    
+## (Intercept)      904.65305   584.12642   1.549   0.155855    
+## sales              0.88413     0.08733  10.124 0.00000323 ***
+## fy_dummy       15300.51943  2688.48058   5.691   0.000298 ***
+## sales:fy_dummy    -0.62154     0.12598  -4.934   0.000809 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 577.4 on 9 degrees of freedom
+## Multiple R-squared:  0.9971, Adjusted R-squared:  0.9961 
+## F-statistic:  1021 on 3 and 9 DF,  p-value: 0.00000000001031</code></pre>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="08-重回帰.html#cb154-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb154-2"><a href="08-重回帰.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sl     =</span> <span class="fu">c</span>(<span class="fu">coef</span>(lm_3)[<span class="dv">2</span>], <span class="fu">coef</span>(lm_3)[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">coef</span>(lm_3)[<span class="dv">4</span>]),</span>
+<span id="cb154-3"><a href="08-重回帰.html#cb154-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">int    =</span> <span class="fu">c</span>(<span class="fu">coef</span>(lm_3)[<span class="dv">1</span>], <span class="fu">coef</span>(lm_3)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(lm_3)[<span class="dv">3</span>]),</span>
+<span id="cb154-4"><a href="08-重回帰.html#cb154-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_dummy =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>)</span>
+<span id="cb154-5"><a href="08-重回帰.html#cb154-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb154-6"><a href="08-重回帰.html#cb154-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb154-7"><a href="08-重回帰.html#cb154-7" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb154-8"><a href="08-重回帰.html#cb154-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb154-9"><a href="08-重回帰.html#cb154-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb154-10"><a href="08-重回帰.html#cb154-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> sales,</span>
+<span id="cb154-11"><a href="08-重回帰.html#cb154-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> cost,</span>
+<span id="cb154-12"><a href="08-重回帰.html#cb154-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="fu">as.character</span>(fy_dummy)</span>
+<span id="cb154-13"><a href="08-重回帰.html#cb154-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb154-14"><a href="08-重回帰.html#cb154-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb154-15"><a href="08-重回帰.html#cb154-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb154-16"><a href="08-重回帰.html#cb154-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(</span>
+<span id="cb154-17"><a href="08-重回帰.html#cb154-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> cc,</span>
+<span id="cb154-18"><a href="08-重回帰.html#cb154-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb154-19"><a href="08-重回帰.html#cb154-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">slope     =</span> sl,</span>
+<span id="cb154-20"><a href="08-重回帰.html#cb154-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">intercept =</span> int,</span>
+<span id="cb154-21"><a href="08-重回帰.html#cb154-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour    =</span> time_dummy</span>
+<span id="cb154-22"><a href="08-重回帰.html#cb154-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb154-23"><a href="08-重回帰.html#cb154-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb154-24"><a href="08-重回帰.html#cb154-24" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-72-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>出力されたグラフをみてみると，買収前と買収後で固定費と変動費率の両方が変化していることをうまく表現できていることがわかる。</p>
+</div>
+</div>
+<div id="コストドライバー分析" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> コストドライバー分析</h2>
+<div id="重回帰分析" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> 重回帰分析</h3>
+<p>前節では，ダミー変数を用いることで同じデータセット内の異なるグループごとに異なる直線が推定できることを学習した。
+コスト直線の推定式に買収ダミーを追加すれば，売上高とコストの関係を場合分けして分析できた。
+また，追加した買収ダミーに対する係数は，買収によって変化した分の固定費・変動費率をそれぞれ表していた。
+いいかえれば，回帰式に新しく変数を追加することで，買収時の経営者の意思決定がコストに与える影響を数式に反映させた。</p>
+<p>このように，現実のコスト変動は複雑であるため，売上高という1変数ですべてを説明できるわけではない。
+前節で示したように，コストは買収行動の結果など他の様々な影響も受ける。
+もし，コストに追加的な影響を与える要因がYes/Noで答えられるような変数，すなわちカテゴリー変数であるならば，前節と同様にダミー変数を使えばよい。</p>
+<p>しかし，コストに追加的な影響を与える要因が「取り扱っている製品の種類数」や「所属している従業員数」など連続値である場合はどうすればよいのか。
+答えは，ダミー変数と同じように説明変数として回帰式に追加すればよい。
+追加する変数がダミー変数であるか，連続値をとる変数かによらず，2つ以上（定数項を含めれば3つ以上）の変数を使用する回帰分析を一般に重回帰分析とよぶ。</p>
+<p>本節では，重回帰分析の例として販売費及び一般管理費（以下，販管費）のコスト・ドライバー分析をあつかう。
+ビジネスに関する費用は，商品の仕入れや製品の製造にかかった費用である売上原価と，広告宣伝費や研究開発などそれ以外の費用である販管費に大別される。</p>
+<p>本節では，いわば「その他」の支出を表す販管費が，どのような要因によってどの程度増減しているのかを検証する。
+販管費は費用の一区分なので，前節までの議論と同様に販管費を売上高の関数とみなすことができる。
+すなわち，売上高が増加し営業量が増加するほど損益計算書に計上される販管費は増加すると考える。</p>
+<p>ここまでなら，売上高を説明変数とする単回帰分析で十分だろう。
+そこで，販管費に影響を与える追加変数として，今回は新しく「従業員数(employees)」という変数を考える。
+販管費の大部分が人件費であることを考えれば，従業員数が増加することで販管費も増加すると考えられる。
+従業員数のようにコストを増加させる要因のことをコスト・ドライバーと呼び，実際にコスト・ドライバーの増減によってコストが増減しているか検証する分析をコスト・ドライバー分析とよぶ。
+ダミー変数と同じように，従業員数が販管費に与える影響もみたいなら，次のように回帰式へ変数として追加すればよい。</p>
+<p>【重回帰分析の回帰式】
+<span class="math display">\[\begin{eqnarray}
+    Cost_i=\beta_0  +\beta_1 Sales_i + \beta_2 Employees_i+ \varepsilon_i.
+    \label{eq:8.7}
+\end{eqnarray}\]</span></p>
+<p>詳しい説明はあとに回すとして，コードを実行してみよう。
+データはこれまでに利用した家電量販店とドラッグストアのデータを利用する。
+下記のコードでは回帰分析の結果を見やすくするため，stargazerパッケージを使用した。</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="08-重回帰.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 作業環境のリセット</span></span>
+<span id="cb155-2"><a href="08-重回帰.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">remove</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="at">all =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb155-3"><a href="08-重回帰.html#cb155-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-4"><a href="08-重回帰.html#cb155-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 重回帰分析</span></span>
+<span id="cb155-5"><a href="08-重回帰.html#cb155-5" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data.csv&quot;</span>,</span>
+<span id="cb155-6"><a href="08-重回帰.html#cb155-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">&quot;cp932&quot;</span>)</span>
+<span id="cb155-7"><a href="08-重回帰.html#cb155-7" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
+<pre><code>## 
+## ─ Column specification ────────────────────────────
+## cols(
+##   id = col_double(),
+##   name = col_character(),
+##   sales = col_double(),
+##   cogs = col_double(),
+##   sga = col_double(),
+##   asset = col_double(),
+##   debt = col_double(),
+##   equity = col_double(),
+##   receivable = col_double(),
+##   inventory = col_double(),
+##   payable = col_double(),
+##   tax = col_double(),
+##   ind = col_character(),
+##   ope_inc = col_double(),
+##   roa = col_double(),
+##   margin = col_double(),
+##   turnover = col_double(),
+##   employees = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="08-重回帰.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="co"># データチェック</span></span>
+<span id="cb157-2"><a href="08-重回帰.html#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_0,<span class="fu">aes</span>(<span class="at">x=</span>sales)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() </span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-73-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="08-重回帰.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_0,<span class="fu">aes</span>(<span class="at">x=</span>sga)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() </span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-73-2.png" width="500px" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="08-重回帰.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_0,<span class="fu">aes</span>(<span class="at">x=</span>sales,<span class="at">y=</span>sga)) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-73-3.png" width="500px" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="08-重回帰.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 異常値排除(ヤマダ電機)</span></span>
+<span id="cb162-2"><a href="08-重回帰.html#cb162-2" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(sales<span class="sc">&lt;</span><span class="dv">1000000</span>)</span>
+<span id="cb162-3"><a href="08-重回帰.html#cb162-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb162-4"><a href="08-重回帰.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 回帰分析</span></span>
+<span id="cb162-5"><a href="08-重回帰.html#cb162-5" aria-hidden="true" tabindex="-1"></a>lm_simple <span class="ot">&lt;-</span> <span class="fu">lm</span>(sga <span class="sc">~</span> sales, df_0)</span>
+<span id="cb162-6"><a href="08-重回帰.html#cb162-6" aria-hidden="true" tabindex="-1"></a>lm_multi  <span class="ot">&lt;-</span> <span class="fu">lm</span>(sga <span class="sc">~</span> sales <span class="sc">+</span> employees, df_0)</span>
+<span id="cb162-7"><a href="08-重回帰.html#cb162-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb162-8"><a href="08-重回帰.html#cb162-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 結果を出力</span></span>
+<span id="cb162-9"><a href="08-重回帰.html#cb162-9" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;stargazer&quot;)</span></span>
+<span id="cb162-10"><a href="08-重回帰.html#cb162-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span></code></pre></div>
+<pre><code>## 
+## Please cite as:</code></pre>
+<pre><code>##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.</code></pre>
+<pre><code>##  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer</code></pre>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="08-重回帰.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(</span>
+<span id="cb166-2"><a href="08-重回帰.html#cb166-2" aria-hidden="true" tabindex="-1"></a>  lm_simple,</span>
+<span id="cb166-3"><a href="08-重回帰.html#cb166-3" aria-hidden="true" tabindex="-1"></a>  lm_multi,</span>
+<span id="cb166-4"><a href="08-重回帰.html#cb166-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;latex&quot;</span>,</span>
+<span id="cb166-5"><a href="08-重回帰.html#cb166-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb166-6"><a href="08-重回帰.html#cb166-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">float =</span> <span class="cn">FALSE</span></span>
+<span id="cb166-7"><a href="08-重回帰.html#cb166-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>データの単位は100万円である。
+重回帰分析の結果を，単回帰分析の結果をみるときと同じ要領でみてみよう。
+まず，売上高の係数は売上高が100万円上がると販管費が平均的に21.2万円上昇することを示している。
+次に，従業員の係数は従業員数が1人増えると販管費が平均的に435.4万円上昇することを示している。</p>
+<p>一方，単回帰分析の結果と比較してみると，重回帰分析における売上高の回帰係数は下がっている。
+なぜ，従業員数を回帰式に追加した重回帰分析では，売上高の係数が下がるのだろうか。
+この点について説明するために，残差を用いた回帰分析を実行してみよう。</p>
+</div>
+<div id="残差回帰" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> 残差回帰</h3>
+<p></p>
+<p>重回帰分析と単回帰分析で売上高の係数が異なる理由は，売上高の変動パターンと従業員数の変動パターンの一部が重複しているからだ。
+これは，両者の相関係数が0ではないことと同義である。
+売上高と従業員数に相関があるのは直感的だろう。
+売上高が高くなるとそれだけ従業員が必要になるし，逆もまたしかりである。</p>
+<p>しかし，売上高に対してどれだけの従業員が必要となるかは企業によって異なる。
+たとえば，同じ売上高だったとしても，製造業とサービス業とでは必要な従業員数が異なるだろう。
+すなわち，従業員数の変動パターンと売上高の変動パターンは完全には一致せず，重複していない部分もある。
+したがって，売上高と従業員数の相関係数は1より小さい。</p>
+<p>両者の分析結果が異なるのは，単回帰分析では売上高の変動パターン全体が販管費をどの程度説明できるかを推定しているのに対し，重回帰分析では売上高の変動パターンのうち従業員数と重複していない部分が，販管費をどの程度説明できるかを推定しているためである。
+この点について解説するため，以下の回帰式を推定してみよう。</p>
+<p>【売上高に対する回帰式】
+<span class="math display">\[\begin{eqnarray}
+    Sales_i=\alpha_0  +\alpha_1 Employees_i+ \xi_i.
+    \label{eq:8.8}
+\end{eqnarray}\]</span></p>
+<p>コードは以下の通り。</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="08-重回帰.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 残差回帰</span></span>
+<span id="cb167-2"><a href="08-重回帰.html#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 売上高を従業員数で推定</span></span>
+<span id="cb167-3"><a href="08-重回帰.html#cb167-3" aria-hidden="true" tabindex="-1"></a>lm_sales <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales <span class="sc">~</span> employees, df_0)</span>
+<span id="cb167-4"><a href="08-重回帰.html#cb167-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_sales)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = sales ~ employees, data = df_0)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -286568  -38689    8527   42456  205518 
+## 
+## Coefficients:
+##             Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept) 58288.43   79991.07   0.729     0.477    
+## employees      76.43      13.55   5.640 0.0000471 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 122000 on 15 degrees of freedom
+## Multiple R-squared:  0.6795, Adjusted R-squared:  0.6582 
+## F-statistic:  31.8 on 1 and 15 DF,  p-value: 0.00004707</code></pre>
+<p>上記のコードでは，売上高を被説明変数，従業員数を説明変数とした単回帰分析を行っている。
+この分析の目的は，売上高の変動パターンを，従業員数の変動パターンで「説明できる部分」と「説明できない部分」に区分することにある。
+すなわち，予測値(<span class="math inline">\(\alpha_0+ \alpha_1 Employees_i\)</span>)を「従業員数の変動パターンで説明できる部分」，残差(<span class="math inline">\(\xi_i\)</span>)を「従業員数の変動パターンで説明できない部分」だと考えるのである。</p>
+<p>売上高と従業員数の関係が単純な一次式の関係になっていると考えるのは難しいかもしれない。
+しかし，ここは思い切って残差(<span class="math inline">\(\xi_i\)</span>)が，従業員数の変動パターンでは説明できない売上高独自の変動を捉えていると仮定して話を進めることにしよう。
+この売上高独自の変動を表す残差(<span class="math inline">\(\xi_i\)</span>)は，販管費をどの程度説明するのだろうか。
+実際に，コードを回して確認してみよう。</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="08-重回帰.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 残差回帰と重回帰分析の比較</span></span>
+<span id="cb169-2"><a href="08-重回帰.html#cb169-2" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb169-3"><a href="08-重回帰.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb169-4"><a href="08-重回帰.html#cb169-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate  =</span> <span class="fu">coef</span>(lm_sales)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(lm_sales)[<span class="dv">2</span>] <span class="sc">*</span> employees,</span>
+<span id="cb169-5"><a href="08-重回帰.html#cb169-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">residuals =</span> sales <span class="sc">-</span> estimate,</span>
+<span id="cb169-6"><a href="08-重回帰.html#cb169-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb169-7"><a href="08-重回帰.html#cb169-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-8"><a href="08-重回帰.html#cb169-8" aria-hidden="true" tabindex="-1"></a>lm_residual <span class="ot">&lt;-</span> <span class="fu">lm</span>(sga <span class="sc">~</span> estimate <span class="sc">+</span> residuals, df_0)</span>
+<span id="cb169-9"><a href="08-重回帰.html#cb169-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-10"><a href="08-重回帰.html#cb169-10" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(</span>
+<span id="cb169-11"><a href="08-重回帰.html#cb169-11" aria-hidden="true" tabindex="-1"></a>  lm_simple,</span>
+<span id="cb169-12"><a href="08-重回帰.html#cb169-12" aria-hidden="true" tabindex="-1"></a>  lm_multi,</span>
+<span id="cb169-13"><a href="08-重回帰.html#cb169-13" aria-hidden="true" tabindex="-1"></a>  lm_residual,</span>
+<span id="cb169-14"><a href="08-重回帰.html#cb169-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;latex&quot;</span>,</span>
+<span id="cb169-15"><a href="08-重回帰.html#cb169-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb169-16"><a href="08-重回帰.html#cb169-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">float =</span> <span class="cn">FALSE</span></span>
+<span id="cb169-17"><a href="08-重回帰.html#cb169-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>出力された分析結果をみてみると，残差回帰での残差の回帰係数（0.212）と重回帰での売上高の回帰係数（0.212）が一致している。
+この分析結果は偶然ではない。
+重回帰分析の数学上の性質である。</p>
+<p>重回帰分析における売上高の係数は，次のように解釈できる。
+すなわち，重回帰分析における売上高の係数は，売上高独自の（従業員数の変動パターンと重複していない）変動パターンが販管費をどの程度説明できるかを表している。
+反対に，売上高独自ではない（従業員数の変動パターンと重複した）変動パターンが販管費をどの程度説明できるかは，推定値（estimate）の回帰係数（0.269）で表される。
+したがって，重回帰分析をもちいることで従業員数の影響を取り除いたうえで，なお売上高が販管費に対してどの程度の追加的な影響があるのか検証できる。</p>
+<p>ただし，ここで「販管費に影響を与える」や「従業員数の影響を取り除いた」という表現には注意が必要である。
+単回帰分析でも重回帰分析でも，両者はあくまで変数間の相関をみているにすぎない。
+たとえば，従業員数の影響を取り除いたといっても，それはあくまで従業員数と相関する部分を回帰分析によって計算上取り除いた値にすぎない。
+分析に利用していない，もしくは利用できないような変数が被説明変数および説明変数に影響を与えている場合などは，別の分析を必要がある。</p>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-AKABJ2003" class="csl-entry">
+Anderson, M. C., R. D. Banker, and S. N. Janakiraman. 2003. <span>“Are Selling, General, and Administrative Costs "Sticky"?”</span> <em>Journal of Accounting Research</em> 41 (1): 47–63.
+</div>
+<div id="ref-AKAS2012" class="csl-entry">
+Anderson, S. W., and K. L. Sedatole. 2012. <span>“Evidence on the Cost Hierarchy: The Association Between Resource Consumption and Production Activities.”</span> <em>Journal of Management Accounting Research</em> 25 (1): 119–41.
+</div>
+<div id="ref-AKBPS1995" class="csl-entry">
+Banker, R. D., G. Potter, and R. G. Schroeder. 1995. <span>“An Empirical Analysis of Manufacturing Overhead Cost Drivers.”</span> <em>Journal of Accounting and Economics</em> 19 (1): 115–37.
+</div>
+<div id="ref-BD1997JAE" class="csl-entry">
+Burgstahler, D., and I. Dichev. 1997. <span>“Earnings Management to Avoid Earnings Decreases and Losses.”</span> <em>Journal of Accounting and Economics</em> 24 (1): 99–126.
+</div>
+<div id="ref-IL2005Obook" class="csl-entry">
+Ittner, C. D., and D. F. Larcker. 2005. <span>“Moving from Strategic Measurement to Srategic Data Analysis.”</span> In <em>Control Strategy: Mamagement, Accounting and Performance Measurement</em>, edited by C. Chapman, 86–105. Oxford University Press.
+</div>
+<div id="ref-AKJ1991" class="csl-entry">
+Jones, J. J. 1991. <span>“Earnings Management During Import Relief Investigations.”</span> <em>Journal of Accounting Research</em> 29 (2): 193–228.
+</div>
+<div id="ref-KC1998HBSP" class="csl-entry">
+Kaplan, R. S., and R. Cooper. 1987. <span>“How Cost Accounting Systematically Distorts Product Costs.”</span> In <em>Accounting and Management: Field Study Perspectives</em>, edited by W. J. Bruns and R. S. Kaplan, 204–28. Boston: Harvard Business School Press.
+</div>
+<div id="ref-L2018Mbook" class="csl-entry">
+Lander, J. P. 2017. <em>R for Everyone: Advanced Analytics and Graphics (2nd Edition) (Addison-Wesley Data &amp; Analytics Series)</em>. Addison-Wesley Professional.
+</div>
+<div id="ref-AKR2006" class="csl-entry">
+Roychowdhury, S. 2006. <span>“Earnings Management Through Real Activities Manipulation.”</span> <em>Journal of Accounting and Economics</em> 42 (3): 335–70.
+</div>
+<div id="ref-S2014JAE" class="csl-entry">
+Srivastava, A. 2014. <span>“Why Have Measures of Earnings Quality Changed over Time?”</span> <em>Journal of Accounting and Economics</em> 57 (2-3): 196–217.
+</div>
+<div id="ref-W2014JSS" class="csl-entry">
+Wickham, H. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical Software</em> 59 (10): 1–23.
+</div>
+<div id="ref-O2014Dbook" class="csl-entry">
+乙政正太. 2014. <em>財務諸表分析（第2版）</em>. 同文館出版.
+</div>
+<div id="ref-YFS2017Cbook" class="csl-entry">
+吉田栄介, 福島一矩, and 妹尾剛好. 2017. <span>“わが国管理会計の実態調査：東証一部とその他上場企業との比較.”</span> In <em>日本的管理会計の深層</em>, edited by 吉田栄介, 49–80. 中央経済社.
+</div>
+<div id="ref-K1994Hbook" class="csl-entry">
+國部克彦. 1994. <em>アメリカ経営分析発達史</em>. 白桃書房.
+</div>
+<div id="ref-FA2012HSMR" class="csl-entry">
+福嶋誠宣, and 新井康平. 2012. <span>“企業レベルでのコストビヘイビア推定.”</span> <em>Hirao School of Management Review</em>, no. 2: 1–7.
+</div>
+<div id="ref-FAM2014AP" class="csl-entry">
+福嶋誠宣, 新井康平, and 松尾貴巳. 2014. <span>“自由裁量費のコスト・ビヘイビアがCVP分析に与える影響 : 回帰分析による固定費推定の問題.”</span> <em>会計プログレス</em>, no. 15: 26–37.
+</div>
+<div id="ref-F2009Obook" class="csl-entry">
+舟尾暢男. 2009. <em>The r Tips データ解析環境 r の基本技・グラフィックス活用集</em>. 株式会社 オーム社.
+</div>
+<div id="ref-T2018Pbook" class="csl-entry">
+高田直芳. 2018. <em>［決定版］ほんとうにわかる管理会計&amp;戦略会計</em>. php出版.
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="37">
+<li id="fn37"><p>単回帰分析で推定された費用直線の切片を固定費として解釈できるかどうかについては，前章でも述べたように多くの議論がある。たとえば，切片がマイナスで推定されてしまうこともあるため，切片を固定費と解釈することは難しいかもしれない。しかし，ここでは説明の都合上，費用直線の切片は固定費だと解釈して進めることにする。<a href="08-重回帰.html#fnref37" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="07-単回帰.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["下準備.pdf", "下準備.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

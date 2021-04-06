@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 R・Rstudioの準備と基本操作 | 会計情報のデータ分析</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 R・Rstudioの準備と基本操作 | 会計情報のデータ分析" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 R・Rstudioの準備と基本操作 | 会計情報のデータ分析" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="北田智久・濵村純平・井上謙仁　編" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="02-会計データへのアクセス.html"/>
+<link rel="next" href="04-会計情報の前処理.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">目次</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>まえがき</a></li>
+<li class="chapter" data-level="1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html"><i class="fa fa-check"></i><b>1</b> 会計情報を統計分析する：必要性と困難性</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#会計情報を統計分析するとは"><i class="fa fa-check"></i><b>1.1</b> 「会計情報を統計分析する」とは？</a></li>
+<li class="chapter" data-level="1.2" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#実証的な会計研究からの示唆コスト変動研究と利益調整研究"><i class="fa fa-check"></i><b>1.2</b> 実証的な会計研究からの示唆：「コスト変動研究」と「利益調整研究」</a></li>
+<li class="chapter" data-level="1.3" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#企業内部で会計情報の統計分析を実施できない理由"><i class="fa fa-check"></i><b>1.3</b> 企業内部で会計情報の統計分析を実施「できない」理由</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html"><i class="fa fa-check"></i><b>2</b> 会計データへのアクセス</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#会計データを入手し整理する"><i class="fa fa-check"></i><b>2.1</b> 会計データを入手し，整理する</a></li>
+<li class="chapter" data-level="2.2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#edinetの使い方"><i class="fa fa-check"></i><b>2.2</b> EDINETの使い方</a></li>
+<li class="chapter" data-level="2.3" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#整然データとは"><i class="fa fa-check"></i><b>2.3</b> 整然データとは</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-Rの準備.html"><a href="03-Rの準備.html"><i class="fa fa-check"></i><b>3</b> R・Rstudioの準備と基本操作</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#この章について"><i class="fa fa-check"></i><b>3.1</b> この章について</a></li>
+<li class="chapter" data-level="3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#インストール"><i class="fa fa-check"></i><b>3.2</b> インストール</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rのインストール"><i class="fa fa-check"></i><b>3.2.1</b> Rのインストール</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioのインストール"><i class="fa fa-check"></i><b>3.2.2</b> RStudioのインストール</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作とrの基礎知識"><i class="fa fa-check"></i><b>3.3</b> RStudioの基本操作とRの基礎知識</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作"><i class="fa fa-check"></i><b>3.3.1</b> RStudioの基本操作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rの基礎知識"><i class="fa fa-check"></i><b>3.3.2</b> Rの基礎知識</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html"><i class="fa fa-check"></i><b>4</b> 会計情報を前処理する</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#この章について-1"><i class="fa fa-check"></i><b>4.1</b> この章について</a></li>
+<li class="chapter" data-level="4.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込操作"><i class="fa fa-check"></i><b>4.2</b> データの読込・操作</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込"><i class="fa fa-check"></i><b>4.2.1</b> データの読込</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの操作"><i class="fa fa-check"></i><b>4.2.2</b> データの操作</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの結合"><i class="fa fa-check"></i><b>4.3</b> データの結合</a></li>
+<li class="chapter" data-level="4.4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#財務指標の作成"><i class="fa fa-check"></i><b>4.4</b> 財務指標の作成</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html"><i class="fa fa-check"></i><b>5</b> 会計情報の可視化</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#この章について-2"><i class="fa fa-check"></i><b>5.1</b> この章について</a></li>
+<li class="chapter" data-level="5.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#つのグラフを出力する"><i class="fa fa-check"></i><b>5.2</b> 1つのグラフを出力する</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ggplotの記述方法"><i class="fa fa-check"></i><b>5.2.1</b> ggplotの記述方法</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ヒストグラムと箱ひげ図"><i class="fa fa-check"></i><b>5.2.2</b> ヒストグラムと箱ひげ図</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#折れ線グラフ"><i class="fa fa-check"></i><b>5.2.3</b> 折れ線グラフ</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#複数のグラフを出力する"><i class="fa fa-check"></i><b>5.3</b> 複数のグラフを出力する</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html"><i class="fa fa-check"></i><b>6</b> 会計情報を検定する</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#この章について-3"><i class="fa fa-check"></i><b>6.1</b> この章について</a></li>
+<li class="chapter" data-level="6.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#用語説明"><i class="fa fa-check"></i><b>6.2</b> 用語説明</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#母集団と標本"><i class="fa fa-check"></i><b>6.2.1</b> 母集団と標本</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#有意水準"><i class="fa fa-check"></i><b>6.2.2</b> 有意水準</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#t検定"><i class="fa fa-check"></i><b>6.3</b> t検定</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#対応のない二群のt検定"><i class="fa fa-check"></i><b>6.3.1</b> 対応のない二群のt検定</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数"><i class="fa fa-check"></i><b>6.3.2</b> 相関係数</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数の検定"><i class="fa fa-check"></i><b>6.3.3</b> 相関係数の検定</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-単回帰.html"><a href="07-単回帰.html"><i class="fa fa-check"></i><b>7</b> 単回帰分析とCVP分析</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析とは"><i class="fa fa-check"></i><b>7.1</b> CVP分析とは</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="07-単回帰.html"><a href="07-単回帰.html#固定費と変動費"><i class="fa fa-check"></i><b>7.1.1</b> 固定費と変動費</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-単回帰.html"><a href="07-単回帰.html#固変分解の方法"><i class="fa fa-check"></i><b>7.1.2</b> 固変分解の方法</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析における仮定"><i class="fa fa-check"></i><b>7.1.3</b> CVP分析における仮定</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法を利用した固変分解"><i class="fa fa-check"></i><b>7.2</b> 最小二乗法を利用した固変分解</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-単回帰.html"><a href="07-単回帰.html#データの確認"><i class="fa fa-check"></i><b>7.2.1</b> データの確認</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法に関する予備知識"><i class="fa fa-check"></i><b>7.2.2</b> 最小二乗法に関する予備知識</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法の実践"><i class="fa fa-check"></i><b>7.2.3</b> 最小二乗法の実践</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-重回帰.html"><a href="08-重回帰.html"><i class="fa fa-check"></i><b>8</b> コストビヘイビアを推定する</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-重回帰.html"><a href="08-重回帰.html#費用構造が変化した場合の費用直線の推定"><i class="fa fa-check"></i><b>8.1</b> 費用構造が変化した場合の費用直線の推定</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="08-重回帰.html"><a href="08-重回帰.html#ダミー変数"><i class="fa fa-check"></i><b>8.1.1</b> ダミー変数</a></li>
+<li class="chapter" data-level="8.1.2" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費のみを変えたい場合"><i class="fa fa-check"></i><b>8.1.2</b> グループごとに固定費のみを変えたい場合</a></li>
+<li class="chapter" data-level="8.1.3" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費および変動費率を変えたい場合"><i class="fa fa-check"></i><b>8.1.3</b> グループごとに固定費および変動費率を変えたい場合</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="08-重回帰.html"><a href="08-重回帰.html#コストドライバー分析"><i class="fa fa-check"></i><b>8.2</b> コストドライバー分析</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-重回帰.html"><a href="08-重回帰.html#重回帰分析"><i class="fa fa-check"></i><b>8.2.1</b> 重回帰分析</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-重回帰.html"><a href="08-重回帰.html#残差回帰"><i class="fa fa-check"></i><b>8.2.2</b> 残差回帰</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">ここ何書こうかしら</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">会計情報のデータ分析</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div id="ch3" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> R・Rstudioの準備と基本操作</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb2-1"><a href="03-Rの準備.html#cb2-1" aria-hidden="true" tabindex="-1"></a>&lt;学習目標&gt;</span>
+<span id="cb2-2"><a href="03-Rの準備.html#cb2-2" aria-hidden="true" tabindex="-1"></a>・RおよびRStudioをインストールする。</span>
+<span id="cb2-3"><a href="03-Rの準備.html#cb2-3" aria-hidden="true" tabindex="-1"></a>・RおよびRStudioの基本操作・基礎知識について学習する。</span>
+<span id="cb2-4"><a href="03-Rの準備.html#cb2-4" aria-hidden="true" tabindex="-1"></a>・会計データの読込・操作・書出ができる。</span></code></pre></div>
+<p>【応用例】</p>
+<ul>
+<li>なし</li>
+</ul>
+<p>【関連する会計研究】</p>
+<ul>
+<li>なし</li>
+</ul>
+<div id="この章について" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> この章について</h2>
+<p>この章では，会計データの分析をするうえで強力なツールとなるRおよびRStudioの基本操作を学習する。
+財務諸表分析，費用直線の推定，利益調整の検証などの会計データを使った分析をしたいとき，データを読み込み，整理し，解析し，結果を出力するという一連の操作を行う必要がある。
+簡単な分析や容量の軽いデータなら，これらの操作をExcel上で行うのも良いだろう。</p>
+<p>しかし，Excelは高度な統計解析を行うには適していない。
+そのため，Excelで統計解析を行うと，(1) 高度な統計解析ができない(もしくは極端に手間がかかる)，(2) データ量が多いためPCの動作が重たくなる，(3) 統計解析の過程を残しづらい，といった問題に突き当たる。
+本書では，統計解析をする際に使用されるソフトウェアのなかで，おそらく世界中で利用者数が最も多いであろうRをつかって，会計データを分析する。</p>
+<p>Rとは，統計解析のためのフリーソフトウェアである。
+さらに，Rはオープンソースのソフトウェアであるため，GNU使用許諾のもとで自由に共有・改変することが認められている。
+そのため，世界中の優秀なエンジニアによってRの修正や機能追加が日夜進められている。
+最新の統計分析から，会計学研究で使用されているような専門的な分析手法まで，現在使われているほとんどの統計解析方法がRでは無料で利用できる。
+Rは利用者も多いため，わからないことがあるときや，エラーが出て分析がうまくいかないときには，インターネット上で検索を行うことで，多くの問題を簡単に解決することができるだろう。</p>
+<p>さて，会計データを使った分析をR上で行うには，自分のPCにRをインストールし，そこに会計データを読み込み，Rを操作し，分析結果を出力する必要がある。
+本章では，RのインストールからRの基本操作までを解説する。
+まず，RおよびRの統合開発環境であるRStudioのインストールを行う。次に，RおよびRStudioの基本操作と基礎知識を確認する。</p>
+</div>
+<div id="インストール" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> インストール</h2>
+<div id="rのインストール" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Rのインストール</h3>
+<p>Rは開発元のCRANから簡単にダウンロードすることができる(<a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>)。使用するPCがWindowsの場合は上記サイトへアクセス後，画面表示される「Download R for Windows」を選択する。</p>
+<div class="figure" style="text-align: center"><span id="fig:r1"></span>
+<img src="pics_pdf/OT2.1.png" alt="Rのインストール1" width="500px" />
+<p class="caption">
+Figure 3.1: Rのインストール1
+</p>
+</div>
+<p>その後，「install R for the first time」を選択し，</p>
+<div class="figure" style="text-align: center"><span id="fig:r2"></span>
+<img src="pics_pdf/OT2.2.png" alt="Rのインストール2" width="500px" />
+<p class="caption">
+Figure 3.2: Rのインストール2
+</p>
+</div>
+<p>「Download R x.x.x(最新バージョンの番号) for Windows」をクリックするとダウンロードを開始される<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>。</p>
+<div class="figure" style="text-align: center"><span id="fig:r3"></span>
+<img src="pics_pdf/OT2.3.png" alt="Rのインストール3" width="500px" />
+<p class="caption">
+Figure 3.3: Rのインストール3
+</p>
+</div>
+<p>Macを使用する場合は，CRANへアクセス後に「Download R for (Mac) OS X」をクリックする。
+クリックすると表示されるページの下部に「R x.x.x.(最新バージョンの番号).pkg」とあるので，最新バージョンを入手する場合はこちらをクリックしダウンロードを開始する。
+古いバージョンを取得したい場合，同ページの「el-capitan/base」や「old」をクリックしてから，ダウンロードしたいバージョンを選択する<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>。</p>
+<p>Rのダウンロードが完了したら，PC上でRを動かすことが可能になる。
+ダウンロード後に表示されるRのアイコンからRを起動してみよう。
+WindowsもしくはMacどちらで起動しても，次のように表示される。</p>
+<div class="figure" style="text-align: center"><span id="fig:rtop"></span>
+<img src="pics_pdf/OT2.4.png" alt="Rの起動" width="500px" />
+<p class="caption">
+Figure 3.4: Rの起動
+</p>
+</div>
+<p>ここでは，Rのバージョンと注意事項が表示されている。
+画面の一番下には「&gt;」と表示されているはずである。
+この「&gt;」はRが命令を待っている状態を意味する。
+試しに，Rに計算をさせてみよう。
+「&gt;」の右に「1 + 2」と入力してエンターキーを押す。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="03-Rの準備.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>画面には「[1] 3」とRによる計算結果が表示されたはずである。
+[1]は計算結果が1つであることを意味している。
+Rでは，このような足し算(+)だけでなく，引き算(-)，掛け算(*)，割り算(/)，累乗(^)といった演算が使える。
+このような演算の他にも，様々な関数が使用できる。
+例えば，2のルートを計算したい場合は<code>sqrt()</code>関数を使う。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="03-Rの準備.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 1.414214</code></pre>
+<p>このように，<code>sqrt()</code>のカッコ内に数値を入力すればRに計算させることができる。
+<code>sqrt()</code>関数の他にも，データ分析によく使う簡単な関数として自然対数(<code>log</code>)，四捨五入(<code>round</code>)などの関数がある。
+関数は膨大な数がR上に用意されている。
+本書では，必要に応じて適宜紹介する。</p>
+<p>Rでは，次の2ステップを繰り返すことでデータ分析を進めていく。</p>
+<ul>
+<li>コードを入力して，Rに命令する。</li>
+<li>Rが計算を行い，命令された結果が返ってくる</li>
+</ul>
+<p>このように，Rでは1つの命令を入力するごとに結果を確認できることから，Rはインタラクティブな言語だといわれている。</p>
+</div>
+<div id="rstudioのインストール" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> RStudioのインストール</h3>
+<p>Rだけでもデータ分析はできる。
+とはいえ，本格的にデータ分析を行うのであれば，便利な機能が豊富に用意されている統合開発環境(Integrated Development Environment; IDE)を介してRを動かす方が便利だろう。
+統合開発環境のなかでも最も代表的なものがRStudioである。
+本書でもRStudioを用いて解説を行う。</p>
+<p>Rstudioは，<a href="https://rstudio.com/products/rstudio/" class="uri">https://rstudio.com/products/rstudio/</a>からデスクトップ版をダウンロードして使用する。
+無料版と有料版があるが，無料版で十分である。本書では，RStudio 1.1.643 を使用している。
+ダウンロード手順は，サイトにアクセスして，</p>
+<div class="figure" style="text-align: center"><span id="fig:rst1"></span>
+<img src="pics_pdf/OT2.5.png" alt="Rstudioのインストール1" width="500px" />
+<p class="caption">
+Figure 3.5: Rstudioのインストール1
+</p>
+</div>
+<p>ページ中部にあるRstudio Desktopの「Download RStudio Desktop」をクリックし，</p>
+<div class="figure" style="text-align: center"><span id="fig:rst2"></span>
+<img src="pics_pdf/OT2.6.png" alt="Rstudioのインストール2" width="500px" />
+<p class="caption">
+Figure 3.6: Rstudioのインストール2
+</p>
+</div>
+<p>RStudio DesktopのFREEをダウンロードをクリックし，</p>
+<div class="figure" style="text-align: center"><span id="fig:rst3"></span>
+<img src="pics_pdf/OT2.7.png" alt="Rstudioのインストール3" width="500px" />
+<p class="caption">
+Figure 3.7: Rstudioのインストール3
+</p>
+</div>
+<p>WindowsかMacの最新バージョンのRStudioをクリックしてダウンロードする。<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>。ダウンロードしたファイルをインストールすることで，RStudioを使用することができるようになる<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>。</p>
+<div class="figure" style="text-align: center"><span id="fig:rst4"></span>
+<img src="pics_pdf/OT2.12.png" alt="Rstudioのインストール4" width="500px" />
+<p class="caption">
+Figure 3.8: Rstudioのインストール4
+</p>
+</div>
+</div>
+</div>
+<div id="rstudioの基本操作とrの基礎知識" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> RStudioの基本操作とRの基礎知識</h2>
+<div id="rstudioの基本操作" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> RStudioの基本操作</h3>
+<p>RStudioを立ち上げると，このような画面が表示される。</p>
+<div class="figure" style="text-align: center"><span id="fig:rsttop"></span>
+<img src="pics_pdf/OT2.8.png" alt="Rstudionの起動" width="500px" />
+<p class="caption">
+Figure 3.9: Rstudionの起動
+</p>
+</div>
+<p>この画面が表示された場合はNew Directoryを選択後，New Projectを選択する。
+このプロジェクトとは，RStudioで行う分析に関連するファイルをまとめて管理してくれる機能である。
+ファイルの管理や，gitによるバージョン管理などを行うことができる。
+New Projectを選択後，このプロジェクトをどこのディレクトリ(場所)に作成するか聞いてくるので，プロジェクトを保存したいディレクトリとプロジェクトの名前を入力する。
+RStudioで分析を行うときは，分析ごとにこのプロジェクトを立ち上げる。</p>
+<p>プロジェクトの設定が終わればこのような画面が表示されるはずである。
+初期画面ではRStudioは3つに区切られている。
+しかし，分析を行うときには，画面を4つに区切ることが多い。
+そこで，左側画面の右上にある画面が2つ重なったマークをクリックして，ウィンドウを4つに区切ってみよう。
+なお，この区切られた画面1つ1つをペインとよぶ。</p>
+<div class="figure" style="text-align: center"><span id="fig:rstpane"></span>
+<img src="pics_pdf/OT2.9.png" alt="Rstudioの画面" width="500px" />
+<p class="caption">
+Figure 3.10: Rstudioの画面
+</p>
+</div>
+<p>このように4つのペインが表示されたら，準備は完了である。
+以下では，会計データを分析するのに最低限必要な各ペインの役割を確認していく。</p>
+<div class="figure" style="text-align: center"><span id="fig:rstpane2"></span>
+<img src="pics_pdf/OT2.10.png" alt="Rstudionのペイン" width="500px" />
+<p class="caption">
+Figure 3.11: Rstudionのペイン
+</p>
+</div>
+<p>まず，左下のペインはコンソール(console)とよばれる。
+ここはRとのやりとりをする場所である。
+四則演算や平方根の計算など，先ほど試しに実行したRとのやりとりはここで行うことができる。</p>
+<p>次に，左上のペインはソース(source)とよばれ，Rへ命令するコードの読み込み・書き込み・保存ができるペインになる。
+データ分析を行うとき，「元データからどのような操作を行って分析結果が得られたのか」を記録しておく必要がある。
+もし，この記録がなければ，どのような操作で分析結果が得られたのかわかりづらく，複雑な分析では同じ分析結果を再び得ることも難しい。
+これは，分析結果の信頼性を得られなくなることを意味する。</p>
+<p>そこで，R上でどのような操作を行ったかを記録しておく必要がある。
+コンソールペイン上のRとのやりとりを保存してもよいが，次の2つの問題がある。
+1つ目は，コンソールペインでのやりとりは命令の入力内容と結果の出力が交互に表示される点である。
+そのため，「R上でどのような操作を行ったのか」という命令の入力だけを見たい場合，結果の出力も表示されるコンソールペインのやりとりでは，記録が長くなってしまう。</p>
+<p>2つ目は，Rでは誤ったコードを入力してしまった場合でも，エラーという結果を返してくれる点である。
+まだRの操作になれていないとき，あるいは慣れない関数を使ったときなどは，エラーと格闘しながら誤ったコードを修正することになる。
+コンソールペインでのやりとりは，このようなエラーも記録されてしまうため，記録が誤ったコードとエラーだらけになってしまう。
+したがって，コンソールペインとは別に，コードを記録するする場所が必要になる。
+この記録を残す場所がソースペインである。</p>
+<p>ソースペインでの記録は，コードの清書だと思ってもらえればよい。
+一般に，プログラミングにかかる時間の多くはコードを打ち込む時間ではなく，入力したコードを確認・修正する時間だといわれている。
+これは会計のデータを分析するときでも同様である。
+複雑な分析をするとき，R上のコードは数十行，場合によっては数百行に及ぶ。
+このような長文のコードを取り扱うとき，コードの視認性が悪いと作業効率が大幅に低下してしまうだろう。
+そのため，R上で行った操作を見やすい形式に清書して，ソースペインに記録することは，作業の効率化の観点からも重要な作業である。</p>
+<p>それでは，先ほど実行した簡単なコードをソースペインに清書してみよう。
+下記コードを左上のソースペインに入力する。
+なお，「<code>#</code>」はコメントアウトの記号であり，「<code>#</code>」と同じ行の右側のコードはRにすべて無視される。
+Rへの命令ではなく，自分を含めユーザーへコメントを残したい場合に使用する。
+コードがかけたら，ソースペインの実行したい範囲をドラッグで指定し，Ctrl+Enter（Macの場合はcommand + Enter）を押すと，左下のコンソールペインで実行される<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="03-Rの準備.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="03-Rの準備.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 1.414214</code></pre>
+<p>このようにソースペインに入力したコードからでも，コンソールペインでのやりとりを再現できる。
+それでは，このスクリプトファイルを実際に保存してみよう。
+ファイルを保存するには，ソースペインのフロッピーディスク(保存)アイコンをクリックすると保存できる。
+なお，新規のスクリプトファイルを開く場合には，画面左上の白紙アイコンを，既存のスクリプトファイルを開く場合には，フォルダが開いているアイコンをクリックする。</p>
+<div class="figure" style="text-align: center"><span id="fig:rstsave"></span>
+<img src="pics_pdf/OT2.11.png" alt="ファイルの保存" width="500px" />
+<p class="caption">
+Figure 3.12: ファイルの保存
+</p>
+</div>
+</div>
+<div id="rの基礎知識" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Rの基礎知識</h3>
+<p>簡単なRとのやりとりがRStudio上で実行できるようになったところで，会計データ分析をするために最低限必要なRおよびRStudioの基礎知識を学習しよう<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>。</p>
+<ul>
+<li>ベクトル</li>
+<li>代入</li>
+<li>データ型</li>
+<li>パッケージ</li>
+</ul>
+<p>まず，読み取った会計データは，ベクトルとして操作することが多い。
+ベクトルとは，(1, 2, 3)のような数字列のことである。
+R上でデータをベクトルだと認識させるためには，括弧の前に<code>c</code>をつけて，<code>c(1, 2, 3)</code>と表記する。
+このベクトルをつかって，下記のように演算や関数を適用してみよう。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="03-Rの準備.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ベクトル</span></span>
+<span id="cb11-2"><a href="03-Rの準備.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 3 5 7</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="03-Rの準備.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1]  2  6 12</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="03-Rの準備.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
+<pre><code>## [1] 1.000000 1.414214 1.732051</code></pre>
+<p>ベクトルを演算するとき，演算のたびに<code>c(1, 2, 3)</code>と書くのは大変である。
+もし，<code>c(1, 2, 3)</code>というのをどこかに格納しておき，その格納した場所で演算するよう指示できれば，入力するコードが短くてすむ。
+このベクトルなどををどこかへ格納する操作を「代入」とよぶ。
+そこで，<code>c(1, 2, 3)</code>と<code>c(2, 3, 4)</code>を<code>vec1</code>と<code>vec2</code>という新たに作成した変数に代入してみよう。</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="03-Rの準備.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 代入</span></span>
+<span id="cb17-2"><a href="03-Rの準備.html#cb17-2" aria-hidden="true" tabindex="-1"></a>vec_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb17-3"><a href="03-Rの準備.html#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="03-Rの準備.html#cb17-4" aria-hidden="true" tabindex="-1"></a>vec_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<p>これで，<code>c(1, 2, 3)</code>を<code>vec1</code>に，<code>c(2, 3, 4)</code>を<code>vec2</code>に代入できた。
+先ほどと同じ演算および関数を<code>vec1</code>と<code>vec2</code>に適用してみると，同じ結果が得られるだろう。</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="03-Rの準備.html#cb18-1" aria-hidden="true" tabindex="-1"></a>vec_1 <span class="sc">+</span> vec_2</span></code></pre></div>
+<pre><code>## [1] 3 5 7</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="03-Rの準備.html#cb20-1" aria-hidden="true" tabindex="-1"></a>vec_1 <span class="sc">*</span> vec_2</span></code></pre></div>
+<pre><code>## [1]  2  6 12</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="03-Rの準備.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(vec_1)</span></code></pre></div>
+<pre><code>## [1] 1.000000 1.414214 1.732051</code></pre>
+<p>ベクトルには数値だけではなく，文字も入力することができる。
+たとえば，下記のように記述する。</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="03-Rの準備.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 型</span></span>
+<span id="cb24-2"><a href="03-Rの準備.html#cb24-2" aria-hidden="true" tabindex="-1"></a>char_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
+<span id="cb24-3"><a href="03-Rの準備.html#cb24-3" aria-hidden="true" tabindex="-1"></a>char_vec</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<p>しかし，当然ながら文字と数値は足し算などをすることはできない。試しに下記のコードを実行してみると，このようなエラーが表示されるだろう。</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="03-Rの準備.html#cb26-1" aria-hidden="true" tabindex="-1"></a>vec_1 <span class="sc">+</span> char_vec</span></code></pre></div>
+<p>エラーからわかるように，Rでは入力されたベクトルや値が数字なのか文字なのか，データの形式を認識している。
+これをデータ型という。
+データ型には実数(numeric;double;integer)，整数(integer)，文字(character)，論理値(logical)，日付(Date)などがある。
+変数の型を調べるには<code>class()</code>関数を使う。
+分析を行うときは，データ型に注意しよう<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>。</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="03-Rの準備.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(vec_1)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="03-Rの準備.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(char_vec)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Rでは，関数とデータを機能別にまとめたパッケージ（もしくはライブラリ）とよばれるコード・ライブラリがある。
+このパッケージは世界中のRユーザーによって作成されており，数千種類もの数が存在する。
+たとえば，高速な分析を可能にするtidyverse，きれいなグラフを出力するggplot2，心理統計でよく使用される手法をまとめたpsychなどがある。
+Rでは既存の関数でやりたいことが実行するのが難しいとき，このパッケージをインストールして，パッケージに含まれている関数を使う。
+パッケージをインストールするには，<code>install.packages()</code>関数を使う<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>。
+<code>install.packages()</code>関数を利用する場合には，パッケージの名前をダブルクオーテーション（""）でくくる必要があることに注意しよう。
+また，「Do you want to install from sources the package which needs compilation? (Yes/no/cancel)」と表示された場合は「Yes」と入力すること。</p>
+<p>本書では，tidyverseというパッケージの関数を使用してデータ処理をする。
+試しにこのtidyverseをインストールしてみよう。なお，このテキストでは tidyverse 1.2.1を使用する。</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="03-Rの準備.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージのインストール</span></span>
+<span id="cb31-2"><a href="03-Rの準備.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<p>これでパッケージのインストールは完了である。
+インストールしたパッケージを使うには，R上でパッケージをロードする必要がある。
+パッケージのロードには，<code>library()</code>関数もしくは<code>require()</code>関数を使う<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>。</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="03-Rの準備.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージの読み込み</span></span>
+<span id="cb32-2"><a href="03-Rの準備.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+
+<div class="footnotes">
+<hr />
+<ol start="13">
+<li id="fn13"><p>古いバージョンのRを取得したい場合は，最後のページの下部にある「Previous releases」をクリックすれば，各バージョンのダウンロードページへのリンクが表示される。このテキストでは，R 3.5.1.を使用している。<a href="03-Rの準備.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>Macの場合はOSによっては対応していないバージョンもあるため，ダウンロード時にはページの注意事項を確認してからダウンロードすること。<a href="03-Rの準備.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>サイトの画像は2021年3月16日時点のもの。<a href="03-Rの準備.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>RStudioをダウンロードしなくともRStudio cloudというRStudioをクラウド上で操作できるサービスもある<a href="https://rstudio.cloud/" class="uri">https://rstudio.cloud/</a>)。このサービスはアカウントを作成するか，もしくはGoogleアカウント・GitHubアカウントをもっていれば利用できる。開発中のアルファ版ではあるが，異なるPC環境でもサーバー上で同じ動作をするので授業等にはこちらの方が便利かもしれない。なお，RStudio cloudではローカルフォルダではなく，サーバー上フォルダを利用するのでデータをアップロードする必要があることに注意してほしい。<a href="03-Rの準備.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>本書では，Rを実行した結果について，コンソールペインに写し出される結果を掲載している。<a href="03-Rの準備.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>紙幅の関係からここでは以下の基礎知識についてのみ説明する。ここでの説明で足りないと感じる読者は， <span class="citation"><a href="08-重回帰.html#ref-F2009Obook" role="doc-biblioref">舟尾</a> (<a href="08-重回帰.html#ref-F2009Obook" role="doc-biblioref">2009</a>)</span> 『The R tips』(オーム社)や <span class="citation"><a href="08-重回帰.html#ref-L2018Mbook" role="doc-biblioref">Lander</a> (<a href="08-重回帰.html#ref-L2018Mbook" role="doc-biblioref">2017</a>)</span> 『みんなのR (第2版)』（マイナビ出版）などR自体のテキストを参照してほしい。<a href="03-Rの準備.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>特に，数値データであるにも関わらずR上では文字型(character)として認識されていることもある。これはデータの中に数字ではないデータが入っている場合にしばしば発生するので注意すること。<a href="03-Rの準備.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>パッケージのダウンロードにはこの他に，RStudioのToolsタブからダウンロードする方法，右下ペインのpackageタブを開き，そこからダウンロードする方法などもある。<a href="03-Rの準備.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>なお，tidyverseを読み込むと，上記のようにconflictsと表示されることがある。これはRにデフォルトで入っている関数とtidyverseに入っている関数で名前が重複する関数があることを意味している。分析するときには注意しよう。今回はデフォルトで入っているstatsパッケージと重複しているので，デフォルトの関数を使いたいときには<code>stats::lag</code>のようにパッケージ名にコロンを2つ(::)をつけたあと，関数名を記入すればよい。<a href="03-Rの準備.html#fnref21" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="02-会計データへのアクセス.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="04-会計情報の前処理.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["下準備.pdf", "下準備.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

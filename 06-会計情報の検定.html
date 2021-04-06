@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 会計情報を検定する | 会計情報のデータ分析</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 会計情報を検定する | 会計情報のデータ分析" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 会計情報を検定する | 会計情報のデータ分析" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="北田智久・濵村純平・井上謙仁　編" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="05-会計情報の可視化.html"/>
+<link rel="next" href="07-単回帰.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">目次</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>まえがき</a></li>
+<li class="chapter" data-level="1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html"><i class="fa fa-check"></i><b>1</b> 会計情報を統計分析する：必要性と困難性</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#会計情報を統計分析するとは"><i class="fa fa-check"></i><b>1.1</b> 「会計情報を統計分析する」とは？</a></li>
+<li class="chapter" data-level="1.2" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#実証的な会計研究からの示唆コスト変動研究と利益調整研究"><i class="fa fa-check"></i><b>1.2</b> 実証的な会計研究からの示唆：「コスト変動研究」と「利益調整研究」</a></li>
+<li class="chapter" data-level="1.3" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#企業内部で会計情報の統計分析を実施できない理由"><i class="fa fa-check"></i><b>1.3</b> 企業内部で会計情報の統計分析を実施「できない」理由</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html"><i class="fa fa-check"></i><b>2</b> 会計データへのアクセス</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#会計データを入手し整理する"><i class="fa fa-check"></i><b>2.1</b> 会計データを入手し，整理する</a></li>
+<li class="chapter" data-level="2.2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#edinetの使い方"><i class="fa fa-check"></i><b>2.2</b> EDINETの使い方</a></li>
+<li class="chapter" data-level="2.3" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#整然データとは"><i class="fa fa-check"></i><b>2.3</b> 整然データとは</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-Rの準備.html"><a href="03-Rの準備.html"><i class="fa fa-check"></i><b>3</b> R・Rstudioの準備と基本操作</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#この章について"><i class="fa fa-check"></i><b>3.1</b> この章について</a></li>
+<li class="chapter" data-level="3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#インストール"><i class="fa fa-check"></i><b>3.2</b> インストール</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rのインストール"><i class="fa fa-check"></i><b>3.2.1</b> Rのインストール</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioのインストール"><i class="fa fa-check"></i><b>3.2.2</b> RStudioのインストール</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作とrの基礎知識"><i class="fa fa-check"></i><b>3.3</b> RStudioの基本操作とRの基礎知識</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作"><i class="fa fa-check"></i><b>3.3.1</b> RStudioの基本操作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rの基礎知識"><i class="fa fa-check"></i><b>3.3.2</b> Rの基礎知識</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html"><i class="fa fa-check"></i><b>4</b> 会計情報を前処理する</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#この章について-1"><i class="fa fa-check"></i><b>4.1</b> この章について</a></li>
+<li class="chapter" data-level="4.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込操作"><i class="fa fa-check"></i><b>4.2</b> データの読込・操作</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込"><i class="fa fa-check"></i><b>4.2.1</b> データの読込</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの操作"><i class="fa fa-check"></i><b>4.2.2</b> データの操作</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの結合"><i class="fa fa-check"></i><b>4.3</b> データの結合</a></li>
+<li class="chapter" data-level="4.4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#財務指標の作成"><i class="fa fa-check"></i><b>4.4</b> 財務指標の作成</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html"><i class="fa fa-check"></i><b>5</b> 会計情報の可視化</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#この章について-2"><i class="fa fa-check"></i><b>5.1</b> この章について</a></li>
+<li class="chapter" data-level="5.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#つのグラフを出力する"><i class="fa fa-check"></i><b>5.2</b> 1つのグラフを出力する</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ggplotの記述方法"><i class="fa fa-check"></i><b>5.2.1</b> ggplotの記述方法</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ヒストグラムと箱ひげ図"><i class="fa fa-check"></i><b>5.2.2</b> ヒストグラムと箱ひげ図</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#折れ線グラフ"><i class="fa fa-check"></i><b>5.2.3</b> 折れ線グラフ</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#複数のグラフを出力する"><i class="fa fa-check"></i><b>5.3</b> 複数のグラフを出力する</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html"><i class="fa fa-check"></i><b>6</b> 会計情報を検定する</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#この章について-3"><i class="fa fa-check"></i><b>6.1</b> この章について</a></li>
+<li class="chapter" data-level="6.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#用語説明"><i class="fa fa-check"></i><b>6.2</b> 用語説明</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#母集団と標本"><i class="fa fa-check"></i><b>6.2.1</b> 母集団と標本</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#有意水準"><i class="fa fa-check"></i><b>6.2.2</b> 有意水準</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#t検定"><i class="fa fa-check"></i><b>6.3</b> t検定</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#対応のない二群のt検定"><i class="fa fa-check"></i><b>6.3.1</b> 対応のない二群のt検定</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数"><i class="fa fa-check"></i><b>6.3.2</b> 相関係数</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数の検定"><i class="fa fa-check"></i><b>6.3.3</b> 相関係数の検定</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-単回帰.html"><a href="07-単回帰.html"><i class="fa fa-check"></i><b>7</b> 単回帰分析とCVP分析</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析とは"><i class="fa fa-check"></i><b>7.1</b> CVP分析とは</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="07-単回帰.html"><a href="07-単回帰.html#固定費と変動費"><i class="fa fa-check"></i><b>7.1.1</b> 固定費と変動費</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-単回帰.html"><a href="07-単回帰.html#固変分解の方法"><i class="fa fa-check"></i><b>7.1.2</b> 固変分解の方法</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析における仮定"><i class="fa fa-check"></i><b>7.1.3</b> CVP分析における仮定</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法を利用した固変分解"><i class="fa fa-check"></i><b>7.2</b> 最小二乗法を利用した固変分解</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-単回帰.html"><a href="07-単回帰.html#データの確認"><i class="fa fa-check"></i><b>7.2.1</b> データの確認</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法に関する予備知識"><i class="fa fa-check"></i><b>7.2.2</b> 最小二乗法に関する予備知識</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法の実践"><i class="fa fa-check"></i><b>7.2.3</b> 最小二乗法の実践</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-重回帰.html"><a href="08-重回帰.html"><i class="fa fa-check"></i><b>8</b> コストビヘイビアを推定する</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-重回帰.html"><a href="08-重回帰.html#費用構造が変化した場合の費用直線の推定"><i class="fa fa-check"></i><b>8.1</b> 費用構造が変化した場合の費用直線の推定</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="08-重回帰.html"><a href="08-重回帰.html#ダミー変数"><i class="fa fa-check"></i><b>8.1.1</b> ダミー変数</a></li>
+<li class="chapter" data-level="8.1.2" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費のみを変えたい場合"><i class="fa fa-check"></i><b>8.1.2</b> グループごとに固定費のみを変えたい場合</a></li>
+<li class="chapter" data-level="8.1.3" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費および変動費率を変えたい場合"><i class="fa fa-check"></i><b>8.1.3</b> グループごとに固定費および変動費率を変えたい場合</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="08-重回帰.html"><a href="08-重回帰.html#コストドライバー分析"><i class="fa fa-check"></i><b>8.2</b> コストドライバー分析</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-重回帰.html"><a href="08-重回帰.html#重回帰分析"><i class="fa fa-check"></i><b>8.2.1</b> 重回帰分析</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-重回帰.html"><a href="08-重回帰.html#残差回帰"><i class="fa fa-check"></i><b>8.2.2</b> 残差回帰</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">ここ何書こうかしら</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">会計情報のデータ分析</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div id="ch6" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> 会計情報を検定する</h1>
+<div class="sourceCode" id="cb93"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb93-1"><a href="06-会計情報の検定.html#cb93-1" aria-hidden="true" tabindex="-1"></a>&lt;学習目標&gt;</span>
+<span id="cb93-2"><a href="06-会計情報の検定.html#cb93-2" aria-hidden="true" tabindex="-1"></a>・t検定と相関の検定について理解する</span>
+<span id="cb93-3"><a href="06-会計情報の検定.html#cb93-3" aria-hidden="true" tabindex="-1"></a>・RStudionを利用して，それぞれの検定を実施できる</span></code></pre></div>
+<p>【応用例】</p>
+<ul>
+<li>なし</li>
+</ul>
+<p>【関連する会計研究】</p>
+<ul>
+<li>なし</li>
+</ul>
+<div id="この章について-3" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> この章について</h2>
+<p></p>
+<p>前章では，(1) 平均や分散といった記述統計量の意味，(2) それらの記述統計量をRStudioにより算出する方法，(3) データをヒストグラムなどにより視覚的に示す方法を学習した。</p>
+<p>しかしながら，多くの会計研究では，収集したデータから記述統計量を算出するだけではなく，これらを応用した統計分析により仮説検証が行われる。
+本章では，その中でも基本的な統計分析であるt検定と相関の検定の2つを紹介し，RStudioでそれらを実行する方法について説明する。</p>
+</div>
+<div id="用語説明" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> 用語説明</h2>
+<p></p>
+<div id="母集団と標本" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> 母集団と標本</h3>
+<p></p>
+<p>母集団とは，「これから知りたいと思う集団全体」である。
+一方で，標本（サンプルとも呼ばれる）とは，「母集団から分析のために選び出された要素」である。
+統計分析を行う主要な目的の1つに，標本のデータを利用して母集団について知るというものがある。
+以下の状況について考えてみよう。</p>
+<p>あなたは精密機器の部品を製造する工場長である。
+この工場では，製品Aを大量生産している。
+あなたはそれが設計値どおりに製造されているかどうかを確認するという品質管理の業務を任されている。</p>
+<p>確認しなければいけない項目は多々あるが，その中の1つに重量がある。
+製品Aの重量は設計値では50gとされている。
+しかしながら，様々な要因により，実際に製造された個々の製品の重量と設計値との間には差異が発生する。
+そのため，個々の製品の重量は厳密に50gである必要はないものの，差異は許容の範囲内に収まっている必要がある。</p>
+<p>差異が許容範囲内かどうかを確かめるために，非常に多くの労力をかけて全ての製品Aの重量を測定するのは，品質管理の方法として現実的では無い。
+なぜなら，あなたの仕事は製品Aの重量を測定することだけでは無いし，それはあなたの部下も同様だからである。</p>
+<p>仮に，製造された製品Aの中から幾つかの製品を抜き出し，それらのデータから「製品Aが設計値どおりの重量で製造されているとみなせるかどうか」を推定できるならば，品質管理にかかる労力は大幅に削減され現実に遂行可能な方法となる。</p>
+<p>これを可能とするのが統計分析である。
+統計分析により，標本のデータから母集団の統計的な特徴を推定できる。
+すなわち，製造された製品Aの中から幾つかを抽出して標本とし，それらの重量を測定することで，母集団である製造したすべての製品Aの重量の特徴を推定できる。</p>
+</div>
+<div id="有意水準" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> 有意水準</h3>
+<p></p>
+<p>統計分析では，標本から算出される平均や分散を用いて，母集団の平均や分散が特定の値と異なるかどうかを判断する。
+製品Aについて，重量の平均値が50gの場合に設計値どおりの重量で製造されているとみなす。
+しかしながら，実際の製品Aの重量における平均値は厳密には50gとならず，差異が生じる。</p>
+<p>重要なことは，それが誤差の範囲内とみなせるものか，それとも誤差の範囲内とはみなせないものか，ということである。
+後者の場合，統計学では有意であるという。
+実際の製品Aの重量について50gと有意に差があるという結果が得られた場合，製品Aは設計値どおりに製造されたとはいえない。</p>
+<p>統計分析で得られる結果は，母集団の平均値や分散が特定の値であると仮定した場合に，標本の平均値や分散がその値をとる蓋然性だといえる。
+そして，蓋然性が高い結果である場合は誤差の範囲内と判断し，低い場合には有意であると判断する。
+有意水準とは，有意な差とみなすどうかを判断する基準である。
+有意水準は5%や1%などのように%で設定される。</p>
+<p>ここで，有意水準をどの値に設定するかという問題が生じる。
+これは，その研究や分析の目的，先行研究の慣行などで異なる。
+会計研究の場合は，10%，5%，1%という3つの基準を用いる場合と，5%，1%，0.1%という3つの基準を用いる場合が多い。</p>
+</div>
+</div>
+<div id="t検定" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> t検定</h2>
+<p></p>
+<p>まずは，t検定とよばれる統計分析を紹介する。
+t検定は平均値に関する統計分析で利用される。
+では，平均値に関する統計分析はどのような場合に行われるのか。
+大きく分けて2つの場合がある。
+1つは，標本のデータにおける平均値と特定の値とを比較し，それらが異なる値かどうかを確かめる場合。
+もう1つは，手元に2種類の標本が存在し，それらの平均値が異なるかどうかを確かめる場合である。
+前者の場合に行うt検定は「一群のt検定」とよばれ，後者の場合に行うt検定は「二群のt検定」とよばれる。</p>
+<p>「二群のt検定」はさらに2種類に分類できる。
+1つは，2つの母集団の比較を行う場合で，もう1つは，同一母集団から得られた対応のある2データを比較する場合である。
+前者は「対応のない二群のt検定」とよばれ，後者は「対応のある二群のt検定」とよばれる。
+本章では「対応のない二群のt検定」をRで実行する方法について説明する。
+なお，「一群のt検定」と「対応のある二群のt検定」をRStudioで実行する方法については巻末で説明している。</p>
+<div id="対応のない二群のt検定" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> 対応のない二群のt検定</h3>
+<p></p>
+<p>対応のない二群のt検定では，2つの母集団を比較する。
+たとえば，異なる業種間で利益額や売上高成長率などの会計数値に差があるかを調べたいとする。
+このような場合には，対応のない二群のt検定を用いればよい。
+ドラッグストアと家電量販店の2業種でROAに差があるかどうかを調べるために，対応のない二群のt検定を実行しよう。
+データはdata.csvを利用する。</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="06-会計情報の検定.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージの読み込み</span></span>
+<span id="cb94-2"><a href="06-会計情報の検定.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb94-3"><a href="06-会計情報の検定.html#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="06-会計情報の検定.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
+<span id="cb94-5"><a href="06-会計情報の検定.html#cb94-5" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data.csv&quot;</span>,</span>
+<span id="cb94-6"><a href="06-会計情報の検定.html#cb94-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">&quot;cp932&quot;</span>)</span>
+<span id="cb94-7"><a href="06-会計情報の検定.html#cb94-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+## ─ Column specification ────────────────────────────
+## cols(
+##   id = col_double(),
+##   name = col_character(),
+##   sales = col_double(),
+##   cogs = col_double(),
+##   sga = col_double(),
+##   asset = col_double(),
+##   debt = col_double(),
+##   equity = col_double(),
+##   receivable = col_double(),
+##   inventory = col_double(),
+##   payable = col_double(),
+##   tax = col_double(),
+##   ind = col_character(),
+##   ope_inc = col_double(),
+##   roa = col_double(),
+##   margin = col_double(),
+##   turnover = col_double(),
+##   employees = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="06-会計情報の検定.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_0)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 18
+##      id name        sales   cogs    sga  asset  debt equity receivable inventory
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+## 1  2664 カワチ薬品 268205 211068  52563 183303 32019  91880       3073     29846
+## 2  2730 エディオン 686284 488119 182786 369547 65930 169005      34530    111703
+## 3  3048 ビックカメラ… 844029 607947 209025 365605 95576 155765      32968    106731
+## 4  3088 マツモトキヨシホー… 558879 389673 135639 315161     0 204871      20905     70362
+## 5  3098 ココカラファイン… 390963 286311  90939 158179   300  87810      20329     46522
+## 6  3141 ウエルシアホールデ… 695268 485320 181121 292238 44225 130482      23514     76317
+## # … with 8 more variables: payable &lt;dbl&gt;, tax &lt;dbl&gt;, ind &lt;chr&gt;, ope_inc &lt;dbl&gt;,
+## #   roa &lt;dbl&gt;, margin &lt;dbl&gt;, turnover &lt;dbl&gt;, employees &lt;dbl&gt;</code></pre>
+<p>まずは，業種別にROAの平均値を算出しよう。
+この作業は2つのステップに分けることができる。まず，データを業種別にグループ化する。
+続いて，グループごとに平均値を算出する。</p>
+<p>最初のステップには<code>group_by()</code>関数を利用する。
+<code>group_by()</code>関数は，<code>group_by(.data, ...)</code>のように記述する。
+<code>.data</code>には対象となるデータフレームを記述する。
+パイプ演算子<code>%&gt;%</code>により事前にデータフレームを指定している場合は，<code>.data</code>の記述を省略する。
+また，<code>...</code>にはどの変数に基づいてグループ化すればよいかを記述する。
+<code>...</code>は複数の変数を指定可能で，例えば，<code>year</code>，<code>industry</code>，<code>prefecture</code>の3変数によりグループ化したい場合には，<code>group_by(df, year，industry，prefecture)</code>と記述すれば良い。
+したがって，最初のステップを実行するには<code>df_0 %&gt;% group_by(ind)</code>と記述すればよいとわかる。</p>
+<p>続いて，<code>summarise()</code>関数を用いてグループごとに平均値を算出する。
+<code>summarise()</code>関数は，<code>summarise(.data, ...)</code>のように記述する。
+<code>.data</code>には対象となるデータフレームを記述する。
+<code>summarise()</code>関数についても<code>group_by()</code>関数と同様で，<code>.data</code>は，パイプ演算子<code>%&gt;%</code>で事前にデータフレームを指定している場合は省略する。
+<code>...</code>には，表示したい情報を算出するための処理を記入する。
+書き方は，<code>x = func()</code>のように記述する。<code>x</code>は結果のラベルに表示したい名前，<code>func()</code>は処理方法を示している。
+変数<code>roa</code>の平均値を<code>roa_mean</code>というラベルで算出したいならば，<code>roa_mean = mean(roa)</code>と記述する<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>。
+したがって，2番目のステップを実行するには<code>summarise(roa_mean = mean(roa))</code>と記述すればよい。</p>
+<p>業種別にROAの平均値を算出するという処理は，上記の2つのステップを連続処理したものなので，それらをパイプ演算子<code>%&gt;%</code>でつないで，<code>df_0 %&gt;% group_by(ind) %&gt;% summarise(roa_mean = mean(roa))</code>というコードを実行すればよい。</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="06-会計情報の検定.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 平均値の算出</span></span>
+<span id="cb98-2"><a href="06-会計情報の検定.html#cb98-2" aria-hidden="true" tabindex="-1"></a>df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb98-3"><a href="06-会計情報の検定.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ind) <span class="sc">%&gt;%</span></span>
+<span id="cb98-4"><a href="06-会計情報の検定.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">roa_mean =</span> <span class="fu">mean</span>(roa))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   ind               roa_mean
+##   &lt;chr&gt;                &lt;dbl&gt;
+## 1 DrugStore           0.0991
+## 2 ElectronicsRetail   0.0482</code></pre>
+<p>結果を確認すると，ドラッグストアの企業ではROAの平均値が0.0991となった。一方で，家電量販店の企業ではROAの平均値が0.0482となっている。
+つまり，ROAの業種平均値はドラッグストアの方が家電量販店よりも，高い数値を示している。</p>
+<p>この2業種間の平均値の差が有意なものか確認するために，有意水準を5%として二群のt検定を実施してみよう。
+Rでt検定を実行するには，<code>t.test()</code>関数を利用する。
+変数<code>x</code>の平均値と変数<code>y</code>の平均値に有意な差があるかどうかを二群のt検定より検証する場合，<code>t.test(x, y)</code>と記せばよい。</p>
+<p>今回はデータセット<code>df_0</code>において，ドラッグストアの企業と家電量販店の企業とで，変数<code>roa</code>の平均値を比較する。
+したがって，<code>x</code>は<code>df_0 %&gt;% filter(ind == "DrugStore") %&gt;% pull(roa)</code>，<code>y</code>は<code>df_0 %&gt;% filter(ind == "ElectronicsRetail") %&gt;% pull(roa)</code>とすればよい。
+<code>pull()</code>関数は，データフレームに収録されている1変数をベクトルとして抜き出す関数である。
+<code>df_0 %&gt;% filter(ind == "DrugStore") %&gt;% pull(weight) %&gt;% pull(roa)</code>は，データフレーム<code>df_0</code>に収録されているドラッグストア企業のデータのうち，<code>roa</code>という変数のみを抽出したことを意味する。</p>
+<p>では，有意水準を5%として，対応のない二群のt検定を実施してみよう。
+結果は以下のように表示されるはずである<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>。
+今回の分析は「Welch Two Sample t-test」と記されている。
+日本語では，ウェルチによる二群のt検定とよばれる<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a>。対応のない二群のt検定は，通常この分析手法が採用される。</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="06-会計情報の検定.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 二群のt検定（対応なし）</span></span>
+<span id="cb100-2"><a href="06-会計情報の検定.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb100-3"><a href="06-会計情報の検定.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  df_0 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ind <span class="sc">==</span> <span class="st">&quot;DrugStore&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(roa),</span>
+<span id="cb100-4"><a href="06-会計情報の検定.html#cb100-4" aria-hidden="true" tabindex="-1"></a>  df_0 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ind <span class="sc">==</span> <span class="st">&quot;ElectronicsRetail&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(roa)</span>
+<span id="cb100-5"><a href="06-会計情報の検定.html#cb100-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  df_0 %&gt;% filter(ind == &quot;DrugStore&quot;) %&gt;% pull(roa) and df_0 %&gt;% filter(ind == &quot;ElectronicsRetail&quot;) %&gt;% pull(roa)
+## t = 3.8905, df = 16, p-value = 0.0013
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.02316547 0.07863742
+## sample estimates:
+##  mean of x  mean of y 
+## 0.09909799 0.04819655</code></pre>
+<p>分析結果の下2行を確認すると，「mean of x 0.09909799」，「mean of y 0.04819655」と記されており，<code>summarise()</code>関数により平均値を確認した場合と同様の結果が得られている。
+最後にp-valueを確認すると，5% (0.05) より小さな値となっている（p-value = 0.0013）。
+よって，ドラッグストアの方が家電量販店よりもROAの業種平均値が高いと判断できる。</p>
+</div>
+<div id="相関係数" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> 相関係数</h3>
+<p></p>
+<p>二群のt検定は，2つの変数の平均値を比較する分析である。
+しかしながら，我々が興味を持つ2変数間の関係は，平均値の差だけではない。
+定量的な研究を含む多くのデータ分析では，変数間の関連性に興味がある場合も多い。</p>
+<p>たとえば，「従業員満足度が高い企業は業績がよいのか」や，「今年度高い利益を計上した企業は来年度も高い利益を計上するか」などである。
+このような変数間の関連性は相関関係とよばれる。ある変数が大きい（小さい）ときに，別の変数が大きい（小さい）という関係は，正の相関関係とよばれる
+。一方，ある変数が大きい（小さい）ときに，別の変数が小さい（大きい）という関係は，負の相関関係とよばれる。</p>
+<p>データフレーム<code>df_0</code>を用いて，企業の変数<code>sales</code>と変数<code>sga</code>との関連性について確認しよう。
+売上高の変動に対して，販管費がどのように変動するのかについて，会計研究で盛んに研究されている。
+この詳細については続く章で説明する。
+ここでは簡単に両者の相関関係についてのみ確認しよう。</p>
+<p>まずは，両者の相関関係を視覚的に確認するために，<code>ggplot2</code>パッケージを用いて散布図を描写する。
+<code>ggplot2</code>は<code>tidyverse</code>に含まれている。
+既に<code>tidyverse</code>を読み込んでいるため，<code>ggplot2</code>を読み込む必要はない。
+散布図は<code>geom_point()</code>関数を用いて描写できる。</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="06-会計情報の検定.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 散布図の描写</span></span>
+<span id="cb102-2"><a href="06-会計情報の検定.html#cb102-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb102-3"><a href="06-会計情報の検定.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sales, <span class="at">y =</span> sga)) <span class="sc">+</span></span>
+<span id="cb102-4"><a href="06-会計情報の検定.html#cb102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb102-5"><a href="06-会計情報の検定.html#cb102-5" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-47-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>表示された営業利益の散布図からは，変数<code>sales</code>と変数<code>sga</code>には正の相関関係がみてとれる。
+すなわち，売上高が高い企業は販管費も高いという関係が確認できる。</p>
+<p>しかし，散布図は視覚的であるため，「どの程度の大きさの相関関係なのか」を客観的に把握できない。
+そこで使用されるのが，相関係数という指標である。相関係数は，ある2変数間の相関関係を量的に表した指標である。
+相関係数は−1から1の範囲の値をとり，正の値の場合は正の相関関係が，負の値をとる場合は負の相関関係があることを示している。また，値の絶対値が大きいほど相関関係が強いと，値が0に近いほど相関関係が弱いと判断できる。</p>
+<p>では，Rで変数<code>sales</code>と変数<code>sga</code>の相関係数を求めてみよう。
+相関係数の算出には<code>cor()</code>関数を用いる。
+変数<code>x</code>と変数<code>y</code>の相関係数を算出するには，<code>cor(x, y)</code>と記す。</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="06-会計情報の検定.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 相関係数の算出</span></span>
+<span id="cb103-2"><a href="06-会計情報の検定.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(</span>
+<span id="cb103-3"><a href="06-会計情報の検定.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  df_0 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(sales),</span>
+<span id="cb103-4"><a href="06-会計情報の検定.html#cb103-4" aria-hidden="true" tabindex="-1"></a>  df_0 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(sga)</span>
+<span id="cb103-5"><a href="06-会計情報の検定.html#cb103-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## [1] 0.9804564</code></pre>
+<p>変数<code>sales</code>と変数<code>sga</code>の相関は0.980…であることが示された。</p>
+</div>
+<div id="相関係数の検定" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> 相関係数の検定</h3>
+<p></p>
+<p>算出された相関係数が厳密に0と一致しない限り，相関係数の数値上は正か負の相関が存在している。</p>
+<p>たとえば，相関係数が0.01の場合，僅かではあるが正の相関がある。
+しかしながら，そのような僅かな相関関係は相関がないとみなしてよい程度かもしれない。
+算出された相関係数が厳密に0となることは殆どないため，その値を0とみなしてよいかの判断が重要となる。</p>
+<p>その判断のために，算出された相関係数が有意に0と異なるかどうかを検定する場合がある。
+そのような検定は，相関係数の検定と呼ばれ，Rでは<code>cor.test()</code>関数でできる。
+変数<code>x</code>と変数<code>y</code>の相関係数について検定を行うには，<code>cor.test(x, y)</code>と書く。</p>
+<p>先に利用した企業の利益に関するデータで，変数<code>sales</code>と変数<code>sga</code>に相関があるかどうかを5%水準で検定しよう。
+結果は以下のように表示される。多くの情報が表示されているが，特に確認しなければいけない情報は以下の3つである。</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="06-会計情報の検定.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 相関の分析</span></span>
+<span id="cb105-2"><a href="06-会計情報の検定.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">100</span>)</span>
+<span id="cb105-3"><a href="06-会計情報の検定.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(</span>
+<span id="cb105-4"><a href="06-会計情報の検定.html#cb105-4" aria-hidden="true" tabindex="-1"></a>  df_0 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(sales),</span>
+<span id="cb105-5"><a href="06-会計情報の検定.html#cb105-5" aria-hidden="true" tabindex="-1"></a>  df_0 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(sga)</span>
+<span id="cb105-6"><a href="06-会計情報の検定.html#cb105-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  df_0 %&gt;% pull(sales) and df_0 %&gt;% pull(sga)
+## t = 19.934, df = 16, p-value = 0.000000000001007
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.9471319 0.9928525
+## sample estimates:
+##       cor 
+## 0.9804564</code></pre>
+<p>1つ目は，一番上に書かれている「Pearson’s product-moment correlation」という表記である。
+これは，今回検定に利用した相関係数がピアソン (Pearson) の積率相関係数であることを意味する。
+相関係数にはいくつか種類があるが，連続変数同士の相関係数を計算する場合，ピアソンの積率相関係数が利用される。</p>
+<p>2つ目は，下2行に記された「cor0.9804564」という表記で，変数<code>sales</code>と変数<code>sga</code>の相関係数を示している。
+<code>cor()</code>関数により算出した場合と同じ結果が得られている。</p>
+<p>最後に，p-value = 0.00…07となり，p値が5%よりも小さい値となった。
+ここから，変数<code>sales</code>と変数<code>sga</code>の間に有意に正の相関があると判断でき，売上高が高い企業は販管費も高い傾向にあるといえる。</p>
+
+<div class="footnotes">
+<hr />
+<ol start="28">
+<li id="fn28"><p>ラベル名の指定は省略することもできる。その時は単に<code>summarise(df, mean(roa))</code>と記述する。<a href="06-会計情報の検定.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<li id="fn29"><p>t = 3.8905のtはt値，df = 16のdfは自由度を意味している。「95 percent confidence interval」は95%信頼区間を意味している。本章では，これらの詳しい説明については省略する。<a href="06-会計情報の検定.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<li id="fn30"><p>ウェルチは人名で，この分析を提案した人物を指す。<a href="06-会計情報の検定.html#fnref30" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="05-会計情報の可視化.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="07-単回帰.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["下準備.pdf", "下準備.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

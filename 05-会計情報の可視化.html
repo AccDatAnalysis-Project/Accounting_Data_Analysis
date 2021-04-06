@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 会計情報の可視化 | 会計情報のデータ分析</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 会計情報の可視化 | 会計情報のデータ分析" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 会計情報の可視化 | 会計情報のデータ分析" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="北田智久・濵村純平・井上謙仁　編" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="04-会計情報の前処理.html"/>
+<link rel="next" href="06-会計情報の検定.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">目次</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>まえがき</a></li>
+<li class="chapter" data-level="1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html"><i class="fa fa-check"></i><b>1</b> 会計情報を統計分析する：必要性と困難性</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#会計情報を統計分析するとは"><i class="fa fa-check"></i><b>1.1</b> 「会計情報を統計分析する」とは？</a></li>
+<li class="chapter" data-level="1.2" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#実証的な会計研究からの示唆コスト変動研究と利益調整研究"><i class="fa fa-check"></i><b>1.2</b> 実証的な会計研究からの示唆：「コスト変動研究」と「利益調整研究」</a></li>
+<li class="chapter" data-level="1.3" data-path="01-会計情報データを統計分析.html"><a href="01-会計情報データを統計分析.html#企業内部で会計情報の統計分析を実施できない理由"><i class="fa fa-check"></i><b>1.3</b> 企業内部で会計情報の統計分析を実施「できない」理由</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html"><i class="fa fa-check"></i><b>2</b> 会計データへのアクセス</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#会計データを入手し整理する"><i class="fa fa-check"></i><b>2.1</b> 会計データを入手し，整理する</a></li>
+<li class="chapter" data-level="2.2" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#edinetの使い方"><i class="fa fa-check"></i><b>2.2</b> EDINETの使い方</a></li>
+<li class="chapter" data-level="2.3" data-path="02-会計データへのアクセス.html"><a href="02-会計データへのアクセス.html#整然データとは"><i class="fa fa-check"></i><b>2.3</b> 整然データとは</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-Rの準備.html"><a href="03-Rの準備.html"><i class="fa fa-check"></i><b>3</b> R・Rstudioの準備と基本操作</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#この章について"><i class="fa fa-check"></i><b>3.1</b> この章について</a></li>
+<li class="chapter" data-level="3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#インストール"><i class="fa fa-check"></i><b>3.2</b> インストール</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rのインストール"><i class="fa fa-check"></i><b>3.2.1</b> Rのインストール</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioのインストール"><i class="fa fa-check"></i><b>3.2.2</b> RStudioのインストール</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作とrの基礎知識"><i class="fa fa-check"></i><b>3.3</b> RStudioの基本操作とRの基礎知識</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rstudioの基本操作"><i class="fa fa-check"></i><b>3.3.1</b> RStudioの基本操作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="03-Rの準備.html"><a href="03-Rの準備.html#rの基礎知識"><i class="fa fa-check"></i><b>3.3.2</b> Rの基礎知識</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html"><i class="fa fa-check"></i><b>4</b> 会計情報を前処理する</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#この章について-1"><i class="fa fa-check"></i><b>4.1</b> この章について</a></li>
+<li class="chapter" data-level="4.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込操作"><i class="fa fa-check"></i><b>4.2</b> データの読込・操作</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの読込"><i class="fa fa-check"></i><b>4.2.1</b> データの読込</a></li>
+<li class="chapter" data-level="4.2.2" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの操作"><i class="fa fa-check"></i><b>4.2.2</b> データの操作</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#データの結合"><i class="fa fa-check"></i><b>4.3</b> データの結合</a></li>
+<li class="chapter" data-level="4.4" data-path="04-会計情報の前処理.html"><a href="04-会計情報の前処理.html#財務指標の作成"><i class="fa fa-check"></i><b>4.4</b> 財務指標の作成</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html"><i class="fa fa-check"></i><b>5</b> 会計情報の可視化</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#この章について-2"><i class="fa fa-check"></i><b>5.1</b> この章について</a></li>
+<li class="chapter" data-level="5.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#つのグラフを出力する"><i class="fa fa-check"></i><b>5.2</b> 1つのグラフを出力する</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ggplotの記述方法"><i class="fa fa-check"></i><b>5.2.1</b> ggplotの記述方法</a></li>
+<li class="chapter" data-level="5.2.2" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#ヒストグラムと箱ひげ図"><i class="fa fa-check"></i><b>5.2.2</b> ヒストグラムと箱ひげ図</a></li>
+<li class="chapter" data-level="5.2.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#折れ線グラフ"><i class="fa fa-check"></i><b>5.2.3</b> 折れ線グラフ</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="05-会計情報の可視化.html"><a href="05-会計情報の可視化.html#複数のグラフを出力する"><i class="fa fa-check"></i><b>5.3</b> 複数のグラフを出力する</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html"><i class="fa fa-check"></i><b>6</b> 会計情報を検定する</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#この章について-3"><i class="fa fa-check"></i><b>6.1</b> この章について</a></li>
+<li class="chapter" data-level="6.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#用語説明"><i class="fa fa-check"></i><b>6.2</b> 用語説明</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#母集団と標本"><i class="fa fa-check"></i><b>6.2.1</b> 母集団と標本</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#有意水準"><i class="fa fa-check"></i><b>6.2.2</b> 有意水準</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#t検定"><i class="fa fa-check"></i><b>6.3</b> t検定</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#対応のない二群のt検定"><i class="fa fa-check"></i><b>6.3.1</b> 対応のない二群のt検定</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数"><i class="fa fa-check"></i><b>6.3.2</b> 相関係数</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-会計情報の検定.html"><a href="06-会計情報の検定.html#相関係数の検定"><i class="fa fa-check"></i><b>6.3.3</b> 相関係数の検定</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-単回帰.html"><a href="07-単回帰.html"><i class="fa fa-check"></i><b>7</b> 単回帰分析とCVP分析</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析とは"><i class="fa fa-check"></i><b>7.1</b> CVP分析とは</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="07-単回帰.html"><a href="07-単回帰.html#固定費と変動費"><i class="fa fa-check"></i><b>7.1.1</b> 固定費と変動費</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-単回帰.html"><a href="07-単回帰.html#固変分解の方法"><i class="fa fa-check"></i><b>7.1.2</b> 固変分解の方法</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-単回帰.html"><a href="07-単回帰.html#cvp分析における仮定"><i class="fa fa-check"></i><b>7.1.3</b> CVP分析における仮定</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法を利用した固変分解"><i class="fa fa-check"></i><b>7.2</b> 最小二乗法を利用した固変分解</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="07-単回帰.html"><a href="07-単回帰.html#データの確認"><i class="fa fa-check"></i><b>7.2.1</b> データの確認</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法に関する予備知識"><i class="fa fa-check"></i><b>7.2.2</b> 最小二乗法に関する予備知識</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-単回帰.html"><a href="07-単回帰.html#最小二乗法の実践"><i class="fa fa-check"></i><b>7.2.3</b> 最小二乗法の実践</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-重回帰.html"><a href="08-重回帰.html"><i class="fa fa-check"></i><b>8</b> コストビヘイビアを推定する</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-重回帰.html"><a href="08-重回帰.html#費用構造が変化した場合の費用直線の推定"><i class="fa fa-check"></i><b>8.1</b> 費用構造が変化した場合の費用直線の推定</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="08-重回帰.html"><a href="08-重回帰.html#ダミー変数"><i class="fa fa-check"></i><b>8.1.1</b> ダミー変数</a></li>
+<li class="chapter" data-level="8.1.2" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費のみを変えたい場合"><i class="fa fa-check"></i><b>8.1.2</b> グループごとに固定費のみを変えたい場合</a></li>
+<li class="chapter" data-level="8.1.3" data-path="08-重回帰.html"><a href="08-重回帰.html#グループごとに固定費および変動費率を変えたい場合"><i class="fa fa-check"></i><b>8.1.3</b> グループごとに固定費および変動費率を変えたい場合</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="08-重回帰.html"><a href="08-重回帰.html#コストドライバー分析"><i class="fa fa-check"></i><b>8.2</b> コストドライバー分析</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="08-重回帰.html"><a href="08-重回帰.html#重回帰分析"><i class="fa fa-check"></i><b>8.2.1</b> 重回帰分析</a></li>
+<li class="chapter" data-level="8.2.2" data-path="08-重回帰.html"><a href="08-重回帰.html#残差回帰"><i class="fa fa-check"></i><b>8.2.2</b> 残差回帰</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">ここ何書こうかしら</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">会計情報のデータ分析</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div id="ch5" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> 会計情報の可視化</h1>
+<div class="sourceCode" id="cb62"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb62-1"><a href="05-会計情報の可視化.html#cb62-1" aria-hidden="true" tabindex="-1"></a>&lt;学習目標&gt;</span>
+<span id="cb62-2"><a href="05-会計情報の可視化.html#cb62-2" aria-hidden="true" tabindex="-1"></a>・作成した財務数値のヒストグラム，散布図，箱ひげ図が出力できる</span>
+<span id="cb62-3"><a href="05-会計情報の可視化.html#cb62-3" aria-hidden="true" tabindex="-1"></a>・複数の異なる財務指標のグラフを並べて表示できる</span></code></pre></div>
+<p>【応用例】</p>
+<ul>
+<li>業界間での収益性指標の傾向を可視化できる</li>
+<li>財務指標間の違いをグラフで可視化して確認する</li>
+</ul>
+<p>【関連する会計研究】</p>
+<ul>
+<li>Burgstahler D. and I. Dichev (1997) Earnings management to avoid earnings decreases and losses. <em>Journal of Accounting and Economics</em>, Vol. 24, No. 1, pp. 99–126.</li>
+</ul>
+<div id="この章について-2" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> この章について</h2>
+<p></p>
+<p>この章では，会計データの可視化について学習する。
+第<a href="04-会計情報の前処理.html#ch4">4</a>章では，会計データの整頓方法について学習した。
+そこでは，会計データに業界データを結合し，業界間で財務数値を比較できるようになった。</p>
+<p>しかし，財務指標についてExcelのように並べられた生データを視るだけでは，データの傾向を把握することは難しい。
+データの傾向を一目で理解するには，データをグラフとして出力し，可視化する必要がある。</p>
+<p>会計データを可視化した代表的な研究として，
+<span class="citation"><a href="08-重回帰.html#ref-BD1997JAE" role="doc-biblioref">Burgstahler and Dichev</a> (<a href="08-重回帰.html#ref-BD1997JAE" role="doc-biblioref">1997</a>)</span>
+がある。
+<span class="citation"><a href="08-重回帰.html#ref-BD1997JAE" role="doc-biblioref">Burgstahler and Dichev</a> (<a href="08-重回帰.html#ref-BD1997JAE" role="doc-biblioref">1997</a>)</span>
+は，企業の利益調整を統計的に検証した論文である。
+彼らのもちいた検証方法は，利益分布アプローチとよばれている。</p>
+<p>一般に，企業にとって前年度の利益は当年度の利益のベンチマークと考えられている。
+新聞の見出しなどでも「連続増益」や「10%の減益」といった表現をよくみるだろう。
+企業には，この前年度の利益を上回りたいというインセンティブが存在する。
+この利益調整インセンティブを，
+<span class="citation"><a href="08-重回帰.html#ref-BD1997JAE" role="doc-biblioref">Burgstahler and Dichev</a> (<a href="08-重回帰.html#ref-BD1997JAE" role="doc-biblioref">1997</a>)</span>
+は会計データの可視化によって明らかにした。</p>
+<p>図<a href="05-会計情報の可視化.html#fig:bd1997">5.1</a>をみてほしい。図<a href="05-会計情報の可視化.html#fig:bd1997">5.1</a>は，
+<span class="citation"><a href="08-重回帰.html#ref-BD1997JAE" role="doc-biblioref">Burgstahler and Dichev</a> (<a href="08-重回帰.html#ref-BD1997JAE" role="doc-biblioref">1997</a>)</span>
+が米国企業のデータをもちいて，当年度利益と前年度利益の差（<span class="math inline">\(Earnings_t - Earnings_{t-1}\)</span>）をヒストグラムで可視化したものである<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a>。
+図<a href="05-会計情報の可視化.html#fig:bd1997">5.1</a>の0.00付近，すなわち当年度利益が前年度利益と同じ値になる付近を境に分布が不自然に歪んでいることがわかるだろう。
+この分布の歪みは，前年度利益というベンチマークを上回るために，企業が利益調整をした証拠だとされている。
+このようにデータの特徴を集約し，瞬時に理解を促すグラフは，企業行動の証拠を提示する強力なツールとなる。</p>
+<div class="figure" style="text-align: center"><span id="fig:bd1997"></span>
+<img src="pics_pdf/OT4.1.png" alt="Burgstahler and Dichev (1997, 105)" width="500px" />
+<p class="caption">
+Figure 5.1: Burgstahler and Dichev (1997, 105)
+</p>
+</div>
+<p>この章では，まず財務指標を1つのグラフに出力する方法について学ぶ。
+具体的には，<a href="04-会計情報の前処理.html#ch4">4</a>章で出力したROAをもとに，ヒストグラム・散布図・箱ひげ図といった統計学でよく使用されるグラフを出力する。</p>
+<p>これらのグラフを利用することで，会計データの特徴や業界間の違いを一目で捉えられるようになるだろう。
+また，複数のグラフを並べて出力する方法についても学習する。
+この方法は，財務指標間の違いを比較したいときにも役立つ。</p>
+<p>たとえば，収益性指標にもROA，ROE，ROICといった指標が存在する。
+これらの収益性指標は，分子にどの利益を使うのか（たとえば，営業利益，経常利益，当期純利益），分母にどの使用資本を使うのか（たとえば，期首期末平均資産，期首資産）によって，様々なパターンが存在する。
+同じデータセット内で，こうした複数の収益性指標の違いを一目で把握したい場合，ここで学習する内容が役立つだろう。</p>
+</div>
+<div id="つのグラフを出力する" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> 1つのグラフを出力する</h2>
+<p>それでは，分析に利用する会計データを読み込んでみよう。
+データは，<a href="04-会計情報の前処理.html#ch4">4</a>章で用いたものと同じであり，それらを<a href="04-会計情報の前処理.html#ch4">4</a>章と同様のやり方で加工している。わからない人は<a href="04-会計情報の前処理.html#ch4">4</a>章を復習しよう。
+下記のコードの最後の部分では，前章までで学習したROA，利益率，回転率の中央値をそれぞれ出力している。</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="05-会計情報の可視化.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージの読み込み</span></span>
+<span id="cb63-2"><a href="05-会計情報の可視化.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb63-3"><a href="05-会計情報の可視化.html#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="05-会計情報の可視化.html#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
+<span id="cb63-5"><a href="05-会計情報の可視化.html#cb63-5" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data.csv&quot;</span>,</span>
+<span id="cb63-6"><a href="05-会計情報の可視化.html#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">&quot;cp932&quot;</span>)</span>
+<span id="cb63-7"><a href="05-会計情報の可視化.html#cb63-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+## ─ Column specification ────────────────────────────
+## cols(
+##   id = col_double(),
+##   name = col_character(),
+##   sales = col_double(),
+##   cogs = col_double(),
+##   sga = col_double(),
+##   asset = col_double(),
+##   debt = col_double(),
+##   equity = col_double(),
+##   receivable = col_double(),
+##   inventory = col_double(),
+##   payable = col_double(),
+##   tax = col_double(),
+##   ind = col_character(),
+##   ope_inc = col_double(),
+##   roa = col_double(),
+##   margin = col_double(),
+##   turnover = col_double(),
+##   employees = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="05-会計情報の可視化.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># データの確認</span></span>
+<span id="cb65-2"><a href="05-会計情報の可視化.html#cb65-2" aria-hidden="true" tabindex="-1"></a>df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb65-3"><a href="05-会計情報の可視化.html#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ind) <span class="sc">%&gt;%</span></span>
+<span id="cb65-4"><a href="05-会計情報の可視化.html#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_at</span>(</span>
+<span id="cb65-5"><a href="05-会計情報の可視化.html#cb65-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(roa, margin, turnover),</span>
+<span id="cb65-6"><a href="05-会計情報の可視化.html#cb65-6" aria-hidden="true" tabindex="-1"></a>    median</span>
+<span id="cb65-7"><a href="05-会計情報の可視化.html#cb65-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 4
+##   ind                  roa margin turnover
+##   &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1 DrugStore         0.103  0.0529     2.10
+## 2 ElectronicsRetail 0.0465 0.0247     1.89</code></pre>
+<p>分析結果は前章と同じくROAについて，ドラッグストア業界は家電量販店業界の2倍近い値をとっている。
+回転率・利益率も同じで，回転率については両業界でそれほど変わらないものの，利益率についてはドラッグトアが家電量販店の2倍近い値をとっている。</p>
+<p>これらの結果から，ドラッグストア業界と家電量販店業界におけるROAの差は，回転率よりも利益率によって生じていると予測される。
+この点を深堀りするため，散布図を出力して可視化してみよう。</p>
+<p>グラフを出力したいときには，ggplot2パッケージを利用する。
+このggplot2では，実行したい操作を順番に「<code>+</code>」でつないでコードを記述する。
+コードの意味を理解しやすいよう，操作ごとにグラフを出力したものが下記のコードである。
+なお，ggplot2はtidyverseに含まれているため，tidyverseを読み込んでいる場合はggplot2の読み込みを省略できる。</p>
+<div id="ggplotの記述方法" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> ggplotの記述方法</h3>
+<p>まず，<code>ggplot( aes(x = margin, y = roa)</code>というコードで，「いまからデータdf_0について，<span class="math inline">\(x\)</span>軸を利益率，<span class="math inline">\(y\)</span>軸をROAとしたグラフを書きます」と指定し，「margin_roa」という変数に代入する。
+試しに「margin_roa」を出力してみると，<span class="math inline">\(x\)</span>軸を利益率，<span class="math inline">\(y\)</span>軸をROAとした表が出力される。</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="05-会計情報の可視化.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggolot2の設定</span></span>
+<span id="cb67-2"><a href="05-会計情報の可視化.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb67-3"><a href="05-会計情報の可視化.html#cb67-3" aria-hidden="true" tabindex="-1"></a>margin_roa <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb67-4"><a href="05-会計情報の可視化.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> margin, <span class="at">y =</span> roa))</span>
+<span id="cb67-5"><a href="05-会計情報の可視化.html#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-6"><a href="05-会計情報の可視化.html#cb67-6" aria-hidden="true" tabindex="-1"></a>margin_roa</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-31-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>ここから，<code>margin_roa</code>に<code>+</code>で実行したい操作を記述し，表にグラフを書きこんでいく。
+散布図を書き込むには，<code>geom_point()</code>関数を使う。
+第章で学習する回帰直線を書き込みたい場合，<code>stat_smooth()</code>関数を使う。
+引数には線形モデル(lm)を指定しよう。
+このように<code>+</code>で操作を書き込むことで，グラフの追加ができる。
+グラフの青い直線が回帰直線で，濃いグレーの範囲は95%信頼区間である。
+信頼区間を表示させたくない場合は，<code>stat_smooth(method = lm, se =FALSE)</code>とする。</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="05-会計情報の可視化.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 散布図</span></span>
+<span id="cb68-2"><a href="05-会計情報の可視化.html#cb68-2" aria-hidden="true" tabindex="-1"></a>margin_roa <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-32-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="05-会計情報の可視化.html#cb69-1" aria-hidden="true" tabindex="-1"></a>margin_roa <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-32-2.png" width="500px" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="05-会計情報の可視化.html#cb71-1" aria-hidden="true" tabindex="-1"></a>margin_roa <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-32-3.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>色や表示方法を変えたい場合は，引数の設定を変えることで調整できる。
+例えば，業界ごとに色分けしたい場合は，<code>ggplot(df_0, aes(x = margin, y = roa, color = ind)</code>とすればよい。
+描きたいグラフに合わせて色々と使い分けてみてほしい。</p>
+<p>なお，ggplotのコードの書き方には，上記のような記述方法の他に，グラフを変数に代入して記述する方法もある。
+下記では，業界ごとに色分けしたグラフを，変数に代入する記述方法で出力している。
+コードを理解しやすいように，各グラフに別々の名前を設定している。
+面倒なら，同じ名前をつかってどんどん上書きしていっても構わない。</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="05-会計情報の可視化.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 代入による記入方法</span></span>
+<span id="cb73-2"><a href="05-会計情報の可視化.html#cb73-2" aria-hidden="true" tabindex="-1"></a>margin_roa_color_ind <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb73-3"><a href="05-会計情報の可視化.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> margin, <span class="at">y =</span> roa, <span class="at">color =</span> ind))</span>
+<span id="cb73-4"><a href="05-会計情報の可視化.html#cb73-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-5"><a href="05-会計情報の可視化.html#cb73-5" aria-hidden="true" tabindex="-1"></a>margin_roa_color_ind_point <span class="ot">&lt;-</span> margin_roa_color_ind <span class="sc">+</span> </span>
+<span id="cb73-6"><a href="05-会計情報の可視化.html#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb73-7"><a href="05-会計情報の可視化.html#cb73-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-8"><a href="05-会計情報の可視化.html#cb73-8" aria-hidden="true" tabindex="-1"></a>margin_roa_color_ind_point_lm <span class="ot">&lt;-</span> margin_roa_color_ind_point <span class="sc">+</span> </span>
+<span id="cb73-9"><a href="05-会計情報の可視化.html#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm)</span>
+<span id="cb73-10"><a href="05-会計情報の可視化.html#cb73-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-11"><a href="05-会計情報の可視化.html#cb73-11" aria-hidden="true" tabindex="-1"></a>margin_roa_color_ind_point_lm</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-33-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>なお，上記のコードと同様の出力を下記のコードでも実行できる。
+グラフの名前は慣例として<code>g</code>を使う。
+グラフの調整方法をインターネットで調べる場合は，こちらの記述方法が記載されていることが多い。</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="05-会計情報の可視化.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gをつかった記入方法</span></span>
+<span id="cb75-2"><a href="05-会計情報の可視化.html#cb75-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb75-3"><a href="05-会計情報の可視化.html#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> margin, <span class="at">y =</span> roa, <span class="at">color =</span> ind)) <span class="sc">+</span></span>
+<span id="cb75-4"><a href="05-会計情報の可視化.html#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb75-5"><a href="05-会計情報の可視化.html#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm)</span>
+<span id="cb75-6"><a href="05-会計情報の可視化.html#cb75-6" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-34-1.png" width="500px" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ヒストグラムと箱ひげ図" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> ヒストグラムと箱ひげ図</h3>
+<p>ggplot2パッケージの記述方法が理解できたところで，ヒストグラムと箱ひげ図の出力をしてみよう。
+このデータで，ROAの違いの大部分は利益率の違いだった。
+そこで，2つの業界で，利益率がどの程度異なるのかを，まずはヒストグラムを書いて可視化する。</p>
+<p>ヒストグラムには，<code>geom_histogram()</code>関数を使う。
+重なると見づらいので，並べて表示する<code>dodge</code>の引数を設定し，ヒストグラムの幅を0.01に設定している。
+なお，ggplotの最初の設定部分で，業界ごとにグラフを塗り分ける<code>fill = ind</code>という引数を設定した。</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="05-会計情報の可視化.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒストグラム</span></span>
+<span id="cb77-2"><a href="05-会計情報の可視化.html#cb77-2" aria-hidden="true" tabindex="-1"></a>margin_hist <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb77-3"><a href="05-会計情報の可視化.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> margin, <span class="at">fill =</span> ind)) <span class="sc">+</span></span>
+<span id="cb77-4"><a href="05-会計情報の可視化.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>, <span class="at">binwidth =</span> <span class="fl">0.01</span>)</span>
+<span id="cb77-5"><a href="05-会計情報の可視化.html#cb77-5" aria-hidden="true" tabindex="-1"></a>margin_hist</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-35-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>上記のグラフから，このデータではドラッグストア業界の方が一般的に利益率は高いという傾向が見て取れる。
+これらのグラフに業界平均を書き込みたい場合は，各業界の平均値を計算して，その値の縦線を書き込めばよい。
+縦線を引くコードは<code>geom_vline()</code>関数を使う。
+なお，各業界の平均値を代入するコードが少し難しいが，章で学習したパイプ演算子の記述法に沿って解釈してほしい。</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="05-会計情報の可視化.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 各業界におけるmarginの平均値を計算</span></span>
+<span id="cb78-2"><a href="05-会計情報の可視化.html#cb78-2" aria-hidden="true" tabindex="-1"></a>roa_means <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span> </span>
+<span id="cb78-3"><a href="05-会計情報の可視化.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ind) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-4"><a href="05-会計情報の可視化.html#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(margin))</span>
+<span id="cb78-5"><a href="05-会計情報の可視化.html#cb78-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-6"><a href="05-会計情報の可視化.html#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 各業界の平均値を，それぞれDSmeanとERmeanに代入</span></span>
+<span id="cb78-7"><a href="05-会計情報の可視化.html#cb78-7" aria-hidden="true" tabindex="-1"></a>DSmean <span class="ot">&lt;-</span> roa_means <span class="sc">%&gt;%</span> </span>
+<span id="cb78-8"><a href="05-会計情報の可視化.html#cb78-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ind <span class="sc">==</span><span class="st">&quot;DrugStore&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-9"><a href="05-会計情報の可視化.html#cb78-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;mean(margin)&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-10"><a href="05-会計情報の可視化.html#cb78-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span>
+<span id="cb78-11"><a href="05-会計情報の可視化.html#cb78-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-12"><a href="05-会計情報の可視化.html#cb78-12" aria-hidden="true" tabindex="-1"></a>ERmean <span class="ot">&lt;-</span> roa_means <span class="sc">%&gt;%</span> </span>
+<span id="cb78-13"><a href="05-会計情報の可視化.html#cb78-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ind <span class="sc">==</span><span class="st">&quot;ElectronicsRetail&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-14"><a href="05-会計情報の可視化.html#cb78-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;mean(margin)&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-15"><a href="05-会計情報の可視化.html#cb78-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span>
+<span id="cb78-16"><a href="05-会計情報の可視化.html#cb78-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-17"><a href="05-会計情報の可視化.html#cb78-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 各業界の平均値をもとに縦線を書き込む</span></span>
+<span id="cb78-18"><a href="05-会計情報の可視化.html#cb78-18" aria-hidden="true" tabindex="-1"></a>margin_hist <span class="sc">+</span> </span>
+<span id="cb78-19"><a href="05-会計情報の可視化.html#cb78-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span>DSmean, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb78-20"><a href="05-会計情報の可視化.html#cb78-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span>ERmean, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-36-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>もう少し要約したグラフが見たいときには，箱ひげ図が便利である。
+箱ひげ図は，文字通り箱にひげが生えたようなグラフである。
+箱ひげ図の出力には，<code>geom_boxplot()</code>関数を使う。</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="05-会計情報の可視化.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 箱ひげ図</span></span>
+<span id="cb79-2"><a href="05-会計情報の可視化.html#cb79-2" aria-hidden="true" tabindex="-1"></a>margin_box <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb79-3"><a href="05-会計情報の可視化.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ind, <span class="at">y =</span> margin)) <span class="sc">+</span></span>
+<span id="cb79-4"><a href="05-会計情報の可視化.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
+<span id="cb79-5"><a href="05-会計情報の可視化.html#cb79-5" aria-hidden="true" tabindex="-1"></a>margin_box</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-37-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>上記のグラフを参考に，箱ひげ図について説明する。
+まず，箱ひげ図の箱にあたる部分に注目しよう。
+グラフ左側にあるドラッグストアの箱では，箱の上辺が0.06あたりで，下辺が0.04あたりをとっている。
+この上辺の値はサンプル全体の上位25%にあたるデータの数値であり，下辺の値はサンプル全体の上位75%にあたるデータの数値である。
+箱の内部にある線は，上位50%にあたるデータの数値（中央値）である。
+このように，この箱の位置や長さからデータの分布を読み取ることができる。</p>
+<p>なお，ひげにあたる部分は，分布の上限および下限を示している。
+厳密には，このひげの長さの決め方には様々な方法があるものの，箱の高さ(IQR:interquartile range)に1.5をかけた範囲内で最も高い（下境界の場合は低い）データの値とするのが一般的であり，ggplotもこの方法で計算されている。</p>
+</div>
+<div id="折れ線グラフ" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> 折れ線グラフ</h3>
+<p>折れ線グラフの作成方法について解説する。
+折れ線グラフには，<code>geom_line()</code>関数を使う。
+折れ線グラフは，時系列での変化を可視化する目的で利用される。
+「data.csv」は単一年度のデータなので，通常，このデータから折れ線グラフを作成することはない。</p>
+<p>そこで，折れ線グラフの作成方法を理解するために，「data.csv」から時系列データを便宜的に作成する。
+そのために，時系列を意味する変数<code>time</code>を<code>row_number()</code>関数により作成する。
+この関数はデータの行番号を返す関数で，1行目のデータ（カワチ薬品）には1，2行目のデータ（エディオン）には2が返される。
+<code>df_0</code>は18企業のデータが収録されているため，変数timeは1〜18までの整数となる。
+では，変数timeを横軸，変数salesを縦軸として，折れ線グラフを作成しよう。</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="05-会計情報の可視化.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 時系列変数の作成</span></span>
+<span id="cb80-2"><a href="05-会計情報の可視化.html#cb80-2" aria-hidden="true" tabindex="-1"></a>df_0  <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb80-3"><a href="05-会計情報の可視化.html#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">row_number</span>())</span>
+<span id="cb80-4"><a href="05-会計情報の可視化.html#cb80-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-5"><a href="05-会計情報の可視化.html#cb80-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_0)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 19
+##      id name        sales   cogs    sga  asset  debt equity receivable inventory
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+## 1  2664 カワチ薬品 268205 211068  52563 183303 32019  91880       3073     29846
+## 2  2730 エディオン 686284 488119 182786 369547 65930 169005      34530    111703
+## 3  3048 ビックカメラ… 844029 607947 209025 365605 95576 155765      32968    106731
+## 4  3088 マツモトキヨシホー… 558879 389673 135639 315161     0 204871      20905     70362
+## 5  3098 ココカラファイン… 390963 286311  90939 158179   300  87810      20329     46522
+## 6  3141 ウエルシアホールデ… 695268 485320 181121 292238 44225 130482      23514     76317
+## # … with 9 more variables: payable &lt;dbl&gt;, tax &lt;dbl&gt;, ind &lt;chr&gt;, ope_inc &lt;dbl&gt;,
+## #   roa &lt;dbl&gt;, margin &lt;dbl&gt;, turnover &lt;dbl&gt;, employees &lt;dbl&gt;, time &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="05-会計情報の可視化.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 折れ線</span></span>
+<span id="cb82-2"><a href="05-会計情報の可視化.html#cb82-2" aria-hidden="true" tabindex="-1"></a>margin_line <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb82-3"><a href="05-会計情報の可視化.html#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sales)) <span class="sc">+</span></span>
+<span id="cb82-4"><a href="05-会計情報の可視化.html#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb82-5"><a href="05-会計情報の可視化.html#cb82-5" aria-hidden="true" tabindex="-1"></a>margin_line</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-38-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>続いて，複数の線の折れ線グラフを作成する方法を説明する。
+今度は，業種ごとにグループ化した後に変数<code>time</code>を作成する。
+この処理により，そのデータが業種内で何番目に収録されているかが返ってくる。
+すなわち，ドラッグストアの中で一番上にあるカワチ薬品には1，家電量販店の中で一番上にあるエディオンには1が返される。
+そして，ドラッグストアの中で2番目にあるマツモトキヨシホールディングスには2，家電量販店の中で2番目にあるビックカメラには2が返される。
+<code>df_0</code>はドラッグストア9社，家電量販点9社のデータが収録されているため，変数<code>time</code>は1〜9までの整数が2個ずつ存在する。</p>
+<p>では，変数<code>time</code>を横軸，変数<code>sales</code>を縦軸として，産業ごとの折れ線グラフを作成しよう。
+複数の線の折れ線グラフを作成するには，各折れ線を識別する必要がある。
+識別方法は2つあり，1つは線の色による識別で，もう１つは線のスタイルによる識別である。
+線の色により識別する場合，<code>aes(x = time, y = sales, colour = ind)</code>とする。
+ドラッグストアの折れ線は赤色に，家電量販点の折れ線は緑色になった。
+線のスタイルにより識別する場合，<code>aes(x = time, y = sales, linetype = ind)</code>とする。
+ドラッグストアの折れ線は実線に，家電量販点の折れ線は点線になった。</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="05-会計情報の可視化.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 時系列変数の作成</span></span>
+<span id="cb83-2"><a href="05-会計情報の可視化.html#cb83-2" aria-hidden="true" tabindex="-1"></a>df_0  <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb83-3"><a href="05-会計情報の可視化.html#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ind) <span class="sc">%&gt;%</span></span>
+<span id="cb83-4"><a href="05-会計情報の可視化.html#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">row_number</span>())</span>
+<span id="cb83-5"><a href="05-会計情報の可視化.html#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-6"><a href="05-会計情報の可視化.html#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_0)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 19
+## # Groups:   ind [2]
+##      id name        sales   cogs    sga  asset  debt equity receivable inventory
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+## 1  2664 カワチ薬品 268205 211068  52563 183303 32019  91880       3073     29846
+## 2  2730 エディオン 686284 488119 182786 369547 65930 169005      34530    111703
+## 3  3048 ビックカメラ… 844029 607947 209025 365605 95576 155765      32968    106731
+## 4  3088 マツモトキヨシホー… 558879 389673 135639 315161     0 204871      20905     70362
+## 5  3098 ココカラファイン… 390963 286311  90939 158179   300  87810      20329     46522
+## 6  3141 ウエルシアホールデ… 695268 485320 181121 292238 44225 130482      23514     76317
+## # … with 9 more variables: payable &lt;dbl&gt;, tax &lt;dbl&gt;, ind &lt;chr&gt;, ope_inc &lt;dbl&gt;,
+## #   roa &lt;dbl&gt;, margin &lt;dbl&gt;, turnover &lt;dbl&gt;, employees &lt;dbl&gt;, time &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="05-会計情報の可視化.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 折れ線（線の色による識別）</span></span>
+<span id="cb85-2"><a href="05-会計情報の可視化.html#cb85-2" aria-hidden="true" tabindex="-1"></a>margin_line <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb85-3"><a href="05-会計情報の可視化.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sales, <span class="at">colour =</span> ind)) <span class="sc">+</span></span>
+<span id="cb85-4"><a href="05-会計情報の可視化.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb85-5"><a href="05-会計情報の可視化.html#cb85-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-6"><a href="05-会計情報の可視化.html#cb85-6" aria-hidden="true" tabindex="-1"></a>margin_line</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-39-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="05-会計情報の可視化.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 折れ線（線のスタイルによる識別）</span></span>
+<span id="cb86-2"><a href="05-会計情報の可視化.html#cb86-2" aria-hidden="true" tabindex="-1"></a>margin_line <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb86-3"><a href="05-会計情報の可視化.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sales, <span class="at">linetype =</span> ind)) <span class="sc">+</span></span>
+<span id="cb86-4"><a href="05-会計情報の可視化.html#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb86-5"><a href="05-会計情報の可視化.html#cb86-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-6"><a href="05-会計情報の可視化.html#cb86-6" aria-hidden="true" tabindex="-1"></a>margin_line</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-39-2.png" width="500px" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="複数のグラフを出力する" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> 複数のグラフを出力する</h2>
+<p>それでは複数のグラフを出力する方法について学習しよう。
+この方法は同じデータセット内で複数の財務指標を比較したいときに役立つ。
+なお，この節には高度な内容が含まれるため，初学者は読み飛ばしてもらっても構わない。</p>
+<p>これまでの収益性指標であるROAに加えて，新しくROIC(Return on Investment Capital)を取扱うことにしよう。
+ROICは運転資本の要素を考慮した収益性指標である。
+運転資本とは，材料調達・製品製造・製品販売・代金回収というビジネスのサイクルを回すのに必要な資本である。</p>
+<p>運転資本は「運転資本 <span class="math inline">\(=\)</span> 棚卸資産 <span class="math inline">\(+\)</span> 売上債権 <span class="math inline">\(-\)</span> 仕入債務」という式で計算される<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a>。
+運転資本は，企業の資金繰りと非常に関連の深い指標だが，企業の資金繰りをより直接的に表す指標として，CCC(Cash Conversion Cycle)という財務指標も存在する。
+CCCは「CCC <span class="math inline">\(=\)</span> 売上債権/売上高 <span class="math inline">\(+\)</span> 棚卸資産/売上原価 <span class="math inline">\(+\)</span> 仕入債務/売上原価」と計算される。</p>
+<p>CCCは，企業が原材料や商品仕入などで現金を投入してから，最終的に現金化されるまでの平均日数を示している。
+この運転資本とCCCについて，ドラッグストアと家電量販店を比べてみよう。
+まずは，それぞれの変数を作成し，グラフを作成する。</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="05-会計情報の可視化.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 変数作成</span></span>
+<span id="cb87-2"><a href="05-会計情報の可視化.html#cb87-2" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb87-3"><a href="05-会計情報の可視化.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb87-4"><a href="05-会計情報の可視化.html#cb87-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">wc  =</span> inventory <span class="sc">+</span> receivable <span class="sc">-</span> payable,</span>
+<span id="cb87-5"><a href="05-会計情報の可視化.html#cb87-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">wcr =</span> wc <span class="sc">/</span> asset,</span>
+<span id="cb87-6"><a href="05-会計情報の可視化.html#cb87-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ccc =</span> receivable <span class="sc">/</span> sales <span class="sc">+</span> inventory <span class="sc">/</span> cogs <span class="sc">-</span> payable <span class="sc">/</span> cogs</span>
+<span id="cb87-7"><a href="05-会計情報の可視化.html#cb87-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb87-8"><a href="05-会計情報の可視化.html#cb87-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-9"><a href="05-会計情報の可視化.html#cb87-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 運転資本のグラフ</span></span>
+<span id="cb87-10"><a href="05-会計情報の可視化.html#cb87-10" aria-hidden="true" tabindex="-1"></a>gwc <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb87-11"><a href="05-会計情報の可視化.html#cb87-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> wcr, <span class="at">fill =</span> ind)) <span class="sc">+</span></span>
+<span id="cb87-12"><a href="05-会計情報の可視化.html#cb87-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>, <span class="at">binwidth =</span> <span class="fl">0.05</span>)</span>
+<span id="cb87-13"><a href="05-会計情報の可視化.html#cb87-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-14"><a href="05-会計情報の可視化.html#cb87-14" aria-hidden="true" tabindex="-1"></a><span class="co"># CCCのグラフ</span></span>
+<span id="cb87-15"><a href="05-会計情報の可視化.html#cb87-15" aria-hidden="true" tabindex="-1"></a>gccc <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb87-16"><a href="05-会計情報の可視化.html#cb87-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ccc, <span class="at">fill =</span> ind)) <span class="sc">+</span></span>
+<span id="cb87-17"><a href="05-会計情報の可視化.html#cb87-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>, <span class="at">binwidth =</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<p>2つのグラフをまとめて出力するには，gridExtraパッケージの<code>grid.arrange()</code>関数を利用する。</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="05-会計情報の可視化.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2つのグラフを並べて表示</span></span>
+<span id="cb88-2"><a href="05-会計情報の可視化.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;gridExtra&quot;)</span></span>
+<span id="cb88-3"><a href="05-会計情報の可視化.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;gridExtra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     combine</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="05-会計情報の可視化.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(gwc, gccc, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-41-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>グラフから運転資本とCCCの両方で，家電量販店の方がドラッグストアより高い。
+この分析結果は，家電量販店業界の方がドラッグストア業界に比べて，キャッシュとして回収されるまでのスピードが遅く，ビジネスを回すのに必要な資金（運転資本）が多いことを示している。</p>
+<p>この2つの業界における違いは，両者のビジネス・モデルを想像してもらえば，理解しやすいだろう。
+製品自体の単価が高く，消費者が購入するタイミングも限られている家電に比べて，商品の単価が低く，消費者が日常的に購入する食料品や医薬品を仕入れて売る方が，必要な資金も，現金化するまでの日数も短い。
+こうした資金繰りの違いを加味した収益性指標がROICである。</p>
+<p>ROICは，固定資産などの資産に運転資本を含めた投下資本全体に対して何%の利益を上げたかを表す指標であり，「ROIC <span class="math inline">\(=\)</span> 利益 / 投下資本」で計算される。</p>
+<p>投下資本は2種類の計算方法があり，貸借対照表の貸方(運用サイド)では「投下資本 <span class="math inline">\(=\)</span> 運転資本 <span class="math inline">\(+\)</span> 固定資産など」，貸借対照表の借方(調達サイド)では「投下資本 <span class="math inline">\(=\)</span> 有利子負債 <span class="math inline">\(+\)</span> 純資産」と計算できる。
+貸借対照表の性質から2つの計算方法の結果は一致する。
+ROAとの違いは，上述した資金繰りの違いをROICの方が反映できる点である。</p>
+<p>たとえば，資産全体の額が変わらないまま，仕入債務の割合が増加したとしよう。
+すなわち，購入したモノの支払いを遅らせることができ，キャッシュに余裕が生じている状態である。
+いま，その余裕ができた分を，借入金の返済にあてたとしよう。
+このとき，資産全体の額は変化しないのでROAには変化がない。
+しかし，運転資本は減少しているため，ROICの値は改善される。
+このように，ROICは企業の資金繰りの良し悪しを加味した収益性評価ができる。</p>
+<p>ROICの分子には，NOPAT（Net Operating Profit After Tax）とよばれる値を持ってくる。
+NOPATの定義は論者によって微妙に異なる。
+ここでは，簡便的に税引き後営業利益を利用する。
+営業利益から税金を考慮する理由は，本業で稼いだ利益のうち，資金提供者間で分配可能な金額はいくらか知りたいからである。</p>
+<p>それでは，ROICを計算してみよう。
+ここでは，「ROIC <span class="math inline">\(=\)</span> (営業利益 <span class="math inline">\(-\)</span> 法人税) / (有利子負債 <span class="math inline">\(+\)</span> 純資産)」で計算する。
+なお，ROICの特徴を理解するため，ROAの分析結果と比較したい。
+しかし，ROICとROAでは分子と分母の両方が異なるため，ROICとROAを直接比較しても，分子と分母のどちらの影響を受けたのか分かりづらい。
+そこで，「分子を税引後営業利益にしたROA」と「分子を営業利益にしたROIC」も作成し，これらの結果を比較してみよう。</p>
+<p>これまでと同様にggplotを使い，今回は2 <span class="math inline">\(\times\)</span> 2の表で表示する。
+表を分割するには，<code>facet_wrap()</code>関数を使い，引数にはどの列名で分割するのか，何行で表示するのかを指定する。
+グラフを出力するために，<code>gather()</code>関数をもちいて，整然データの形式に修正している点に注意してほしい。
+なお，<code>gather()</code>関数についてはweb付録を参照すること。</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="05-会計情報の可視化.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 変数作成</span></span>
+<span id="cb92-2"><a href="05-会計情報の可視化.html#cb92-2" aria-hidden="true" tabindex="-1"></a>df_0 <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb92-3"><a href="05-会計情報の可視化.html#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb92-4"><a href="05-会計情報の可視化.html#cb92-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">roa       =</span> ope_inc <span class="sc">/</span> asset,</span>
+<span id="cb92-5"><a href="05-会計情報の可視化.html#cb92-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">roa_nopat =</span> (ope_inc <span class="sc">-</span> tax) <span class="sc">/</span> asset,</span>
+<span id="cb92-6"><a href="05-会計情報の可視化.html#cb92-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">roic_ope  =</span> ope_inc <span class="sc">/</span> (debt <span class="sc">+</span> equity),</span>
+<span id="cb92-7"><a href="05-会計情報の可視化.html#cb92-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">roic      =</span> (ope_inc <span class="sc">-</span> tax) <span class="sc">/</span> (debt <span class="sc">+</span> equity)</span>
+<span id="cb92-8"><a href="05-会計情報の可視化.html#cb92-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb92-9"><a href="05-会計情報の可視化.html#cb92-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-10"><a href="05-会計情報の可視化.html#cb92-10" aria-hidden="true" tabindex="-1"></a><span class="co"># グラフ作成用の整然データを作成</span></span>
+<span id="cb92-11"><a href="05-会計情報の可視化.html#cb92-11" aria-hidden="true" tabindex="-1"></a>df_1 <span class="ot">&lt;-</span> df_0 <span class="sc">%&gt;%</span></span>
+<span id="cb92-12"><a href="05-会計情報の可視化.html#cb92-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb92-13"><a href="05-会計情報の可視化.html#cb92-13" aria-hidden="true" tabindex="-1"></a>    id,</span>
+<span id="cb92-14"><a href="05-会計情報の可視化.html#cb92-14" aria-hidden="true" tabindex="-1"></a>    roa,</span>
+<span id="cb92-15"><a href="05-会計情報の可視化.html#cb92-15" aria-hidden="true" tabindex="-1"></a>    roa_nopat,</span>
+<span id="cb92-16"><a href="05-会計情報の可視化.html#cb92-16" aria-hidden="true" tabindex="-1"></a>    roic_ope,</span>
+<span id="cb92-17"><a href="05-会計情報の可視化.html#cb92-17" aria-hidden="true" tabindex="-1"></a>    roic,</span>
+<span id="cb92-18"><a href="05-会計情報の可視化.html#cb92-18" aria-hidden="true" tabindex="-1"></a>    ind</span>
+<span id="cb92-19"><a href="05-会計情報の可視化.html#cb92-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb92-20"><a href="05-会計情報の可視化.html#cb92-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(</span>
+<span id="cb92-21"><a href="05-会計情報の可視化.html#cb92-21" aria-hidden="true" tabindex="-1"></a>    measure,</span>
+<span id="cb92-22"><a href="05-会計情報の可視化.html#cb92-22" aria-hidden="true" tabindex="-1"></a>    value,</span>
+<span id="cb92-23"><a href="05-会計情報の可視化.html#cb92-23" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>id,</span>
+<span id="cb92-24"><a href="05-会計情報の可視化.html#cb92-24" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>ind</span>
+<span id="cb92-25"><a href="05-会計情報の可視化.html#cb92-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb92-26"><a href="05-会計情報の可視化.html#cb92-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-27"><a href="05-会計情報の可視化.html#cb92-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 4つのグラフを2*2で表示(gをつかった記入方法)</span></span>
+<span id="cb92-28"><a href="05-会計情報の可視化.html#cb92-28" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> df_1 <span class="sc">%&gt;%</span></span>
+<span id="cb92-29"><a href="05-会計情報の可視化.html#cb92-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">fill =</span> ind)) <span class="sc">+</span></span>
+<span id="cb92-30"><a href="05-会計情報の可視化.html#cb92-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb92-31"><a href="05-会計情報の可視化.html#cb92-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>,</span>
+<span id="cb92-32"><a href="05-会計情報の可視化.html#cb92-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span>,</span>
+<span id="cb92-33"><a href="05-会計情報の可視化.html#cb92-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="fl">0.01</span></span>
+<span id="cb92-34"><a href="05-会計情報の可視化.html#cb92-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb92-35"><a href="05-会計情報の可視化.html#cb92-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>measure, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb92-36"><a href="05-会計情報の可視化.html#cb92-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;[Operating Profit] VS [Operating Profit minus Taxes]&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-37"><a href="05-会計情報の可視化.html#cb92-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;[ROIC] VS [ROA]&quot;</span>)</span>
+<span id="cb92-38"><a href="05-会計情報の可視化.html#cb92-38" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
+<p><img src="%E4%B8%8B%E6%BA%96%E5%82%99_files/figure-html/unnamed-chunk-42-1.png" width="500px" style="display: block; margin: auto;" /></p>
+<p>グラフでは，上段は分母に資産を用いた収益性指標，下段は分母に投下資本をもちいた収益性指標を表している。
+一方で，左列は分子に営業利益を用いた収益性指標，右列は分子に税引き後営業利益を用いら収益性指標を表している。</p>
+<p>まず，上下を見比べると，下段の2つのグラフの方がドラッグストアと家電量販店の差は大きい。
+この差は分母に投下資本をもちいたことで，ドラッグストアの資金繰りの良さがより顕著に反映されたことを意味している。</p>
+<p>一方，左右2つのグラフを見比べると，税引き後営業利益の結果の方が，ドラッグストアと家電量販店の差は小さいとわかる。
+この違いは，ドラッグストアの方が多くの法人税を支払っていることを意味している。
+法人税は企業が獲得した利益をベースに決定される。
+そのため，資本効率性の高いドラッグストアの方が，ROAおよびROICに比して高い税金を支払っているためだと考えられる。</p>
+
+<div class="footnotes">
+<hr />
+<ol start="26">
+<li id="fn26"><p>利益差をそのまま使うと規模の影響が出るので，時価総額で基準化されている。<a href="05-会計情報の可視化.html#fnref26" class="footnote-back">↩︎</a></p></li>
+<li id="fn27"><p>なお，各指標は期首・期末を平均化した値を用いることが一般的だが，本節ではコードの簡略化の観点から期末の値を用いた<a href="05-会計情報の可視化.html#fnref27" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="04-会計情報の前処理.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="06-会計情報の検定.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["下準備.pdf", "下準備.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
